@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Air-Ticket-Management-System", "Air-Ticket-Management-System\Air-Ticket-Management-System.csproj", "{F90FC93D-E624-48FA-90AE-8D1504F79D28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F90FC93D-E624-48FA-90AE-8D1504F79D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90FC93D-E624-48FA-90AE-8D1504F79D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90FC93D-E624-48FA-90AE-8D1504F79D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90FC93D-E624-48FA-90AE-8D1504F79D28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8168C5A-4AB1-4973-8CA2-1D49E36FD68F}
+	EndGlobalSection
+EndGlobal
