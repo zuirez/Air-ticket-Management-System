@@ -5,9 +5,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Air_Ticket_Management_System
 {
@@ -152,7 +154,7 @@ namespace Air_Ticket_Management_System
         }
 
 
-        //LogIn Button Click Event
+        //Log In Button Click Event
         private void btnLogIn_Click_1(object sender, EventArgs e)
         {
             string userName = txtUserNameLogIn.Text;
@@ -170,9 +172,55 @@ namespace Air_Ticket_Management_System
                 return;
             }
 
-            //SignUp Success Message
-            MessageBox.Show($"Message : \n\nLog In Successful.\nWelcome {userName}.");
-            clearLogInSelection();
+            //Database Connection and Verification for LogIn
+            try
+            {
+                SqlConnection con = new SqlConnection("Data Source=DESKTOP-MH8FO6G;Initial Catalog=Air.Ticket.Management;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+
+                con.Open();
+
+                String queryCheck = "SELECT userIdType FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "';";
+                SqlCommand cmdCheck = new SqlCommand(queryCheck, con);
+                SqlDataReader reader = cmdCheck.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    int userTypeInt = reader.GetInt32(0);
+
+                    // Log in success message
+                    MessageBox.Show($"Log in successful. Welcome, {userName}.");
+                    clearSignUpSelection();
+
+                    
+                    if (userTypeInt == 1)
+                    {
+                        AdminForm adminForm = new AdminForm();
+                        adminForm.Show(this);
+                    }
+                    else if (userTypeInt == 2)
+                    {
+                        EmployeeForm employeeForm = new EmployeeForm();
+                        employeeForm.Show(this);
+                    }
+                    else if (userTypeInt == 3)
+                    {
+                        PassengerForm passengerForm = new PassengerForm();
+                        passengerForm.Show(this);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No account found. Please sign up first.");
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception.Message);
+            }
         }
     }
 }
