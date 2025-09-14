@@ -189,10 +189,10 @@ namespace Air_Ticket_Management_System
                     int userTypeInt = reader.GetInt32(0);
 
                     // Log in success message
-                    MessageBox.Show($"Log in successful. Welcome, {userName}.");
-                    clearSignUpSelection();
+                    MessageBox.Show($"Log in successful. \n\nWelcome, {userName}.");
+                    clearLogInSelection();
 
-                    
+
                     if (userTypeInt == 1)
                     {
                         AdminForm adminForm = new AdminForm();
@@ -212,6 +212,7 @@ namespace Air_Ticket_Management_System
                 else
                 {
                     MessageBox.Show("No account found. Please sign up first.");
+                    clearLogInSelection();
                 }
 
                 reader.Close();
