@@ -45,6 +45,9 @@ namespace Air_Ticket_Management_System
 
         }
 
+        //Connection String to connect to database
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-MH8FO6G;Initial Catalog=Air.Ticket.Management;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+
 
         //Method to clear all fields after SignUp
         public void clearSignUpSelection()
@@ -118,8 +121,6 @@ namespace Air_Ticket_Management_System
             //Database Connection and Insertion for SignUp
             try
             {
-                SqlConnection con = new SqlConnection("Data Source=DESKTOP-MH8FO6G;Initial Catalog=Air.Ticket.Management;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
-
                 con.Open();
 
                 String queryCheck = "SELECT * FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "'";
@@ -142,6 +143,7 @@ namespace Air_Ticket_Management_System
 
                     con.Close();
 
+
                     //SignUp Success Message
                     MessageBox.Show("Message : \n\nSign Up Successful.\nNow you can Log In.");
                     clearSignUpSelection();
@@ -160,6 +162,7 @@ namespace Air_Ticket_Management_System
             string userName = txtUserNameLogIn.Text;
             string password = txtPasswordLogIn.Text;
 
+
             //Checking if any field is empty
             if (string.IsNullOrWhiteSpace(userName))
             {
@@ -172,11 +175,10 @@ namespace Air_Ticket_Management_System
                 return;
             }
 
+
             //Database Connection and Verification for LogIn
             try
             {
-                SqlConnection con = new SqlConnection("Data Source=DESKTOP-MH8FO6G;Initial Catalog=Air.Ticket.Management;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
-
                 con.Open();
 
                 String queryCheck = "SELECT userIdType FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "';";
@@ -188,11 +190,13 @@ namespace Air_Ticket_Management_System
                     reader.Read();
                     int userTypeInt = reader.GetInt32(0);
 
-                    // Log in success message
+
+                    //Log in success message
                     MessageBox.Show($"Log in successful. \n\nWelcome, {userName}.");
                     clearLogInSelection();
 
 
+                    //Demining user type and opening respective form
                     if (userTypeInt == 1)
                     {
                         AdminForm adminForm = new AdminForm();
