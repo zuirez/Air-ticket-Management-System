@@ -52,6 +52,7 @@
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DbHelper.cs" />
     <Compile Include="EmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>

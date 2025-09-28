@@ -91,27 +91,27 @@ namespace Air_Ticket_Management_System
 
 
             //Checking if any field is empty
-            if(string.IsNullOrWhiteSpace(userName))
+            if (string.IsNullOrWhiteSpace(userName))
             {
                 MessageBox.Show("Error : Enter username");
                 return;
             }
-            if(string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Error : Enter Password");
                 return;
             }
-            if(string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(email))
             {
                 MessageBox.Show("Error : Enter Email");
                 return;
             }
-            if(string.IsNullOrWhiteSpace(address))
+            if (string.IsNullOrWhiteSpace(address))
             {
                 MessageBox.Show("Error : Enter Address");
                 return;
             }
-            if(string.IsNullOrWhiteSpace(gender))
+            if (string.IsNullOrWhiteSpace(gender))
             {
                 MessageBox.Show("Error : Please choose a gender");
                 return;
@@ -121,28 +121,33 @@ namespace Air_Ticket_Management_System
             //Database Connection and Insertion for SignUp
             try
             {
-                con.Open();
+                string queryCheckIfUserExists = "SELECT * FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "'";
 
-                String queryCheck = "SELECT * FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "'";
-                SqlCommand cmdCheck = new SqlCommand(queryCheck, con);
-                SqlDataReader reader = cmdCheck.ExecuteReader();
+                var result = DbHelper.GetQueryData(queryCheckIfUserExists);
 
-                if (reader.HasRows)
+                if (result.HasError)
+                {
+                    MessageBox.Show("Error : " + result.Message);
+                    return;
+                }
+
+                if (result.Data.Rows.Count > 0)
                 {
                     MessageBox.Show("Error : User already exists. Please Log In.");
                     clearSignUpSelection();
-                    reader.Close();
                     return;
                 }
                 else
                 {
-                    reader.Close();
-                    String query = "INSERT INTO UserInfo VALUES ('" + userName + "', '" + password + "', '" + email + "', '" + address + "', '" + gender + "', 3);\r\n";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.ExecuteNonQuery();
+                    string queryNewUser = "INSERT INTO UserInfo VALUES ('" + userName + "', '" + password + "', '" + email + "', '" + address + "', '" + gender + "', 3);\r\n";
 
-                    con.Close();
+                    var insertResult = DbHelper.ExecuteNonResultQuery(queryNewUser);
 
+                    if (insertResult.HasError)
+                    {
+                        MessageBox.Show("Error : " + insertResult.Message);
+                        return;
+                    }
 
                     //SignUp Success Message
                     MessageBox.Show("Message : \n\nSign Up Successful.\nNow you can Log In.");
@@ -179,24 +184,25 @@ namespace Air_Ticket_Management_System
             //Database Connection and Verification for LogIn
             try
             {
-                con.Open();
-
                 String queryCheck = "SELECT userIdType FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "';";
-                SqlCommand cmdCheck = new SqlCommand(queryCheck, con);
-                SqlDataReader reader = cmdCheck.ExecuteReader();
-
-                if (reader.HasRows)
+                
+                var result = DbHelper.GetQueryData(queryCheck);
+                
+                if (result.HasError)
                 {
-                    reader.Read();
-                    int userTypeInt = reader.GetInt32(0);
+                    MessageBox.Show("Error : " + result.Message);
+                    return;
+                }
 
-
+                if (result.Data.Rows.Count > 0)
+                {
                     //Log in success message
                     MessageBox.Show($"Log in successful. \n\nWelcome, {userName}.");
                     clearLogInSelection();
 
-
                     //Demining user type and opening respective form
+                    int userTypeInt = Convert.ToInt32(result.Data.Rows[0]["userIdType"]);
+
                     if (userTypeInt == 1)
                     {
                         AdminForm adminForm = new AdminForm();
@@ -218,9 +224,6 @@ namespace Air_Ticket_Management_System
                     MessageBox.Show("No account found. Please sign up first.");
                     clearLogInSelection();
                 }
-
-                reader.Close();
-                con.Close();
             }
             catch (Exception exception)
             {
