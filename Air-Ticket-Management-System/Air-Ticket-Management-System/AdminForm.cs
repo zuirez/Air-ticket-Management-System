@@ -19,24 +19,15 @@ namespace Air_Ticket_Management_System
         }
 
 
-        // Load data from the database and display it in the Data Grid View
+        // Method to load flight data into the panel
         public void LoadEvent()
         {
-            string query = "SELECT * FROM userInfo;";
-
-            var result = DbHelper.GetQueryData(query);
-
-            if (result.HasError)
-            {
-                MessageBox.Show("Error : " + result.Message);
-                return;
-            }
-
-            dgvAdminForm.DataSource = result.Data;
-            dgvAdminForm.Refresh();
-            dgvAdminForm.ClearSelection();
-
-            txtAdminSearch.Text = "";
+            AdminFlightForm flight = new AdminFlightForm();
+            flight.TopLevel = false;
+            flight.FormBorderStyle = FormBorderStyle.None;
+            flight.Dock = DockStyle.Fill;
+            this.pnlAdminShowInfo.Controls.Add(flight);
+            flight.Show();
         }
 
 
@@ -76,17 +67,76 @@ namespace Air_Ticket_Management_System
                 MessageBox.Show("Error : " + result.Message);
                 return;
             }
-
-            dgvAdminForm.DataSource = result.Data;
-            dgvAdminForm.Refresh();
-            dgvAdminForm.ClearSelection();
         }
 
 
         // Refresh Button Click Event
         private void btnAdminRefresh_Click(object sender, EventArgs e)
         {
+            //will be added later
+        }
+
+
+        // Flight Button Click Event
+        private void btnAdminFlight_Click(object sender, EventArgs e)
+        {
             LoadEvent();
         }
+
+
+        // Booking Button Click Event
+        private void btnAdminBooking_Click(object sender, EventArgs e)
+        {
+            //will be added later
+        }
+
+
+        // Admin Button Click Event
+        private void btnAdminAdmin_Click(object sender, EventArgs e)
+        {
+            //will be added later
+        }
+
+
+        // Employee Button Click Event
+        private void btnAdminEmployee_Click(object sender, EventArgs e)
+        {
+            //will be added later
+        }
+
+
+        // Passenger Button Click Event
+        private void btnAdminPassenger_Click(object sender, EventArgs e)
+        {
+            //will be added later
+        }
+
+
+        // Payment Button Click Event
+        private void btnAdminPayment_Click(object sender, EventArgs e)
+        {
+            //will be added later
+        }
+
+
+        // Report Button Click Event
+        private void btnAdminReport_Click(object sender, EventArgs e)
+        {
+            //will be added later
+        }
+
+
+
+        // Sign Out Button Click Event
+        private void btnAdminSignOut_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Do You Want to Sign out?", "Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        
     }
 }

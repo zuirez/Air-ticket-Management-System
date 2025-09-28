@@ -32,6 +32,7 @@
             this.pnlAdminSearch = new System.Windows.Forms.TableLayoutPanel();
             this.txtAdminSearch = new System.Windows.Forms.TextBox();
             this.btnAdminSearch = new System.Windows.Forms.Button();
+            this.btnAdminRefresh = new System.Windows.Forms.Button();
             this.lblAdminTitle = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdminAdmin = new System.Windows.Forms.Button();
@@ -42,12 +43,10 @@
             this.btnAdminBooking = new System.Windows.Forms.Button();
             this.btnAdminFlight = new System.Windows.Forms.Button();
             this.btnAdminSignOut = new System.Windows.Forms.Button();
-            this.dgvAdminForm = new System.Windows.Forms.DataGridView();
-            this.btnAdminRefresh = new System.Windows.Forms.Button();
+            this.pnlAdminShowInfo = new System.Windows.Forms.Panel();
             this.pnlAdmin.SuspendLayout();
             this.pnlAdminSearch.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAdminForm)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAdmin
@@ -59,14 +58,14 @@
             this.pnlAdmin.Controls.Add(this.pnlAdminSearch, 1, 0);
             this.pnlAdmin.Controls.Add(this.lblAdminTitle, 0, 0);
             this.pnlAdmin.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.pnlAdmin.Controls.Add(this.dgvAdminForm, 1, 1);
+            this.pnlAdmin.Controls.Add(this.pnlAdminShowInfo, 1, 1);
             this.pnlAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAdmin.Location = new System.Drawing.Point(0, 0);
             this.pnlAdmin.Name = "pnlAdmin";
             this.pnlAdmin.RowCount = 2;
             this.pnlAdmin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.971098F));
             this.pnlAdmin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.0289F));
-            this.pnlAdmin.Size = new System.Drawing.Size(1225, 692);
+            this.pnlAdmin.Size = new System.Drawing.Size(1356, 698);
             this.pnlAdmin.TabIndex = 0;
             // 
             // pnlAdminSearch
@@ -76,9 +75,9 @@
             this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 99.073F));
             this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0.9269989F));
             this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 9F));
+            this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 9F));
+            this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlAdminSearch.Controls.Add(this.txtAdminSearch, 1, 1);
             this.pnlAdminSearch.Controls.Add(this.btnAdminSearch, 3, 1);
             this.pnlAdminSearch.Controls.Add(this.btnAdminRefresh, 5, 1);
@@ -89,7 +88,7 @@
             this.pnlAdminSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.pnlAdminSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlAdminSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.pnlAdminSearch.Size = new System.Drawing.Size(1013, 62);
+            this.pnlAdminSearch.Size = new System.Drawing.Size(1144, 63);
             this.pnlAdminSearch.TabIndex = 0;
             // 
             // txtAdminSearch
@@ -99,7 +98,7 @@
             this.txtAdminSearch.Location = new System.Drawing.Point(8, 11);
             this.txtAdminSearch.Multiline = true;
             this.txtAdminSearch.Name = "txtAdminSearch";
-            this.txtAdminSearch.Size = new System.Drawing.Size(657, 40);
+            this.txtAdminSearch.Size = new System.Drawing.Size(795, 41);
             this.txtAdminSearch.TabIndex = 0;
             // 
             // btnAdminSearch
@@ -107,13 +106,26 @@
             this.btnAdminSearch.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnAdminSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdminSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminSearch.Location = new System.Drawing.Point(677, 11);
+            this.btnAdminSearch.Location = new System.Drawing.Point(816, 11);
             this.btnAdminSearch.Name = "btnAdminSearch";
-            this.btnAdminSearch.Size = new System.Drawing.Size(154, 40);
+            this.btnAdminSearch.Size = new System.Drawing.Size(154, 41);
             this.btnAdminSearch.TabIndex = 1;
             this.btnAdminSearch.Text = "Search";
             this.btnAdminSearch.UseVisualStyleBackColor = false;
             this.btnAdminSearch.Click += new System.EventHandler(this.btnAdminSearch_Click);
+            // 
+            // btnAdminRefresh
+            // 
+            this.btnAdminRefresh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnAdminRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdminRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminRefresh.Location = new System.Drawing.Point(981, 11);
+            this.btnAdminRefresh.Name = "btnAdminRefresh";
+            this.btnAdminRefresh.Size = new System.Drawing.Size(154, 41);
+            this.btnAdminRefresh.TabIndex = 2;
+            this.btnAdminRefresh.Text = "Refresh";
+            this.btnAdminRefresh.UseVisualStyleBackColor = false;
+            this.btnAdminRefresh.Click += new System.EventHandler(this.btnAdminRefresh_Click);
             // 
             // lblAdminTitle
             // 
@@ -122,7 +134,7 @@
             this.lblAdminTitle.Location = new System.Drawing.Point(4, 1);
             this.lblAdminTitle.Name = "lblAdminTitle";
             this.lblAdminTitle.Padding = new System.Windows.Forms.Padding(6, 20, 4, 20);
-            this.lblAdminTitle.Size = new System.Drawing.Size(194, 68);
+            this.lblAdminTitle.Size = new System.Drawing.Size(194, 69);
             this.lblAdminTitle.TabIndex = 1;
             this.lblAdminTitle.Text = "ADMIN PANEL";
             // 
@@ -139,7 +151,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnAdminFlight, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnAdminSignOut, 0, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 73);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 74);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 9;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -151,7 +163,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(197, 615);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(197, 620);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // btnAdminAdmin
@@ -164,6 +176,7 @@
             this.btnAdminAdmin.TabIndex = 9;
             this.btnAdminAdmin.Text = "Admin";
             this.btnAdminAdmin.UseVisualStyleBackColor = true;
+            this.btnAdminAdmin.Click += new System.EventHandler(this.btnAdminAdmin_Click);
             // 
             // btnAdminPayment
             // 
@@ -175,6 +188,7 @@
             this.btnAdminPayment.TabIndex = 8;
             this.btnAdminPayment.Text = "Payment";
             this.btnAdminPayment.UseVisualStyleBackColor = true;
+            this.btnAdminPayment.Click += new System.EventHandler(this.btnAdminPayment_Click);
             // 
             // btnAdminPassenger
             // 
@@ -186,6 +200,7 @@
             this.btnAdminPassenger.TabIndex = 7;
             this.btnAdminPassenger.Text = "Passenger";
             this.btnAdminPassenger.UseVisualStyleBackColor = true;
+            this.btnAdminPassenger.Click += new System.EventHandler(this.btnAdminPassenger_Click);
             // 
             // btnAdminReport
             // 
@@ -197,6 +212,7 @@
             this.btnAdminReport.TabIndex = 5;
             this.btnAdminReport.Text = "Report";
             this.btnAdminReport.UseVisualStyleBackColor = true;
+            this.btnAdminReport.Click += new System.EventHandler(this.btnAdminReport_Click);
             // 
             // btnAdminEmployee
             // 
@@ -208,6 +224,7 @@
             this.btnAdminEmployee.TabIndex = 2;
             this.btnAdminEmployee.Text = "Employee";
             this.btnAdminEmployee.UseVisualStyleBackColor = true;
+            this.btnAdminEmployee.Click += new System.EventHandler(this.btnAdminEmployee_Click);
             // 
             // btnAdminBooking
             // 
@@ -219,6 +236,7 @@
             this.btnAdminBooking.TabIndex = 1;
             this.btnAdminBooking.Text = "Booking";
             this.btnAdminBooking.UseVisualStyleBackColor = true;
+            this.btnAdminBooking.Click += new System.EventHandler(this.btnAdminBooking_Click);
             // 
             // btnAdminFlight
             // 
@@ -230,6 +248,7 @@
             this.btnAdminFlight.TabIndex = 0;
             this.btnAdminFlight.Text = "Flight";
             this.btnAdminFlight.UseVisualStyleBackColor = true;
+            this.btnAdminFlight.Click += new System.EventHandler(this.btnAdminFlight_Click);
             // 
             // btnAdminSignOut
             // 
@@ -241,38 +260,24 @@
             this.btnAdminSignOut.TabIndex = 10;
             this.btnAdminSignOut.Text = "Sign Out";
             this.btnAdminSignOut.UseVisualStyleBackColor = true;
+            this.btnAdminSignOut.Click += new System.EventHandler(this.btnAdminSignOut_Click);
             // 
-            // dgvAdminForm
+            // pnlAdminShowInfo
             // 
-            this.dgvAdminForm.AllowUserToAddRows = false;
-            this.dgvAdminForm.AllowUserToDeleteRows = false;
-            this.dgvAdminForm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAdminForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAdminForm.Location = new System.Drawing.Point(208, 73);
-            this.dgvAdminForm.Name = "dgvAdminForm";
-            this.dgvAdminForm.ReadOnly = true;
-            this.dgvAdminForm.Size = new System.Drawing.Size(1013, 615);
-            this.dgvAdminForm.TabIndex = 3;
-            // 
-            // btnAdminRefresh
-            // 
-            this.btnAdminRefresh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnAdminRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdminRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminRefresh.Location = new System.Drawing.Point(846, 11);
-            this.btnAdminRefresh.Name = "btnAdminRefresh";
-            this.btnAdminRefresh.Size = new System.Drawing.Size(154, 40);
-            this.btnAdminRefresh.TabIndex = 2;
-            this.btnAdminRefresh.Text = "Refresh";
-            this.btnAdminRefresh.UseVisualStyleBackColor = false;
-            this.btnAdminRefresh.Click += new System.EventHandler(this.btnAdminRefresh_Click);
+            this.pnlAdminShowInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlAdminShowInfo.Location = new System.Drawing.Point(208, 74);
+            this.pnlAdminShowInfo.Name = "pnlAdminShowInfo";
+            this.pnlAdminShowInfo.Size = new System.Drawing.Size(1144, 620);
+            this.pnlAdminShowInfo.TabIndex = 3;
             // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1225, 692);
+            this.ClientSize = new System.Drawing.Size(1356, 698);
             this.Controls.Add(this.pnlAdmin);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AdminForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminForm";
@@ -283,7 +288,6 @@
             this.pnlAdminSearch.ResumeLayout(false);
             this.pnlAdminSearch.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAdminForm)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -304,7 +308,7 @@
         private System.Windows.Forms.Button btnAdminPassenger;
         private System.Windows.Forms.Button btnAdminAdmin;
         private System.Windows.Forms.Button btnAdminSignOut;
-        private System.Windows.Forms.DataGridView dgvAdminForm;
         private System.Windows.Forms.Button btnAdminRefresh;
+        private System.Windows.Forms.Panel pnlAdminShowInfo;
     }
 }
