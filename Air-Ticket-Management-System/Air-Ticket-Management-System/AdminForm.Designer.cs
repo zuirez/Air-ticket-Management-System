@@ -53,7 +53,7 @@
             // 
             this.pnlAdmin.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.pnlAdmin.ColumnCount = 2;
-            this.pnlAdmin.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
+            this.pnlAdmin.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 166F));
             this.pnlAdmin.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlAdmin.Controls.Add(this.pnlAdminSearch, 1, 0);
             this.pnlAdmin.Controls.Add(this.lblAdminTitle, 0, 0);
@@ -77,18 +77,18 @@
             this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.pnlAdminSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 6F));
             this.pnlAdminSearch.Controls.Add(this.txtAdminSearch, 1, 1);
             this.pnlAdminSearch.Controls.Add(this.btnAdminSearch, 3, 1);
             this.pnlAdminSearch.Controls.Add(this.btnAdminRefresh, 5, 1);
             this.pnlAdminSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAdminSearch.Location = new System.Drawing.Point(208, 4);
+            this.pnlAdminSearch.Location = new System.Drawing.Point(171, 4);
             this.pnlAdminSearch.Name = "pnlAdminSearch";
             this.pnlAdminSearch.RowCount = 3;
             this.pnlAdminSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.pnlAdminSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlAdminSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.pnlAdminSearch.Size = new System.Drawing.Size(1144, 63);
+            this.pnlAdminSearch.Size = new System.Drawing.Size(1181, 63);
             this.pnlAdminSearch.TabIndex = 0;
             // 
             // txtAdminSearch
@@ -98,7 +98,7 @@
             this.txtAdminSearch.Location = new System.Drawing.Point(8, 11);
             this.txtAdminSearch.Multiline = true;
             this.txtAdminSearch.Name = "txtAdminSearch";
-            this.txtAdminSearch.Size = new System.Drawing.Size(795, 41);
+            this.txtAdminSearch.Size = new System.Drawing.Size(831, 41);
             this.txtAdminSearch.TabIndex = 0;
             // 
             // btnAdminSearch
@@ -106,7 +106,7 @@
             this.btnAdminSearch.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnAdminSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdminSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminSearch.Location = new System.Drawing.Point(816, 11);
+            this.btnAdminSearch.Location = new System.Drawing.Point(852, 11);
             this.btnAdminSearch.Name = "btnAdminSearch";
             this.btnAdminSearch.Size = new System.Drawing.Size(154, 41);
             this.btnAdminSearch.TabIndex = 1;
@@ -119,7 +119,7 @@
             this.btnAdminRefresh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnAdminRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdminRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminRefresh.Location = new System.Drawing.Point(981, 11);
+            this.btnAdminRefresh.Location = new System.Drawing.Point(1017, 11);
             this.btnAdminRefresh.Name = "btnAdminRefresh";
             this.btnAdminRefresh.Size = new System.Drawing.Size(154, 41);
             this.btnAdminRefresh.TabIndex = 2;
@@ -130,13 +130,14 @@
             // lblAdminTitle
             // 
             this.lblAdminTitle.AutoSize = true;
-            this.lblAdminTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdminTitle.Location = new System.Drawing.Point(4, 1);
             this.lblAdminTitle.Name = "lblAdminTitle";
             this.lblAdminTitle.Padding = new System.Windows.Forms.Padding(6, 20, 4, 20);
-            this.lblAdminTitle.Size = new System.Drawing.Size(194, 69);
+            this.lblAdminTitle.Size = new System.Drawing.Size(158, 64);
             this.lblAdminTitle.TabIndex = 1;
             this.lblAdminTitle.Text = "ADMIN PANEL";
+            this.lblAdminTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel1
             // 
@@ -163,7 +164,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(197, 620);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(160, 620);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // btnAdminAdmin
@@ -172,7 +173,7 @@
             this.btnAdminAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdminAdmin.Location = new System.Drawing.Point(3, 103);
             this.btnAdminAdmin.Name = "btnAdminAdmin";
-            this.btnAdminAdmin.Size = new System.Drawing.Size(191, 44);
+            this.btnAdminAdmin.Size = new System.Drawing.Size(154, 44);
             this.btnAdminAdmin.TabIndex = 9;
             this.btnAdminAdmin.Text = "Admin";
             this.btnAdminAdmin.UseVisualStyleBackColor = true;
@@ -184,7 +185,7 @@
             this.btnAdminPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdminPayment.Location = new System.Drawing.Point(3, 253);
             this.btnAdminPayment.Name = "btnAdminPayment";
-            this.btnAdminPayment.Size = new System.Drawing.Size(191, 44);
+            this.btnAdminPayment.Size = new System.Drawing.Size(154, 44);
             this.btnAdminPayment.TabIndex = 8;
             this.btnAdminPayment.Text = "Payment";
             this.btnAdminPayment.UseVisualStyleBackColor = true;
@@ -196,7 +197,7 @@
             this.btnAdminPassenger.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdminPassenger.Location = new System.Drawing.Point(3, 203);
             this.btnAdminPassenger.Name = "btnAdminPassenger";
-            this.btnAdminPassenger.Size = new System.Drawing.Size(191, 44);
+            this.btnAdminPassenger.Size = new System.Drawing.Size(154, 44);
             this.btnAdminPassenger.TabIndex = 7;
             this.btnAdminPassenger.Text = "Passenger";
             this.btnAdminPassenger.UseVisualStyleBackColor = true;
@@ -208,7 +209,7 @@
             this.btnAdminReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdminReport.Location = new System.Drawing.Point(3, 303);
             this.btnAdminReport.Name = "btnAdminReport";
-            this.btnAdminReport.Size = new System.Drawing.Size(191, 44);
+            this.btnAdminReport.Size = new System.Drawing.Size(154, 44);
             this.btnAdminReport.TabIndex = 5;
             this.btnAdminReport.Text = "Report";
             this.btnAdminReport.UseVisualStyleBackColor = true;
@@ -220,7 +221,7 @@
             this.btnAdminEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdminEmployee.Location = new System.Drawing.Point(3, 153);
             this.btnAdminEmployee.Name = "btnAdminEmployee";
-            this.btnAdminEmployee.Size = new System.Drawing.Size(191, 44);
+            this.btnAdminEmployee.Size = new System.Drawing.Size(154, 44);
             this.btnAdminEmployee.TabIndex = 2;
             this.btnAdminEmployee.Text = "Employee";
             this.btnAdminEmployee.UseVisualStyleBackColor = true;
@@ -232,7 +233,7 @@
             this.btnAdminBooking.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdminBooking.Location = new System.Drawing.Point(3, 53);
             this.btnAdminBooking.Name = "btnAdminBooking";
-            this.btnAdminBooking.Size = new System.Drawing.Size(191, 44);
+            this.btnAdminBooking.Size = new System.Drawing.Size(154, 44);
             this.btnAdminBooking.TabIndex = 1;
             this.btnAdminBooking.Text = "Booking";
             this.btnAdminBooking.UseVisualStyleBackColor = true;
@@ -244,7 +245,7 @@
             this.btnAdminFlight.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdminFlight.Location = new System.Drawing.Point(3, 3);
             this.btnAdminFlight.Name = "btnAdminFlight";
-            this.btnAdminFlight.Size = new System.Drawing.Size(191, 44);
+            this.btnAdminFlight.Size = new System.Drawing.Size(154, 44);
             this.btnAdminFlight.TabIndex = 0;
             this.btnAdminFlight.Text = "Flight";
             this.btnAdminFlight.UseVisualStyleBackColor = true;
@@ -256,7 +257,7 @@
             this.btnAdminSignOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdminSignOut.Location = new System.Drawing.Point(3, 353);
             this.btnAdminSignOut.Name = "btnAdminSignOut";
-            this.btnAdminSignOut.Size = new System.Drawing.Size(191, 44);
+            this.btnAdminSignOut.Size = new System.Drawing.Size(154, 44);
             this.btnAdminSignOut.TabIndex = 10;
             this.btnAdminSignOut.Text = "Sign Out";
             this.btnAdminSignOut.UseVisualStyleBackColor = true;
@@ -265,9 +266,9 @@
             // pnlAdminShowInfo
             // 
             this.pnlAdminShowInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAdminShowInfo.Location = new System.Drawing.Point(208, 74);
+            this.pnlAdminShowInfo.Location = new System.Drawing.Point(171, 74);
             this.pnlAdminShowInfo.Name = "pnlAdminShowInfo";
-            this.pnlAdminShowInfo.Size = new System.Drawing.Size(1144, 620);
+            this.pnlAdminShowInfo.Size = new System.Drawing.Size(1181, 620);
             this.pnlAdminShowInfo.TabIndex = 3;
             // 
             // AdminForm
