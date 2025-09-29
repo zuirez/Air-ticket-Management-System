@@ -47,36 +47,6 @@ namespace Air_Ticket_Management_System
         }
 
 
-        // Search Button Click Event
-        private void btnAdminSearch_Click(object sender, EventArgs e)
-        {
-            String userName = txtAdminSearch.Text;
-
-            if (string.IsNullOrEmpty(txtAdminSearch.Text))
-            {
-                MessageBox.Show("Please enter a username to search.");
-                return;
-            }
-
-            string query = "SELECT * FROM UserInfo WHERE userName = '" + userName + "'";
-
-            var result = DbHelper.GetQueryData(query);
-
-            if (result.HasError)
-            {
-                MessageBox.Show("Error : " + result.Message);
-                return;
-            }
-        }
-
-
-        // Refresh Button Click Event
-        private void btnAdminRefresh_Click(object sender, EventArgs e)
-        {
-            //will be added later
-        }
-
-
         // Flight Button Click Event
         private void btnAdminFlight_Click(object sender, EventArgs e)
         {

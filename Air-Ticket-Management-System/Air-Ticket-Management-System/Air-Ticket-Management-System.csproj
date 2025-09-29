@@ -46,23 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminFlightForm.cs">
+    <Compile Include="Admin\AdminAdminForm.cs" />
+    <Compile Include="Admin\AdminBookingForm.cs" />
+    <Compile Include="Admin\AdminEmployeeForm.cs" />
+    <Compile Include="Admin\AdminFlightForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminFlightForm.Designer.cs">
+    <Compile Include="Admin\AdminFlightForm.Designer.cs">
       <DependentUpon>AdminFlightForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminForm.cs">
+    <Compile Include="Admin\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminForm.Designer.cs">
+    <Compile Include="Admin\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AdminPassengerForm.cs" />
+    <Compile Include="Admin\AdminPaymentForm.cs" />
+    <Compile Include="Admin\AdminReportForm.cs" />
     <Compile Include="DbHelper.cs" />
-    <Compile Include="EmployeeForm.cs">
+    <Compile Include="Employee\EmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmployeeForm.Designer.cs">
+    <Compile Include="Employee\EmployeeForm.Designer.cs">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogIn.cs">
@@ -71,27 +77,27 @@
     <Compile Include="LogIn.Designer.cs">
       <DependentUpon>LogIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="PassengerForm.cs">
+    <Compile Include="Passenger\PassengerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PassengerForm.Designer.cs">
+    <Compile Include="Passenger\PassengerForm.Designer.cs">
       <DependentUpon>PassengerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AdminFlightForm.resx">
+    <EmbeddedResource Include="Admin\AdminFlightForm.resx">
       <DependentUpon>AdminFlightForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminForm.resx">
+    <EmbeddedResource Include="Admin\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeForm.resx">
+    <EmbeddedResource Include="Employee\EmployeeForm.resx">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PassengerForm.resx">
+    <EmbeddedResource Include="Passenger\PassengerForm.resx">
       <DependentUpon>PassengerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -116,5 +122,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

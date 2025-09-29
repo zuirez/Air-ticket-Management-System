@@ -45,6 +45,10 @@ namespace Air_Ticket_Management_System
                 result.HasError = true;
                 result.Message = e.Message;
             }
+            finally
+            {
+                con.Close();
+            }
 
             return result;
         }
@@ -67,6 +71,10 @@ namespace Air_Ticket_Management_System
             {
                 result.HasError = true;
                 result.Message = e.Message;
+            }
+            finally
+            {
+                con.Close();
             }
 
             return result;
