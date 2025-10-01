@@ -22,6 +22,7 @@ namespace Air_Ticket_Management_System
         // Method to load flight data into the panel
         public void LoadEvent()
         {
+            this.pnlAdminShowInfo.Controls.Clear();
             AdminFlightForm flight = new AdminFlightForm();
             flight.TopLevel = false;
             flight.FormBorderStyle = FormBorderStyle.None;
@@ -57,7 +58,13 @@ namespace Air_Ticket_Management_System
         // Booking Button Click Event
         private void btnAdminBooking_Click(object sender, EventArgs e)
         {
-            //will be added later
+            this.pnlAdminShowInfo.Controls.Clear();
+            AdminBookingForm booking = new AdminBookingForm();
+            booking.TopLevel = false;
+            booking.FormBorderStyle = FormBorderStyle.None;
+            booking.Dock = DockStyle.Fill;
+            this.pnlAdminShowInfo.Controls.Add(booking);
+            booking.Show();
         }
 
 
@@ -106,7 +113,5 @@ namespace Air_Ticket_Management_System
                 this.Close();
             }
         }
-
-        
     }
 }

@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\AdminAdminForm.cs" />
-    <Compile Include="Admin\AdminBookingForm.cs" />
-    <Compile Include="Admin\AdminEmployeeForm.cs" />
+    <Compile Include="Admin\AdminBookingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminBookingForm.Designer.cs">
+      <DependentUpon>AdminBookingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AdminFlightForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,9 +64,6 @@
     <Compile Include="Admin\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\AdminPassengerForm.cs" />
-    <Compile Include="Admin\AdminPaymentForm.cs" />
-    <Compile Include="Admin\AdminReportForm.cs" />
     <Compile Include="DbHelper.cs" />
     <Compile Include="Employee\EmployeeForm.cs">
       <SubType>Form</SubType>
@@ -85,6 +85,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Admin\AdminBookingForm.resx">
+      <DependentUpon>AdminBookingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin\AdminFlightForm.resx">
       <DependentUpon>AdminFlightForm.cs</DependentUpon>
     </EmbeddedResource>
