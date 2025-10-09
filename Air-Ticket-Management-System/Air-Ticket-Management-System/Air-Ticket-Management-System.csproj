@@ -46,6 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminPassenger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminPassenger.Designer.cs">
+      <DependentUpon>AdminPassenger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminReport.Designer.cs">
+      <DependentUpon>AdminReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminEmployee.Designer.cs">
+      <DependentUpon>AdminEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminAdmin.Designer.cs">
+      <DependentUpon>AdminAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminFlightSeats.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminFlightSeats.Designer.cs">
+      <DependentUpon>AdminFlightSeats.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AdminBookingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,11 +115,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Admin\AdminPassenger.resx">
+      <DependentUpon>AdminPassenger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\AdminReport.resx">
+      <DependentUpon>AdminReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\AdminAdmin.resx">
+      <DependentUpon>AdminAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin\AdminBookingForm.resx">
       <DependentUpon>AdminBookingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Admin\AdminEmployee.resx">
+      <DependentUpon>AdminEmployee.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin\AdminFlightForm.resx">
       <DependentUpon>AdminFlightForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\AdminFlightSeats.resx">
+      <DependentUpon>AdminFlightSeats.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>

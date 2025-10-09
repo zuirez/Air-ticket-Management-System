@@ -28,7 +28,7 @@ namespace Air_Ticket_Management_System
             dtpAdminFlightArrivalTime.Value = DateTime.Now;
             rdbOnTime.Checked = false;
             rdbDelayed.Checked = false;
-            rdbCancelled.Checked = false;
+            rdbCanceled.Checked = false;
         }
 
 
@@ -147,7 +147,7 @@ namespace Air_Ticket_Management_System
                 }
                 else if (status == "Cancelled")
                 {
-                    rdbCancelled.Checked = true;
+                    rdbCanceled.Checked = true;
                 }
             }
             catch (Exception exception)
@@ -175,9 +175,9 @@ namespace Air_Ticket_Management_System
             {
                 FlightStatus = rdbDelayed.Text;
             }
-            else if (rdbCancelled.Checked)
+            else if (rdbCanceled.Checked)
             {
-                FlightStatus = rdbCancelled.Text;
+                FlightStatus = rdbCanceled.Text;
             }
 
 
@@ -211,7 +211,7 @@ namespace Air_Ticket_Management_System
             {
                 if (!rdbDelayed.Checked)
                 {
-                    if (!rdbCancelled.Checked)
+                    if (!rdbCanceled.Checked)
                     {
                         MessageBox.Show("Error: Select Flight Status");
                         return;
@@ -306,10 +306,12 @@ namespace Air_Ticket_Management_System
             catch (Exception exception)
             {
                 MessageBox.Show("Error: " + exception.Message);
-
+                return;
             }
         }
 
+
+        // Update Button Click Event
         private void btnAdminFlightUpdate_Click(object sender, EventArgs e)
         {
             int FlightId = Convert.ToInt32(txtAdminFlightId.Text);
@@ -328,9 +330,9 @@ namespace Air_Ticket_Management_System
             {
                 FlightStatus = rdbDelayed.Text;
             }
-            else if (rdbCancelled.Checked)
+            else if (rdbCanceled.Checked)
             {
-                FlightStatus = rdbCancelled.Text;
+                FlightStatus = rdbCanceled.Text;
             }
 
 
@@ -364,7 +366,7 @@ namespace Air_Ticket_Management_System
             {
                 if (!rdbDelayed.Checked)
                 {
-                    if (!rdbCancelled.Checked)
+                    if (!rdbCanceled.Checked)
                     {
                         MessageBox.Show("Error: Select Flight Status");
                         return;
@@ -382,7 +384,8 @@ namespace Air_Ticket_Management_System
 
 
             // Validating that departure time is unique
-            if (FlightDestination == null) {
+            if (FlightDestination == null) 
+            {
                 MessageBox.Show("Error: Flight Destination cannot be null.");
                 return;
             }

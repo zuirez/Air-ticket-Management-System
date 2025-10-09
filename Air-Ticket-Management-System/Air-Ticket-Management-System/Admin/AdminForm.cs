@@ -71,21 +71,39 @@ namespace Air_Ticket_Management_System
         // Admin Button Click Event
         private void btnAdminAdmin_Click(object sender, EventArgs e)
         {
-            //will be added later
+            this.pnlAdminShowInfo.Controls.Clear();
+            AdminAdmin admin = new AdminAdmin();
+            admin.TopLevel = false;
+            admin.FormBorderStyle = FormBorderStyle.None;
+            admin.Dock = DockStyle.Fill;
+            this.pnlAdminShowInfo.Controls.Add(admin);
+            admin.Show();
         }
 
 
         // Employee Button Click Event
         private void btnAdminEmployee_Click(object sender, EventArgs e)
         {
-            //will be added later
+            this.pnlAdminShowInfo.Controls.Clear();
+            AdminEmployee employee = new AdminEmployee();
+            employee.TopLevel = false;
+            employee.FormBorderStyle = FormBorderStyle.None;
+            employee.Dock = DockStyle.Fill;
+            this.pnlAdminShowInfo.Controls.Add(employee);
+            employee.Show();
         }
 
 
         // Passenger Button Click Event
         private void btnAdminPassenger_Click(object sender, EventArgs e)
         {
-            //will be added later
+            this.pnlAdminShowInfo.Controls.Clear();
+            AdminPassenger passenger = new AdminPassenger();
+            passenger.TopLevel = false;
+            passenger.FormBorderStyle = FormBorderStyle.None;
+            passenger.Dock = DockStyle.Fill;
+            this.pnlAdminShowInfo.Controls.Add(passenger);
+            passenger.Show();
         }
 
 
@@ -99,7 +117,13 @@ namespace Air_Ticket_Management_System
         // Report Button Click Event
         private void btnAdminReport_Click(object sender, EventArgs e)
         {
-            //will be added later
+            this.pnlAdminShowInfo.Controls.Clear();
+            AdminReport report = new AdminReport();
+            report.TopLevel = false;
+            report.FormBorderStyle = FormBorderStyle.None;
+            report.Dock = DockStyle.Fill;
+            this.pnlAdminShowInfo.Controls.Add(report);
+            report.Show();
         }
 
 

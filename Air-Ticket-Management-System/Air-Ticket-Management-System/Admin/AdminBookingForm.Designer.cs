@@ -42,6 +42,11 @@
             this.lblAdminBookingManage = new System.Windows.Forms.Label();
             this.lblAdminBookingInfo = new System.Windows.Forms.Label();
             this.pnlAdminBookingManage = new System.Windows.Forms.Panel();
+            this.txtAdminBookingBookedSeats = new System.Windows.Forms.TextBox();
+            this.txtAdminBookingFlightId = new System.Windows.Forms.TextBox();
+            this.lblAdminBookingFlightId = new System.Windows.Forms.Label();
+            this.txtAdminBookingPaymentStatus = new System.Windows.Forms.TextBox();
+            this.lblAdminBookingPaymentStatus = new System.Windows.Forms.Label();
             this.cmbAdminBookingFlightName = new System.Windows.Forms.ComboBox();
             this.txtAdminBookingFlightDestination = new System.Windows.Forms.TextBox();
             this.lblAdminBookingFlightDestination = new System.Windows.Forms.Label();
@@ -52,8 +57,8 @@
             this.rdbCanceled = new System.Windows.Forms.RadioButton();
             this.rdbPending = new System.Windows.Forms.RadioButton();
             this.rdbConfirmed = new System.Windows.Forms.RadioButton();
-            this.txtAdminBookingPassengerName = new System.Windows.Forms.TextBox();
-            this.lblAdminBookingPassengerName = new System.Windows.Forms.Label();
+            this.txtAdminBookingPassengerId = new System.Windows.Forms.TextBox();
+            this.lblAdminBookingPassengerId = new System.Windows.Forms.Label();
             this.lblAdminBookingFlightNo = new System.Windows.Forms.Label();
             this.lblAdminBookingStatus = new System.Windows.Forms.Label();
             this.txtBookingSearch = new System.Windows.Forms.TextBox();
@@ -86,8 +91,9 @@
             this.dgvAdminBooking.Name = "dgvAdminBooking";
             this.dgvAdminBooking.ReadOnly = true;
             this.dgvAdminBooking.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAdminBooking.Size = new System.Drawing.Size(746, 521);
+            this.dgvAdminBooking.Size = new System.Drawing.Size(742, 521);
             this.dgvAdminBooking.TabIndex = 4;
+            this.dgvAdminBooking.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAdminBooking_CellDoubleClick);
             // 
             // lblAdminBookingDate
             // 
@@ -133,6 +139,7 @@
             this.btnAdminFlightAdd.TabIndex = 2;
             this.btnAdminFlightAdd.Text = "Add";
             this.btnAdminFlightAdd.UseVisualStyleBackColor = false;
+            this.btnAdminFlightAdd.Click += new System.EventHandler(this.btnAdminFlightAdd_Click_1);
             // 
             // btnAdminFlightUpdate
             // 
@@ -159,7 +166,7 @@
             this.tableLayoutPanel2.Controls.Add(this.btnAdminFlightAdd, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnAdminFlightUpdate, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnAdminFlightDelete, 4, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 334);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 422);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -192,9 +199,9 @@
             this.lblAdminBookingManage.AutoSize = true;
             this.lblAdminBookingManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAdminBookingManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdminBookingManage.Location = new System.Drawing.Point(757, 72);
+            this.lblAdminBookingManage.Location = new System.Drawing.Point(753, 72);
             this.lblAdminBookingManage.Name = "lblAdminBookingManage";
-            this.lblAdminBookingManage.Size = new System.Drawing.Size(404, 50);
+            this.lblAdminBookingManage.Size = new System.Drawing.Size(408, 50);
             this.lblAdminBookingManage.TabIndex = 1;
             this.lblAdminBookingManage.Text = "Manage Bookings";
             this.lblAdminBookingManage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -206,13 +213,18 @@
             this.lblAdminBookingInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdminBookingInfo.Location = new System.Drawing.Point(4, 72);
             this.lblAdminBookingInfo.Name = "lblAdminBookingInfo";
-            this.lblAdminBookingInfo.Size = new System.Drawing.Size(746, 50);
+            this.lblAdminBookingInfo.Size = new System.Drawing.Size(742, 50);
             this.lblAdminBookingInfo.TabIndex = 0;
             this.lblAdminBookingInfo.Text = "Bookings";
             this.lblAdminBookingInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlAdminBookingManage
             // 
+            this.pnlAdminBookingManage.Controls.Add(this.txtAdminBookingBookedSeats);
+            this.pnlAdminBookingManage.Controls.Add(this.txtAdminBookingFlightId);
+            this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingFlightId);
+            this.pnlAdminBookingManage.Controls.Add(this.txtAdminBookingPaymentStatus);
+            this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingPaymentStatus);
             this.pnlAdminBookingManage.Controls.Add(this.cmbAdminBookingFlightName);
             this.pnlAdminBookingManage.Controls.Add(this.txtAdminBookingFlightDestination);
             this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingFlightDestination);
@@ -223,8 +235,8 @@
             this.pnlAdminBookingManage.Controls.Add(this.rdbCanceled);
             this.pnlAdminBookingManage.Controls.Add(this.rdbPending);
             this.pnlAdminBookingManage.Controls.Add(this.rdbConfirmed);
-            this.pnlAdminBookingManage.Controls.Add(this.txtAdminBookingPassengerName);
-            this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingPassengerName);
+            this.pnlAdminBookingManage.Controls.Add(this.txtAdminBookingPassengerId);
+            this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingPassengerId);
             this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingFlightNo);
             this.pnlAdminBookingManage.Controls.Add(this.tableLayoutPanel2);
             this.pnlAdminBookingManage.Controls.Add(this.dtpAdminBookingDate);
@@ -234,10 +246,52 @@
             this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingStatus);
             this.pnlAdminBookingManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAdminBookingManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlAdminBookingManage.Location = new System.Drawing.Point(757, 126);
+            this.pnlAdminBookingManage.Location = new System.Drawing.Point(753, 126);
             this.pnlAdminBookingManage.Name = "pnlAdminBookingManage";
-            this.pnlAdminBookingManage.Size = new System.Drawing.Size(404, 521);
+            this.pnlAdminBookingManage.Size = new System.Drawing.Size(408, 521);
             this.pnlAdminBookingManage.TabIndex = 3;
+            // 
+            // txtAdminBookingBookedSeats
+            // 
+            this.txtAdminBookingBookedSeats.Location = new System.Drawing.Point(149, 209);
+            this.txtAdminBookingBookedSeats.Name = "txtAdminBookingBookedSeats";
+            this.txtAdminBookingBookedSeats.ReadOnly = true;
+            this.txtAdminBookingBookedSeats.Size = new System.Drawing.Size(115, 26);
+            this.txtAdminBookingBookedSeats.TabIndex = 36;
+            // 
+            // txtAdminBookingFlightId
+            // 
+            this.txtAdminBookingFlightId.Location = new System.Drawing.Point(149, 173);
+            this.txtAdminBookingFlightId.Name = "txtAdminBookingFlightId";
+            this.txtAdminBookingFlightId.ReadOnly = true;
+            this.txtAdminBookingFlightId.Size = new System.Drawing.Size(238, 26);
+            this.txtAdminBookingFlightId.TabIndex = 35;
+            // 
+            // lblAdminBookingFlightId
+            // 
+            this.lblAdminBookingFlightId.AutoSize = true;
+            this.lblAdminBookingFlightId.Location = new System.Drawing.Point(65, 175);
+            this.lblAdminBookingFlightId.Name = "lblAdminBookingFlightId";
+            this.lblAdminBookingFlightId.Size = new System.Drawing.Size(81, 20);
+            this.lblAdminBookingFlightId.TabIndex = 34;
+            this.lblAdminBookingFlightId.Text = "Flight ID : ";
+            // 
+            // txtAdminBookingPaymentStatus
+            // 
+            this.txtAdminBookingPaymentStatus.Location = new System.Drawing.Point(149, 323);
+            this.txtAdminBookingPaymentStatus.Name = "txtAdminBookingPaymentStatus";
+            this.txtAdminBookingPaymentStatus.ReadOnly = true;
+            this.txtAdminBookingPaymentStatus.Size = new System.Drawing.Size(238, 26);
+            this.txtAdminBookingPaymentStatus.TabIndex = 33;
+            // 
+            // lblAdminBookingPaymentStatus
+            // 
+            this.lblAdminBookingPaymentStatus.AutoSize = true;
+            this.lblAdminBookingPaymentStatus.Location = new System.Drawing.Point(14, 326);
+            this.lblAdminBookingPaymentStatus.Name = "lblAdminBookingPaymentStatus";
+            this.lblAdminBookingPaymentStatus.Size = new System.Drawing.Size(134, 20);
+            this.lblAdminBookingPaymentStatus.TabIndex = 32;
+            this.lblAdminBookingPaymentStatus.Text = "Payment Status : ";
             // 
             // cmbAdminBookingFlightName
             // 
@@ -246,10 +300,11 @@
             this.cmbAdminBookingFlightName.Name = "cmbAdminBookingFlightName";
             this.cmbAdminBookingFlightName.Size = new System.Drawing.Size(238, 28);
             this.cmbAdminBookingFlightName.TabIndex = 31;
+            this.cmbAdminBookingFlightName.SelectedIndexChanged += new System.EventHandler(this.cmbAdminBookingFlightName_SelectedIndexChanged_1);
             // 
             // txtAdminBookingFlightDestination
             // 
-            this.txtAdminBookingFlightDestination.Location = new System.Drawing.Point(149, 252);
+            this.txtAdminBookingFlightDestination.Location = new System.Drawing.Point(149, 286);
             this.txtAdminBookingFlightDestination.Name = "txtAdminBookingFlightDestination";
             this.txtAdminBookingFlightDestination.ReadOnly = true;
             this.txtAdminBookingFlightDestination.Size = new System.Drawing.Size(238, 26);
@@ -258,7 +313,7 @@
             // lblAdminBookingFlightDestination
             // 
             this.lblAdminBookingFlightDestination.AutoSize = true;
-            this.lblAdminBookingFlightDestination.Location = new System.Drawing.Point(46, 255);
+            this.lblAdminBookingFlightDestination.Location = new System.Drawing.Point(46, 289);
             this.lblAdminBookingFlightDestination.Name = "lblAdminBookingFlightDestination";
             this.lblAdminBookingFlightDestination.Size = new System.Drawing.Size(102, 20);
             this.lblAdminBookingFlightDestination.TabIndex = 29;
@@ -266,7 +321,7 @@
             // 
             // txtAdminBookingFlightOrigin
             // 
-            this.txtAdminBookingFlightOrigin.Location = new System.Drawing.Point(149, 214);
+            this.txtAdminBookingFlightOrigin.Location = new System.Drawing.Point(149, 248);
             this.txtAdminBookingFlightOrigin.Name = "txtAdminBookingFlightOrigin";
             this.txtAdminBookingFlightOrigin.ReadOnly = true;
             this.txtAdminBookingFlightOrigin.Size = new System.Drawing.Size(238, 26);
@@ -275,7 +330,7 @@
             // lblAdminBookingFlightOrigin
             // 
             this.lblAdminBookingFlightOrigin.AutoSize = true;
-            this.lblAdminBookingFlightOrigin.Location = new System.Drawing.Point(86, 217);
+            this.lblAdminBookingFlightOrigin.Location = new System.Drawing.Point(86, 251);
             this.lblAdminBookingFlightOrigin.Name = "lblAdminBookingFlightOrigin";
             this.lblAdminBookingFlightOrigin.Size = new System.Drawing.Size(62, 20);
             this.lblAdminBookingFlightOrigin.TabIndex = 27;
@@ -285,17 +340,18 @@
             // 
             this.btnAdminBookingFlightSeat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnAdminBookingFlightSeat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminBookingFlightSeat.Location = new System.Drawing.Point(149, 174);
+            this.btnAdminBookingFlightSeat.Location = new System.Drawing.Point(270, 207);
             this.btnAdminBookingFlightSeat.Name = "btnAdminBookingFlightSeat";
-            this.btnAdminBookingFlightSeat.Size = new System.Drawing.Size(238, 32);
+            this.btnAdminBookingFlightSeat.Size = new System.Drawing.Size(117, 32);
             this.btnAdminBookingFlightSeat.TabIndex = 26;
-            this.btnAdminBookingFlightSeat.Text = "Flight Seat";
+            this.btnAdminBookingFlightSeat.Text = "Choose Seat";
             this.btnAdminBookingFlightSeat.UseVisualStyleBackColor = false;
+            this.btnAdminBookingFlightSeat.Click += new System.EventHandler(this.btnAdminBookingFlightSeat_Click);
             // 
             // lblAdminBookingFlightSeat
             // 
             this.lblAdminBookingFlightSeat.AutoSize = true;
-            this.lblAdminBookingFlightSeat.Location = new System.Drawing.Point(93, 179);
+            this.lblAdminBookingFlightSeat.Location = new System.Drawing.Point(93, 212);
             this.lblAdminBookingFlightSeat.Name = "lblAdminBookingFlightSeat";
             this.lblAdminBookingFlightSeat.Size = new System.Drawing.Size(55, 20);
             this.lblAdminBookingFlightSeat.TabIndex = 25;
@@ -305,7 +361,7 @@
             // 
             this.rdbCanceled.AutoSize = true;
             this.rdbCanceled.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbCanceled.Location = new System.Drawing.Point(309, 294);
+            this.rdbCanceled.Location = new System.Drawing.Point(309, 363);
             this.rdbCanceled.Name = "rdbCanceled";
             this.rdbCanceled.Size = new System.Drawing.Size(85, 21);
             this.rdbCanceled.TabIndex = 24;
@@ -317,7 +373,7 @@
             // 
             this.rdbPending.AutoSize = true;
             this.rdbPending.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbPending.Location = new System.Drawing.Point(232, 294);
+            this.rdbPending.Location = new System.Drawing.Point(232, 363);
             this.rdbPending.Name = "rdbPending";
             this.rdbPending.Size = new System.Drawing.Size(78, 21);
             this.rdbPending.TabIndex = 23;
@@ -329,7 +385,7 @@
             // 
             this.rdbConfirmed.AutoSize = true;
             this.rdbConfirmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbConfirmed.Location = new System.Drawing.Point(143, 294);
+            this.rdbConfirmed.Location = new System.Drawing.Point(143, 363);
             this.rdbConfirmed.Name = "rdbConfirmed";
             this.rdbConfirmed.Size = new System.Drawing.Size(90, 21);
             this.rdbConfirmed.TabIndex = 21;
@@ -337,21 +393,21 @@
             this.rdbConfirmed.Text = "Confirmed";
             this.rdbConfirmed.UseVisualStyleBackColor = true;
             // 
-            // txtAdminBookingPassengerName
+            // txtAdminBookingPassengerId
             // 
-            this.txtAdminBookingPassengerName.Location = new System.Drawing.Point(149, 100);
-            this.txtAdminBookingPassengerName.Name = "txtAdminBookingPassengerName";
-            this.txtAdminBookingPassengerName.Size = new System.Drawing.Size(238, 26);
-            this.txtAdminBookingPassengerName.TabIndex = 20;
+            this.txtAdminBookingPassengerId.Location = new System.Drawing.Point(149, 100);
+            this.txtAdminBookingPassengerId.Name = "txtAdminBookingPassengerId";
+            this.txtAdminBookingPassengerId.Size = new System.Drawing.Size(238, 26);
+            this.txtAdminBookingPassengerId.TabIndex = 20;
             // 
-            // lblAdminBookingPassengerName
+            // lblAdminBookingPassengerId
             // 
-            this.lblAdminBookingPassengerName.AutoSize = true;
-            this.lblAdminBookingPassengerName.Location = new System.Drawing.Point(6, 103);
-            this.lblAdminBookingPassengerName.Name = "lblAdminBookingPassengerName";
-            this.lblAdminBookingPassengerName.Size = new System.Drawing.Size(143, 20);
-            this.lblAdminBookingPassengerName.TabIndex = 19;
-            this.lblAdminBookingPassengerName.Text = "Passenger Name : ";
+            this.lblAdminBookingPassengerId.AutoSize = true;
+            this.lblAdminBookingPassengerId.Location = new System.Drawing.Point(30, 103);
+            this.lblAdminBookingPassengerId.Name = "lblAdminBookingPassengerId";
+            this.lblAdminBookingPassengerId.Size = new System.Drawing.Size(118, 20);
+            this.lblAdminBookingPassengerId.TabIndex = 19;
+            this.lblAdminBookingPassengerId.Text = "Passenger ID : ";
             // 
             // lblAdminBookingFlightNo
             // 
@@ -365,7 +421,7 @@
             // lblAdminBookingStatus
             // 
             this.lblAdminBookingStatus.AutoSize = true;
-            this.lblAdminBookingStatus.Location = new System.Drawing.Point(17, 293);
+            this.lblAdminBookingStatus.Location = new System.Drawing.Point(17, 362);
             this.lblAdminBookingStatus.Name = "lblAdminBookingStatus";
             this.lblAdminBookingStatus.Size = new System.Drawing.Size(130, 20);
             this.lblAdminBookingStatus.TabIndex = 22;
@@ -378,7 +434,7 @@
             this.txtBookingSearch.Location = new System.Drawing.Point(8, 11);
             this.txtBookingSearch.Multiline = true;
             this.txtBookingSearch.Name = "txtBookingSearch";
-            this.txtBookingSearch.Size = new System.Drawing.Size(803, 42);
+            this.txtBookingSearch.Size = new System.Drawing.Size(799, 42);
             this.txtBookingSearch.TabIndex = 0;
             // 
             // btnBookingSearch
@@ -386,24 +442,26 @@
             this.btnBookingSearch.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnBookingSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBookingSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBookingSearch.Location = new System.Drawing.Point(824, 11);
+            this.btnBookingSearch.Location = new System.Drawing.Point(820, 11);
             this.btnBookingSearch.Name = "btnBookingSearch";
             this.btnBookingSearch.Size = new System.Drawing.Size(154, 42);
             this.btnBookingSearch.TabIndex = 1;
             this.btnBookingSearch.Text = "Search";
             this.btnBookingSearch.UseVisualStyleBackColor = false;
+            this.btnBookingSearch.Click += new System.EventHandler(this.btnBookingSearch_Click);
             // 
             // btnBookingRefresh
             // 
             this.btnBookingRefresh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnBookingRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBookingRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBookingRefresh.Location = new System.Drawing.Point(989, 11);
+            this.btnBookingRefresh.Location = new System.Drawing.Point(985, 11);
             this.btnBookingRefresh.Name = "btnBookingRefresh";
             this.btnBookingRefresh.Size = new System.Drawing.Size(154, 42);
             this.btnBookingRefresh.TabIndex = 2;
             this.btnBookingRefresh.Text = "Refresh";
             this.btnBookingRefresh.UseVisualStyleBackColor = false;
+            this.btnBookingRefresh.Click += new System.EventHandler(this.btnBookingRefresh_Click);
             // 
             // pnlBookingSearch
             // 
@@ -415,7 +473,7 @@
             this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 14F));
             this.pnlBookingSearch.Controls.Add(this.txtBookingSearch, 1, 1);
             this.pnlBookingSearch.Controls.Add(this.btnBookingSearch, 3, 1);
             this.pnlBookingSearch.Controls.Add(this.btnBookingRefresh, 5, 1);
@@ -434,7 +492,7 @@
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 410F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 414F));
             this.tableLayoutPanel1.Controls.Add(this.pnlBookingSearch, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminBookingManage, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminBookingInfo, 0, 1);
@@ -458,6 +516,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AdminBookingForm";
             this.Text = "AdminBookingForm";
+            this.Load += new System.EventHandler(this.AdminBookingForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAdminBooking)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.pnlAdminBookingManage.ResumeLayout(false);
@@ -491,8 +550,8 @@
         private System.Windows.Forms.TableLayoutPanel pnlBookingSearch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblAdminBookingFlightNo;
-        private System.Windows.Forms.Label lblAdminBookingPassengerName;
-        private System.Windows.Forms.TextBox txtAdminBookingPassengerName;
+        private System.Windows.Forms.Label lblAdminBookingPassengerId;
+        private System.Windows.Forms.TextBox txtAdminBookingPassengerId;
         private System.Windows.Forms.RadioButton rdbCanceled;
         private System.Windows.Forms.RadioButton rdbPending;
         private System.Windows.Forms.RadioButton rdbConfirmed;
@@ -504,5 +563,10 @@
         private System.Windows.Forms.Label lblAdminBookingFlightDestination;
         private System.Windows.Forms.TextBox txtAdminBookingFlightOrigin;
         private System.Windows.Forms.Label lblAdminBookingFlightOrigin;
+        private System.Windows.Forms.Label lblAdminBookingPaymentStatus;
+        private System.Windows.Forms.TextBox txtAdminBookingPaymentStatus;
+        private System.Windows.Forms.TextBox txtAdminBookingFlightId;
+        private System.Windows.Forms.Label lblAdminBookingFlightId;
+        private System.Windows.Forms.TextBox txtAdminBookingBookedSeats;
     }
 }
