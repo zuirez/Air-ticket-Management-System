@@ -28,7 +28,7 @@ namespace Air_Ticket_Management_System
             dtpAdminFlightArrivalTime.Value = DateTime.Now;
             rdbOnTime.Checked = false;
             rdbDelayed.Checked = false;
-            rdbCanceled.Checked = false;
+            rdbCancelled.Checked = false;
         }
 
 
@@ -147,7 +147,7 @@ namespace Air_Ticket_Management_System
                 }
                 else if (status == "Cancelled")
                 {
-                    rdbCanceled.Checked = true;
+                    rdbCancelled.Checked = true;
                 }
             }
             catch (Exception exception)
@@ -175,9 +175,9 @@ namespace Air_Ticket_Management_System
             {
                 FlightStatus = rdbDelayed.Text;
             }
-            else if (rdbCanceled.Checked)
+            else if (rdbCancelled.Checked)
             {
-                FlightStatus = rdbCanceled.Text;
+                FlightStatus = rdbCancelled.Text;
             }
 
 
@@ -211,7 +211,7 @@ namespace Air_Ticket_Management_System
             {
                 if (!rdbDelayed.Checked)
                 {
-                    if (!rdbCanceled.Checked)
+                    if (!rdbCancelled.Checked)
                     {
                         MessageBox.Show("Error: Select Flight Status");
                         return;
@@ -300,6 +300,43 @@ namespace Air_Ticket_Management_System
 
                 MessageBox.Show("Message: Flight Added Successfully.");
 
+
+
+                // adding flight seats for this flight
+                string getFlightIdQuery = "SELECT flightId FROM Flight WHERE flightNo = '" + FlightNo + "';";
+
+                var getFlightIdResult = DbHelper.GetQueryData(getFlightIdQuery);
+
+                if (getFlightIdResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getFlightIdResult.Message);
+                    return;
+                }
+
+                int flightId = Convert.ToInt32(getFlightIdResult.Data.Rows[0]["flightId"]);
+
+                char[] rows = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
+
+                int seatsPerRow = 6;
+
+                for (int row = 0; row < rows.Length; row++)
+                {
+                    for (int seat = 1; seat <= seatsPerRow; seat++)
+                    {
+                        string seatNo = rows[row].ToString() + seat.ToString();
+
+                        string seatQuery = "INSERT INTO FlightSeats (flightId, seatNo, flightSeatStatus) " + "VALUES ('" + flightId + "', '" + seatNo + "', 'Available');";
+
+                        var seatResult = DbHelper.ExecuteNonResultQuery(seatQuery);
+
+                        if (seatResult.HasError)
+                        {
+                            MessageBox.Show("Error : " + seatResult.Message);
+                            return;
+                        }
+                    }
+                }
+
                 clearFlightSelection();
                 ShowFlightInfo();
             }
@@ -330,9 +367,9 @@ namespace Air_Ticket_Management_System
             {
                 FlightStatus = rdbDelayed.Text;
             }
-            else if (rdbCanceled.Checked)
+            else if (rdbCancelled.Checked)
             {
-                FlightStatus = rdbCanceled.Text;
+                FlightStatus = rdbCancelled.Text;
             }
 
 
@@ -366,7 +403,7 @@ namespace Air_Ticket_Management_System
             {
                 if (!rdbDelayed.Checked)
                 {
-                    if (!rdbCanceled.Checked)
+                    if (!rdbCancelled.Checked)
                     {
                         MessageBox.Show("Error: Select Flight Status");
                         return;
@@ -429,7 +466,7 @@ namespace Air_Ticket_Management_System
             // Updating flight data into the database
             try
             {
-                string query = "UPDATE Flight SET FlightNo = '" + FlightNo + "' Origin = '" + FlightOrigin + "' Destination = '" + FlightDestination + "' DepartureTime = '" + FlightDepartureTime + "' ArrivalTime = '" + FlightArrivalTime + "' FlightStatus = '" + FlightStatus + "' WHERE FlightID = '" + FlightId + "';";
+                string query = "UPDATE Flight SET FlightNo = '" + FlightNo + "', Origin = '" + FlightOrigin + "', Destination = '" + FlightDestination + "', DepartureTime = '" + FlightDepartureTime + "', ArrivalTime = '" + FlightArrivalTime + "', FlightStatus = '" + FlightStatus + "' WHERE FlightID = '" + FlightId + "';";
 
                 var result = DbHelper.ExecuteNonResultQuery(query);
 
@@ -457,15 +494,28 @@ namespace Air_Ticket_Management_System
         {
             try
             {
+                // Deleting flight seats associated with this flight
+                string deleteFlightSeatsQuery = "DELETE FROM FlightSeats WHERE flightId = '" + txtAdminFlightId.Text + "';";
+
+                var deleteFlightSeatsQueryResult = DbHelper.ExecuteNonResultQuery(deleteFlightSeatsQuery);
+
+                if (deleteFlightSeatsQueryResult.HasError)
+                {
+                    MessageBox.Show("Error : " + deleteFlightSeatsQueryResult.Message);
+                    return;
+                }
+
+
+                // Deleting the flight
                 string FlightId = Convert.ToString(txtAdminFlightId.Text);
 
-                string query = "DELETE FROM Flight WHERE flightId = '" + FlightId + "';";
+                string deleteFlightQuery = "DELETE FROM Flight WHERE flightId = '" + FlightId + "';";
 
-                var result = DbHelper.ExecuteNonResultQuery(query);
+                var deleteFlightQueryResult = DbHelper.ExecuteNonResultQuery(deleteFlightQuery);
 
-                if (result.HasError)
+                if (deleteFlightQueryResult.HasError)
                 {
-                    MessageBox.Show("Error : " + result.Message);
+                    MessageBox.Show("Error : " + deleteFlightQueryResult.Message);
                     return;
                 }
 

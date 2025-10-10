@@ -30,6 +30,7 @@
         {
             this.pnlAdmin = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAdminRefund = new System.Windows.Forms.Button();
             this.btnAdminAdmin = new System.Windows.Forms.Button();
             this.btnAdminPayment = new System.Windows.Forms.Button();
             this.btnAdminPassenger = new System.Windows.Forms.Button();
@@ -38,8 +39,8 @@
             this.btnAdminBooking = new System.Windows.Forms.Button();
             this.btnAdminFlight = new System.Windows.Forms.Button();
             this.btnAdminSignOut = new System.Windows.Forms.Button();
-            this.pnlAdminShowInfo = new System.Windows.Forms.TableLayoutPanel();
             this.lblAdminPanelText = new System.Windows.Forms.Label();
+            this.pnlAdminShowInfo = new System.Windows.Forms.TableLayoutPanel();
             this.pnlAdmin.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -65,20 +66,22 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.btnAdminRefund, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.btnAdminAdmin, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnAdminPayment, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.btnAdminPassenger, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.btnAdminReport, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.btnAdminReport, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnAdminEmployee, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnAdminBooking, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnAdminFlight, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnAdminSignOut, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.btnAdminSignOut, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminPanelText, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowCount = 11;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -90,6 +93,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(160, 690);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // btnAdminRefund
+            // 
+            this.btnAdminRefund.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdminRefund.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminRefund.Location = new System.Drawing.Point(3, 373);
+            this.btnAdminRefund.Name = "btnAdminRefund";
+            this.btnAdminRefund.Size = new System.Drawing.Size(154, 44);
+            this.btnAdminRefund.TabIndex = 12;
+            this.btnAdminRefund.Text = "Refund";
+            this.btnAdminRefund.UseVisualStyleBackColor = true;
+            this.btnAdminRefund.Click += new System.EventHandler(this.btnAdminRefund_Click);
             // 
             // btnAdminAdmin
             // 
@@ -131,7 +146,7 @@
             // 
             this.btnAdminReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdminReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminReport.Location = new System.Drawing.Point(3, 373);
+            this.btnAdminReport.Location = new System.Drawing.Point(3, 423);
             this.btnAdminReport.Name = "btnAdminReport";
             this.btnAdminReport.Size = new System.Drawing.Size(154, 44);
             this.btnAdminReport.TabIndex = 5;
@@ -179,26 +194,13 @@
             // 
             this.btnAdminSignOut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdminSignOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminSignOut.Location = new System.Drawing.Point(3, 423);
+            this.btnAdminSignOut.Location = new System.Drawing.Point(3, 473);
             this.btnAdminSignOut.Name = "btnAdminSignOut";
             this.btnAdminSignOut.Size = new System.Drawing.Size(154, 44);
             this.btnAdminSignOut.TabIndex = 10;
             this.btnAdminSignOut.Text = "Sign Out";
             this.btnAdminSignOut.UseVisualStyleBackColor = true;
             this.btnAdminSignOut.Click += new System.EventHandler(this.btnAdminSignOut_Click);
-            // 
-            // pnlAdminShowInfo
-            // 
-            this.pnlAdminShowInfo.ColumnCount = 1;
-            this.pnlAdminShowInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlAdminShowInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAdminShowInfo.Location = new System.Drawing.Point(171, 4);
-            this.pnlAdminShowInfo.Name = "pnlAdminShowInfo";
-            this.pnlAdminShowInfo.RowCount = 1;
-            this.pnlAdminShowInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlAdminShowInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.pnlAdminShowInfo.Size = new System.Drawing.Size(1181, 690);
-            this.pnlAdminShowInfo.TabIndex = 3;
             // 
             // lblAdminPanelText
             // 
@@ -211,6 +213,19 @@
             this.lblAdminPanelText.TabIndex = 11;
             this.lblAdminPanelText.Text = "ADMIN PANEL";
             this.lblAdminPanelText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlAdminShowInfo
+            // 
+            this.pnlAdminShowInfo.ColumnCount = 1;
+            this.pnlAdminShowInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlAdminShowInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlAdminShowInfo.Location = new System.Drawing.Point(171, 4);
+            this.pnlAdminShowInfo.Name = "pnlAdminShowInfo";
+            this.pnlAdminShowInfo.RowCount = 1;
+            this.pnlAdminShowInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlAdminShowInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 690F));
+            this.pnlAdminShowInfo.Size = new System.Drawing.Size(1181, 690);
+            this.pnlAdminShowInfo.TabIndex = 3;
             // 
             // AdminForm
             // 
@@ -246,5 +261,6 @@
         private System.Windows.Forms.Button btnAdminSignOut;
         private System.Windows.Forms.TableLayoutPanel pnlAdminShowInfo;
         private System.Windows.Forms.Label lblAdminPanelText;
+        private System.Windows.Forms.Button btnAdminRefund;
     }
 }

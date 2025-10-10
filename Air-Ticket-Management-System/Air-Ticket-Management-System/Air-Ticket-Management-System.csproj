@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminRefund.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminRefund.Designer.cs">
+      <DependentUpon>AdminRefund.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminPayment.Designer.cs">
+      <DependentUpon>AdminPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AdminPassenger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +119,18 @@
     <Compile Include="LogIn.Designer.cs">
       <DependentUpon>LogIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Passenger\PassengerBookingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Passenger\PassengerBookingForm.Designer.cs">
+      <DependentUpon>PassengerBookingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Passenger\PassengerFlightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Passenger\PassengerFlightForm.Designer.cs">
+      <DependentUpon>PassengerFlightForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Passenger\PassengerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +139,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionInfo.cs" />
+    <EmbeddedResource Include="Admin\AdminRefund.resx">
+      <DependentUpon>AdminRefund.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\AdminPayment.resx">
+      <DependentUpon>AdminPayment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin\AdminPassenger.resx">
       <DependentUpon>AdminPassenger.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,11 +170,14 @@
     <EmbeddedResource Include="Admin\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Employee\EmployeeForm.resx">
-      <DependentUpon>EmployeeForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Passenger\PassengerBookingForm.resx">
+      <DependentUpon>PassengerBookingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Passenger\PassengerFlightForm.resx">
+      <DependentUpon>PassengerFlightForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Passenger\PassengerForm.resx">
       <DependentUpon>PassengerForm.cs</DependentUpon>

@@ -34,10 +34,10 @@
             this.dtpAdminBookingDate = new System.Windows.Forms.DateTimePicker();
             this.txtAdminBookingId = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnAdminFlightAdd = new System.Windows.Forms.Button();
-            this.btnAdminFlightUpdate = new System.Windows.Forms.Button();
+            this.btnAdminBookingAdd = new System.Windows.Forms.Button();
+            this.btnAdminBookingUpdate = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAdminFlightDelete = new System.Windows.Forms.Button();
+            this.btnAdminBookingDelete = new System.Windows.Forms.Button();
             this.lblAdminBookingId = new System.Windows.Forms.Label();
             this.lblAdminBookingManage = new System.Windows.Forms.Label();
             this.lblAdminBookingInfo = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@
             this.lblAdminBookingFlightOrigin = new System.Windows.Forms.Label();
             this.btnAdminBookingFlightSeat = new System.Windows.Forms.Button();
             this.lblAdminBookingFlightSeat = new System.Windows.Forms.Label();
-            this.rdbCanceled = new System.Windows.Forms.RadioButton();
+            this.rdbCancelled = new System.Windows.Forms.RadioButton();
             this.rdbPending = new System.Windows.Forms.RadioButton();
             this.rdbConfirmed = new System.Windows.Forms.RadioButton();
             this.txtAdminBookingPassengerId = new System.Windows.Forms.TextBox();
@@ -91,7 +91,7 @@
             this.dgvAdminBooking.Name = "dgvAdminBooking";
             this.dgvAdminBooking.ReadOnly = true;
             this.dgvAdminBooking.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAdminBooking.Size = new System.Drawing.Size(742, 521);
+            this.dgvAdminBooking.Size = new System.Drawing.Size(739, 521);
             this.dgvAdminBooking.TabIndex = 4;
             this.dgvAdminBooking.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAdminBooking_CellDoubleClick);
             // 
@@ -128,30 +128,31 @@
             this.panel2.Size = new System.Drawing.Size(1, 34);
             this.panel2.TabIndex = 1;
             // 
-            // btnAdminFlightAdd
+            // btnAdminBookingAdd
             // 
-            this.btnAdminFlightAdd.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnAdminFlightAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdminFlightAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminFlightAdd.Location = new System.Drawing.Point(3, 3);
-            this.btnAdminFlightAdd.Name = "btnAdminFlightAdd";
-            this.btnAdminFlightAdd.Size = new System.Drawing.Size(114, 34);
-            this.btnAdminFlightAdd.TabIndex = 2;
-            this.btnAdminFlightAdd.Text = "Add";
-            this.btnAdminFlightAdd.UseVisualStyleBackColor = false;
-            this.btnAdminFlightAdd.Click += new System.EventHandler(this.btnAdminFlightAdd_Click_1);
+            this.btnAdminBookingAdd.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnAdminBookingAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdminBookingAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminBookingAdd.Location = new System.Drawing.Point(3, 3);
+            this.btnAdminBookingAdd.Name = "btnAdminBookingAdd";
+            this.btnAdminBookingAdd.Size = new System.Drawing.Size(114, 34);
+            this.btnAdminBookingAdd.TabIndex = 2;
+            this.btnAdminBookingAdd.Text = "Add";
+            this.btnAdminBookingAdd.UseVisualStyleBackColor = false;
+            this.btnAdminBookingAdd.Click += new System.EventHandler(this.btnAdminFlightAdd_Click_1);
             // 
-            // btnAdminFlightUpdate
+            // btnAdminBookingUpdate
             // 
-            this.btnAdminFlightUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnAdminFlightUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdminFlightUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminFlightUpdate.Location = new System.Drawing.Point(130, 3);
-            this.btnAdminFlightUpdate.Name = "btnAdminFlightUpdate";
-            this.btnAdminFlightUpdate.Size = new System.Drawing.Size(114, 34);
-            this.btnAdminFlightUpdate.TabIndex = 3;
-            this.btnAdminFlightUpdate.Text = "Update";
-            this.btnAdminFlightUpdate.UseVisualStyleBackColor = false;
+            this.btnAdminBookingUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnAdminBookingUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdminBookingUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminBookingUpdate.Location = new System.Drawing.Point(130, 3);
+            this.btnAdminBookingUpdate.Name = "btnAdminBookingUpdate";
+            this.btnAdminBookingUpdate.Size = new System.Drawing.Size(114, 34);
+            this.btnAdminBookingUpdate.TabIndex = 3;
+            this.btnAdminBookingUpdate.Text = "Update";
+            this.btnAdminBookingUpdate.UseVisualStyleBackColor = false;
+            this.btnAdminBookingUpdate.Click += new System.EventHandler(this.btnAdminFlightUpdate_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -163,9 +164,9 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel2.Controls.Add(this.panel2, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnAdminFlightAdd, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnAdminFlightUpdate, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnAdminFlightDelete, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnAdminBookingAdd, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnAdminBookingUpdate, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnAdminBookingDelete, 4, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 422);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -173,17 +174,18 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(374, 40);
             this.tableLayoutPanel2.TabIndex = 16;
             // 
-            // btnAdminFlightDelete
+            // btnAdminBookingDelete
             // 
-            this.btnAdminFlightDelete.BackColor = System.Drawing.Color.Salmon;
-            this.btnAdminFlightDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdminFlightDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminFlightDelete.Location = new System.Drawing.Point(257, 3);
-            this.btnAdminFlightDelete.Name = "btnAdminFlightDelete";
-            this.btnAdminFlightDelete.Size = new System.Drawing.Size(114, 34);
-            this.btnAdminFlightDelete.TabIndex = 4;
-            this.btnAdminFlightDelete.Text = "Delete";
-            this.btnAdminFlightDelete.UseVisualStyleBackColor = false;
+            this.btnAdminBookingDelete.BackColor = System.Drawing.Color.Salmon;
+            this.btnAdminBookingDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdminBookingDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminBookingDelete.Location = new System.Drawing.Point(257, 3);
+            this.btnAdminBookingDelete.Name = "btnAdminBookingDelete";
+            this.btnAdminBookingDelete.Size = new System.Drawing.Size(114, 34);
+            this.btnAdminBookingDelete.TabIndex = 4;
+            this.btnAdminBookingDelete.Text = "Delete";
+            this.btnAdminBookingDelete.UseVisualStyleBackColor = false;
+            this.btnAdminBookingDelete.Click += new System.EventHandler(this.btnAdminFlightDelete_Click);
             // 
             // lblAdminBookingId
             // 
@@ -199,9 +201,9 @@
             this.lblAdminBookingManage.AutoSize = true;
             this.lblAdminBookingManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAdminBookingManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdminBookingManage.Location = new System.Drawing.Point(753, 72);
+            this.lblAdminBookingManage.Location = new System.Drawing.Point(750, 72);
             this.lblAdminBookingManage.Name = "lblAdminBookingManage";
-            this.lblAdminBookingManage.Size = new System.Drawing.Size(408, 50);
+            this.lblAdminBookingManage.Size = new System.Drawing.Size(411, 50);
             this.lblAdminBookingManage.TabIndex = 1;
             this.lblAdminBookingManage.Text = "Manage Bookings";
             this.lblAdminBookingManage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -213,7 +215,7 @@
             this.lblAdminBookingInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdminBookingInfo.Location = new System.Drawing.Point(4, 72);
             this.lblAdminBookingInfo.Name = "lblAdminBookingInfo";
-            this.lblAdminBookingInfo.Size = new System.Drawing.Size(742, 50);
+            this.lblAdminBookingInfo.Size = new System.Drawing.Size(739, 50);
             this.lblAdminBookingInfo.TabIndex = 0;
             this.lblAdminBookingInfo.Text = "Bookings";
             this.lblAdminBookingInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -232,7 +234,7 @@
             this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingFlightOrigin);
             this.pnlAdminBookingManage.Controls.Add(this.btnAdminBookingFlightSeat);
             this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingFlightSeat);
-            this.pnlAdminBookingManage.Controls.Add(this.rdbCanceled);
+            this.pnlAdminBookingManage.Controls.Add(this.rdbCancelled);
             this.pnlAdminBookingManage.Controls.Add(this.rdbPending);
             this.pnlAdminBookingManage.Controls.Add(this.rdbConfirmed);
             this.pnlAdminBookingManage.Controls.Add(this.txtAdminBookingPassengerId);
@@ -246,9 +248,9 @@
             this.pnlAdminBookingManage.Controls.Add(this.lblAdminBookingStatus);
             this.pnlAdminBookingManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAdminBookingManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlAdminBookingManage.Location = new System.Drawing.Point(753, 126);
+            this.pnlAdminBookingManage.Location = new System.Drawing.Point(750, 126);
             this.pnlAdminBookingManage.Name = "pnlAdminBookingManage";
-            this.pnlAdminBookingManage.Size = new System.Drawing.Size(408, 521);
+            this.pnlAdminBookingManage.Size = new System.Drawing.Size(411, 521);
             this.pnlAdminBookingManage.TabIndex = 3;
             // 
             // txtAdminBookingBookedSeats
@@ -357,17 +359,17 @@
             this.lblAdminBookingFlightSeat.TabIndex = 25;
             this.lblAdminBookingFlightSeat.Text = "Seat : ";
             // 
-            // rdbCanceled
+            // rdbCancelled
             // 
-            this.rdbCanceled.AutoSize = true;
-            this.rdbCanceled.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbCanceled.Location = new System.Drawing.Point(309, 363);
-            this.rdbCanceled.Name = "rdbCanceled";
-            this.rdbCanceled.Size = new System.Drawing.Size(85, 21);
-            this.rdbCanceled.TabIndex = 24;
-            this.rdbCanceled.TabStop = true;
-            this.rdbCanceled.Text = "Canceled";
-            this.rdbCanceled.UseVisualStyleBackColor = true;
+            this.rdbCancelled.AutoSize = true;
+            this.rdbCancelled.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbCancelled.Location = new System.Drawing.Point(309, 363);
+            this.rdbCancelled.Name = "rdbCancelled";
+            this.rdbCancelled.Size = new System.Drawing.Size(88, 21);
+            this.rdbCancelled.TabIndex = 24;
+            this.rdbCancelled.TabStop = true;
+            this.rdbCancelled.Text = "Cancelled";
+            this.rdbCancelled.UseVisualStyleBackColor = true;
             // 
             // rdbPending
             // 
@@ -434,7 +436,7 @@
             this.txtBookingSearch.Location = new System.Drawing.Point(8, 11);
             this.txtBookingSearch.Multiline = true;
             this.txtBookingSearch.Name = "txtBookingSearch";
-            this.txtBookingSearch.Size = new System.Drawing.Size(799, 42);
+            this.txtBookingSearch.Size = new System.Drawing.Size(796, 42);
             this.txtBookingSearch.TabIndex = 0;
             // 
             // btnBookingSearch
@@ -442,7 +444,7 @@
             this.btnBookingSearch.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnBookingSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBookingSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBookingSearch.Location = new System.Drawing.Point(820, 11);
+            this.btnBookingSearch.Location = new System.Drawing.Point(817, 11);
             this.btnBookingSearch.Name = "btnBookingSearch";
             this.btnBookingSearch.Size = new System.Drawing.Size(154, 42);
             this.btnBookingSearch.TabIndex = 1;
@@ -455,7 +457,7 @@
             this.btnBookingRefresh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnBookingRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBookingRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBookingRefresh.Location = new System.Drawing.Point(985, 11);
+            this.btnBookingRefresh.Location = new System.Drawing.Point(982, 11);
             this.btnBookingRefresh.Name = "btnBookingRefresh";
             this.btnBookingRefresh.Size = new System.Drawing.Size(154, 42);
             this.btnBookingRefresh.TabIndex = 2;
@@ -473,7 +475,7 @@
             this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 14F));
+            this.pnlBookingSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.pnlBookingSearch.Controls.Add(this.txtBookingSearch, 1, 1);
             this.pnlBookingSearch.Controls.Add(this.btnBookingSearch, 3, 1);
             this.pnlBookingSearch.Controls.Add(this.btnBookingRefresh, 5, 1);
@@ -492,7 +494,7 @@
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 414F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 417F));
             this.tableLayoutPanel1.Controls.Add(this.pnlBookingSearch, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminBookingManage, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminBookingInfo, 0, 1);
@@ -536,10 +538,10 @@
         private System.Windows.Forms.DateTimePicker dtpAdminBookingDate;
         private System.Windows.Forms.TextBox txtAdminBookingId;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnAdminFlightAdd;
-        private System.Windows.Forms.Button btnAdminFlightUpdate;
+        private System.Windows.Forms.Button btnAdminBookingAdd;
+        private System.Windows.Forms.Button btnAdminBookingUpdate;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button btnAdminFlightDelete;
+        private System.Windows.Forms.Button btnAdminBookingDelete;
         private System.Windows.Forms.Label lblAdminBookingId;
         private System.Windows.Forms.Label lblAdminBookingManage;
         private System.Windows.Forms.Label lblAdminBookingInfo;
@@ -552,7 +554,7 @@
         private System.Windows.Forms.Label lblAdminBookingFlightNo;
         private System.Windows.Forms.Label lblAdminBookingPassengerId;
         private System.Windows.Forms.TextBox txtAdminBookingPassengerId;
-        private System.Windows.Forms.RadioButton rdbCanceled;
+        private System.Windows.Forms.RadioButton rdbCancelled;
         private System.Windows.Forms.RadioButton rdbPending;
         private System.Windows.Forms.RadioButton rdbConfirmed;
         private System.Windows.Forms.Label lblAdminBookingStatus;

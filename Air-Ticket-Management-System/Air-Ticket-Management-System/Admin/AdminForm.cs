@@ -110,7 +110,26 @@ namespace Air_Ticket_Management_System
         // Payment Button Click Event
         private void btnAdminPayment_Click(object sender, EventArgs e)
         {
-            //will be added later
+            this.pnlAdminShowInfo.Controls.Clear();
+            AdminPayment payment = new AdminPayment();
+            payment.TopLevel = false;
+            payment.FormBorderStyle = FormBorderStyle.None;
+            payment.Dock = DockStyle.Fill;
+            this.pnlAdminShowInfo.Controls.Add(payment);
+            payment.Show();
+        }
+
+
+        // Refund Button Click Event
+        private void btnAdminRefund_Click(object sender, EventArgs e)
+        {
+            this.pnlAdminShowInfo.Controls.Clear();
+            AdminRefund refund = new AdminRefund();
+            refund.TopLevel = false;
+            refund.FormBorderStyle = FormBorderStyle.None;
+            refund.Dock = DockStyle.Fill;
+            this.pnlAdminShowInfo.Controls.Add(refund);
+            refund.Show();
         }
 
 

@@ -25,9 +25,18 @@ namespace Air_Ticket_Management_System
 
         public AdminFlightSeats(string flightNo, TextBox bookedSeats)
         {
+            InitializeComponent();
+
             this.FlightNo = flightNo;
             this.txtAdminBookingBookedSeats = bookedSeats;
-            InitializeComponent();
+
+
+            // Initialize seats list from the provided TextBox
+            if (!string.IsNullOrWhiteSpace(bookedSeats.Text))
+            {
+                var alreadyBooked = bookedSeats.Text.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim());
+                seats.AddRange(alreadyBooked);
+            }
         }
 
 
@@ -82,6 +91,7 @@ namespace Air_Ticket_Management_System
                         // If the seat is selected locally, show selected color regardless of DB status
                         if (seats.Contains(seatNo))
                         {
+                            // Always show seats the user has already selected
                             seatButton.BackColor = Color.LimeGreen;
                         }
                         else if (status == "Available")
@@ -91,7 +101,8 @@ namespace Air_Ticket_Management_System
                         else if (status == "Booked")
                         {
                             seatButton.BackColor = Color.IndianRed;
-                            // make sure we don't keep a selected seat that's actually booked
+
+                            // Only remove if booked by someone else
                             if (seats.Contains(seatNo)) seats.Remove(seatNo);
                         }
                     }
@@ -122,7 +133,6 @@ namespace Air_Ticket_Management_System
 
             try
             {
-                // Read-only check to ensure seat isn't already booked in DB
                 string checkSeatStatusQuery = "SELECT flightSeatStatus FROM FlightSeats WHERE seatNo = '" + seatNo + "' AND flightId = (SELECT flightId FROM Flight WHERE flightNo = '" + this.FlightNo + "')";
                 var checkSeatStatusResult = DbHelper.GetQueryData(checkSeatStatusQuery);
 
@@ -146,16 +156,15 @@ namespace Air_Ticket_Management_System
                     return;
                 }
 
-                // Toggle selection in local list (no DB update here)
                 if (seats.Contains(seatNo))
                 {
                     seats.Remove(seatNo);
-                    seatBtn.BackColor = Color.DimGray; // available-looking color
+                    seatBtn.BackColor = Color.DimGray;
                 }
                 else
                 {
                     seats.Add(seatNo);
-                    seatBtn.BackColor = Color.LimeGreen; // selected color
+                    seatBtn.BackColor = Color.LimeGreen;
                 }
             }
             catch (Exception exception)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Air_Ticket_Management_System.Employee;
+using Air_Ticket_Management_System.Passenger;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -184,7 +186,7 @@ namespace Air_Ticket_Management_System
             //Database Connection and Verification for LogIn
             try
             {
-                String queryCheck = "SELECT userIdType FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "';";
+                String queryCheck = "SELECT * FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "';";
                 
                 var result = DbHelper.GetQueryData(queryCheck);
                 
@@ -202,6 +204,7 @@ namespace Air_Ticket_Management_System
 
                     //Demining user type and opening respective form
                     int userTypeInt = Convert.ToInt32(result.Data.Rows[0]["userIdType"]);
+                    SessionInfo.LoggedInUserId = Convert.ToInt32(result.Data.Rows[0]["userId"]);
 
                     if (userTypeInt == 1)
                     {

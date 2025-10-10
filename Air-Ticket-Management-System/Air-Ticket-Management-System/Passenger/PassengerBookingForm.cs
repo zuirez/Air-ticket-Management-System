@@ -6,14 +6,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 
-namespace Air_Ticket_Management_System
+namespace Air_Ticket_Management_System.Passenger
 {
-    public partial class AdminBookingForm : Form
+    public partial class PassengerBookingForm : Form
     {
-        public AdminBookingForm()
+        // Storing logged in user id
+        int userId = SessionInfo.LoggedInUserId;
+
+        public PassengerBookingForm()
         {
             InitializeComponent();
         }
@@ -22,15 +24,15 @@ namespace Air_Ticket_Management_System
         // Method to clear input fields
         private void ClearBookingSelection()
         {
-            txtAdminBookingPassengerId.ReadOnly = false;
-            cmbAdminBookingFlightName.Enabled = true;
-            dtpAdminBookingDate.Value = DateTime.Now;
-            txtAdminBookingPassengerId.Text = "";
-            cmbAdminBookingFlightName.SelectedIndex = -1;
-            txtAdminBookingFlightOrigin.Text = "";
-            txtAdminBookingFlightDestination.Text = "";
-            txtAdminBookingPaymentStatus.Text = "";
-            txtAdminBookingBookedSeats.Text = "";
+            txtPassengerBookingPassengerId.ReadOnly = true;
+            txtPassengerBookingPassengerId.Text = Convert.ToString(userId);
+            cmbPassengerBookingFlightName.Enabled = true;
+            dtpPassengerBookingDate.Value = DateTime.Now;
+            cmbPassengerBookingFlightName.SelectedIndex = -1;
+            txtPassengerBookingFlightOrigin.Text = "";
+            txtPassengerBookingFlightDestination.Text = "";
+            txtPassengerBookingPaymentStatus.Text = "";
+            txtPassengerBookingBookedSeats.Text = "";
             rdbCancelled.Checked = false;
             rdbConfirmed.Checked = false;
             rdbPending.Checked = false;
@@ -40,13 +42,14 @@ namespace Air_Ticket_Management_System
         // Method to display booking information
         private void ShowBookingInfo()
         {
-            txtAdminBookingId.Text = "Auto Generated";
-            txtAdminBookingPaymentStatus.Text = "Pending";
+            txtPassengerBookingId.Text = "Auto Generated";
+            txtPassengerBookingPassengerId.Text = Convert.ToString(userId);
+            txtPassengerBookingPaymentStatus.Text = "Pending";
             rdbPending.Checked = true;
             rdbCancelled.Enabled = false;
             rdbConfirmed.Enabled = false;
 
-            string query = "SELECT * FROM BOOK";
+            string query = "SELECT * FROM BOOK WHERE userId = '"+ userId +"'";
 
             var result = DbHelper.GetQueryData(query);
 
@@ -56,9 +59,9 @@ namespace Air_Ticket_Management_System
                 return;
             }
 
-            dgvAdminBooking.DataSource = result.Data;
-            dgvAdminBooking.Refresh();
-            dgvAdminBooking.ClearSelection();
+            dgvPassengerBooking.DataSource = result.Data;
+            dgvPassengerBooking.Refresh();
+            dgvPassengerBooking.ClearSelection();
         }
 
 
@@ -75,27 +78,27 @@ namespace Air_Ticket_Management_System
                 return;
             }
 
-            cmbAdminBookingFlightName.Items.Clear();
+            cmbPassengerBookingFlightName.Items.Clear();
 
             foreach (DataRow row in result.Data.Rows)
             {
-                cmbAdminBookingFlightName.Items.Add(row["flightNo"].ToString());
+                cmbPassengerBookingFlightName.Items.Add(row["flightNo"].ToString());
             }
         }
 
 
         // Methode to populate flight origin and destination based on selected flight name
-        private void cmbAdminBookingFlightName_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void cmbPassengerBookingFlightName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbAdminBookingFlightName.SelectedItem == null || cmbAdminBookingFlightName.SelectedIndex == -1)
+            if (cmbPassengerBookingFlightName.SelectedItem == null || cmbPassengerBookingFlightName.SelectedIndex == -1)
             {
-                txtAdminBookingFlightId.Text = "";
-                txtAdminBookingFlightOrigin.Text = "";
-                txtAdminBookingFlightDestination.Text = "";
+                txtPassengerBookingFlightId.Text = "";
+                txtPassengerBookingFlightOrigin.Text = "";
+                txtPassengerBookingFlightDestination.Text = "";
                 return;
             }
 
-            string selectedFlightNo = cmbAdminBookingFlightName.SelectedItem.ToString();
+            string selectedFlightNo = cmbPassengerBookingFlightName.SelectedItem.ToString();
 
             try
             {
@@ -110,15 +113,15 @@ namespace Air_Ticket_Management_System
 
                 if (result.Data != null && result.Data.Rows.Count > 0)
                 {
-                    txtAdminBookingFlightId.Text = result.Data.Rows[0]["flightId"].ToString();
-                    txtAdminBookingFlightOrigin.Text = result.Data.Rows[0]["origin"].ToString();
-                    txtAdminBookingFlightDestination.Text = result.Data.Rows[0]["destination"].ToString();
+                    txtPassengerBookingFlightId.Text = result.Data.Rows[0]["flightId"].ToString();
+                    txtPassengerBookingFlightOrigin.Text = result.Data.Rows[0]["origin"].ToString();
+                    txtPassengerBookingFlightDestination.Text = result.Data.Rows[0]["destination"].ToString();
                 }
                 else
                 {
-                    txtAdminBookingFlightId.Text = "";
-                    txtAdminBookingFlightOrigin.Text = "";
-                    txtAdminBookingFlightDestination.Text = "";
+                    txtPassengerBookingFlightId.Text = "";
+                    txtPassengerBookingFlightOrigin.Text = "";
+                    txtPassengerBookingFlightDestination.Text = "";
                 }
             }
             catch (Exception exception)
@@ -130,8 +133,9 @@ namespace Air_Ticket_Management_System
 
 
         // Form Load Event
-        private void AdminBookingForm_Load(object sender, EventArgs e)
+        private void PassengerBookingForm_Load(object sender, EventArgs e)
         {
+            txtPassengerBookingPassengerId.Text = Convert.ToString(userId);
             ShowBookingInfo();
             ShowFlightNames();
         }
@@ -144,12 +148,12 @@ namespace Air_Ticket_Management_System
 
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                MessageBox.Show("Error: Enter Booking Id/ Booking status/ Passenger ID.");
+                MessageBox.Show("Error: Enter Booking Id/ Booking status");
                 txtBookingSearch.Text = "";
                 return;
             }
 
-            string searchBookingQuery = "SELECT * FROM BOOK WHERE CAST(bookingId AS VARCHAR) = '" + searchText + "' OR bookingStatus = '" + searchText + "' OR CAST(userId as VARCHAR) = '" + searchText + "';";
+            string searchBookingQuery = "SELECT * FROM BOOK WHERE userId = '" + userId + "' AND (CAST(bookingId AS VARCHAR) = '" + searchText + "' OR bookingStatus = '" + searchText + "');";
 
             var searchBookingQueryResult = DbHelper.GetQueryData(searchBookingQuery);
 
@@ -160,9 +164,9 @@ namespace Air_Ticket_Management_System
                 return;
             }
 
-            dgvAdminBooking.DataSource = searchBookingQueryResult.Data;
-            dgvAdminBooking.Refresh();
-            dgvAdminBooking.ClearSelection();
+            dgvPassengerBooking.DataSource = searchBookingQueryResult.Data;
+            dgvPassengerBooking.Refresh();
+            dgvPassengerBooking.ClearSelection();
 
             txtBookingSearch.Text = "";
         }
@@ -178,17 +182,17 @@ namespace Air_Ticket_Management_System
 
 
         // DataGridView Cell Double Click Event
-        private void dgvAdminBooking_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvPassengerBooking_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.RowIndex < 0)
                 {
-                    dgvAdminBooking.ClearSelection();
+                    dgvPassengerBooking.ClearSelection();
                     return;
                 }
 
-                int BookingId = Convert.ToInt32(dgvAdminBooking.Rows[e.RowIndex].Cells["bookingId"].Value);
+                int BookingId = Convert.ToInt32(dgvPassengerBooking.Rows[e.RowIndex].Cells["bookingId"].Value);
 
                 // getting paymentId from booking table
                 string GetPaymentIdQuery = "SELECT paymentId FROM Book WHERE bookingId = '" + BookingId + "';";
@@ -222,15 +226,15 @@ namespace Air_Ticket_Management_System
                     return;
                 }
 
-                txtAdminBookingPassengerId.ReadOnly = true;
+                txtPassengerBookingPassengerId.ReadOnly = true;
 
-                txtAdminBookingId.Text = Convert.ToString(GetBookQueryResult.Data.Rows[0]["bookingId"]);
+                txtPassengerBookingId.Text = Convert.ToString(GetBookQueryResult.Data.Rows[0]["bookingId"]);
                 string BookingStatus = Convert.ToString(GetBookQueryResult.Data.Rows[0]["bookingStatus"]);
-                dtpAdminBookingDate.Value = Convert.ToDateTime(GetBookQueryResult.Data.Rows[0]["bookingDate"]);
+                dtpPassengerBookingDate.Value = Convert.ToDateTime(GetBookQueryResult.Data.Rows[0]["bookingDate"]);
                 int PassengerId = Convert.ToInt32(GetBookQueryResult.Data.Rows[0]["userId"]);
-                txtAdminBookingPassengerId.Text = Convert.ToString(GetBookQueryResult.Data.Rows[0]["userId"]);
+                txtPassengerBookingPassengerId.Text = Convert.ToString(GetBookQueryResult.Data.Rows[0]["userId"]);
                 int FlightId = Convert.ToInt32(GetBookQueryResult.Data.Rows[0]["flightId"]);
-                txtAdminBookingFlightId.Text = Convert.ToString(GetBookQueryResult.Data.Rows[0]["flightId"]);
+                txtPassengerBookingFlightId.Text = Convert.ToString(GetBookQueryResult.Data.Rows[0]["flightId"]);
 
                 if (BookingStatus == "Confirmed")
                 {
@@ -255,13 +259,13 @@ namespace Air_Ticket_Management_System
                     return;
                 }
 
-                cmbAdminBookingFlightName.Text = Convert.ToString(GetFLightQueryResult.Data.Rows[0]["flightNo"]);
-                txtAdminBookingFlightOrigin.Text = Convert.ToString(GetFLightQueryResult.Data.Rows[0]["origin"]);
-                txtAdminBookingFlightDestination.Text = Convert.ToString(GetFLightQueryResult.Data.Rows[0]["destination"]);
+                cmbPassengerBookingFlightName.Text = Convert.ToString(GetFLightQueryResult.Data.Rows[0]["flightNo"]);
+                txtPassengerBookingFlightOrigin.Text = Convert.ToString(GetFLightQueryResult.Data.Rows[0]["origin"]);
+                txtPassengerBookingFlightDestination.Text = Convert.ToString(GetFLightQueryResult.Data.Rows[0]["destination"]);
 
 
                 // making combobox readonly
-                cmbAdminBookingFlightName.Enabled = false;
+                cmbPassengerBookingFlightName.Enabled = false;
 
 
                 string GetFlightSeatsQuery = "SELECT seatNo FROM FlightSeats WHERE userId = '" + PassengerId + "' AND paymentId = '" + PaymentId + "';";
@@ -281,7 +285,7 @@ namespace Air_Ticket_Management_System
                     bookedSeats.Add(row["seatNo"].ToString());
                 }
 
-                txtAdminBookingBookedSeats.Text = string.Join(", ", bookedSeats);
+                txtPassengerBookingBookedSeats.Text = string.Join(", ", bookedSeats);
 
 
                 //updating payment status
@@ -299,7 +303,7 @@ namespace Air_Ticket_Management_System
 
                 if (paymentStatus == "Paid")
                 {
-                    txtAdminBookingPaymentStatus.Text = "Paid";
+                    txtPassengerBookingPaymentStatus.Text = "Paid";
                     rdbConfirmed.Checked = true;
                     rdbConfirmed.Enabled = true;
                     rdbCancelled.Enabled = false;
@@ -307,7 +311,7 @@ namespace Air_Ticket_Management_System
                 }
                 else if (paymentStatus == "Cancelled")
                 {
-                    txtAdminBookingPaymentStatus.Text = "Cancelled";
+                    txtPassengerBookingPaymentStatus.Text = "Cancelled";
                     rdbCancelled.Checked = true;
                     rdbCancelled.Enabled = true;
                     rdbPending.Enabled = false;
@@ -315,7 +319,7 @@ namespace Air_Ticket_Management_System
                 }
                 else
                 {
-                    txtAdminBookingPaymentStatus.Text = "Pending";
+                    txtPassengerBookingPaymentStatus.Text = "Pending";
                     rdbPending.Checked = true;
                     rdbPending.Enabled = true;
                     rdbCancelled.Enabled = false;
@@ -330,9 +334,9 @@ namespace Air_Ticket_Management_System
 
 
         // Flight Seats button Click Event
-        private void btnAdminBookingFlightSeat_Click(object sender, EventArgs e)
+        private void btnPassengerBookingFlightSeat_Click(object sender, EventArgs e)
         {
-            string FlightNo = cmbAdminBookingFlightName.Text;
+            string FlightNo = cmbPassengerBookingFlightName.Text;
 
             if (string.IsNullOrWhiteSpace(FlightNo))
             {
@@ -340,28 +344,28 @@ namespace Air_Ticket_Management_System
                 return;
             }
 
-            AdminFlightSeats flightSeats = new AdminFlightSeats(FlightNo, txtAdminBookingBookedSeats);
+            AdminFlightSeats flightSeats = new AdminFlightSeats(FlightNo, txtPassengerBookingBookedSeats);
             flightSeats.ShowDialog();
         }
 
 
         // Add Button Click Event
-        private void btnAdminFlightAdd_Click_1(object sender, EventArgs e)
+        private void btnPassengerBookingAdd_Click(object sender, EventArgs e)
         {
             // Checking if any field is empty
-            if (string.IsNullOrWhiteSpace(txtAdminBookingPassengerId.Text))
+            if (string.IsNullOrWhiteSpace(txtPassengerBookingPassengerId.Text))
             {
                 MessageBox.Show("Error: Enter Passenger ID");
                 return;
             }
 
-            if (cmbAdminBookingFlightName.SelectedItem == null || cmbAdminBookingFlightName.SelectedIndex == -1)
+            if (cmbPassengerBookingFlightName.SelectedItem == null || cmbPassengerBookingFlightName.SelectedIndex == -1)
             {
                 MessageBox.Show("Error: Select Flight No");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txtAdminBookingBookedSeats.Text))
+            if (string.IsNullOrWhiteSpace(txtPassengerBookingBookedSeats.Text))
             {
                 MessageBox.Show("Error: Select Seats");
                 return;
@@ -381,8 +385,8 @@ namespace Air_Ticket_Management_System
 
 
             // Getting data from input fields
-            int userId = Convert.ToInt32(txtAdminBookingPassengerId.Text);
-            DateTime BookingDate = dtpAdminBookingDate.Value;
+            int userId = Convert.ToInt32(txtPassengerBookingPassengerId.Text);
+            DateTime BookingDate = dtpPassengerBookingDate.Value;
             string BookingStatus = "";
 
 
@@ -420,12 +424,12 @@ namespace Air_Ticket_Management_System
             }
 
 
-            // getting flightSeats id from txtAdminBookingBookedSeats
-            string bookedSeats = txtAdminBookingBookedSeats.Text.Trim();
+            // getting flightSeats id from txtPassengerBookingBookedSeats
+            string bookedSeats = txtPassengerBookingBookedSeats.Text.Trim();
 
 
             // Cheacking if any other user has already booked the same seats on the same flight
-            string checkSeatAvailabilityQuery = "SELECT * FROM FlightSeats WHERE seatNo IN ('" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "') AND flightId = (SELECT flightId FROM Flight WHERE flightNo = '" + cmbAdminBookingFlightName.SelectedItem.ToString() + "') AND flightSeatStatus = 'Booked';";
+            string checkSeatAvailabilityQuery = "SELECT * FROM FlightSeats WHERE seatNo IN ('" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "') AND flightId = (SELECT flightId FROM Flight WHERE flightNo = '" + cmbPassengerBookingFlightName.SelectedItem.ToString() + "') AND flightSeatStatus = 'Booked';";
 
             var checkSeatAvailabilityQueryResult = DbHelper.GetQueryData(checkSeatAvailabilityQuery);
 
@@ -444,7 +448,7 @@ namespace Air_Ticket_Management_System
                 }
 
                 MessageBox.Show("Error: The following seats are already booked: " + string.Join(", ", alreadyBookedSeats) + ". Please select different seats.");
-                txtAdminBookingBookedSeats.Text = "";
+                txtPassengerBookingBookedSeats.Text = "";
                 return;
             }
 
@@ -453,7 +457,7 @@ namespace Air_Ticket_Management_System
             try
             {
                 // getting flightId from flight table based on selected flightNo
-                string getFlightIdQuery = "SELECT * FROM Flight WHERE flightNo = '" + cmbAdminBookingFlightName.SelectedItem.ToString() + "';";
+                string getFlightIdQuery = "SELECT * FROM Flight WHERE flightNo = '" + cmbPassengerBookingFlightName.SelectedItem.ToString() + "';";
 
                 var getFlightIdQueryResult = DbHelper.GetQueryData(getFlightIdQuery);
 
@@ -594,15 +598,14 @@ namespace Air_Ticket_Management_System
 
 
         // Update Button Click Event
-        private void btnAdminFlightUpdate_Click(object sender, EventArgs e)
+        private void btnPassengerBookingUpdate_Click(object sender, EventArgs e)
         {
-            DateTime BookingDate = dtpAdminBookingDate.Value = DateTime.Now;
-            txtAdminBookingBookedSeats.Text = "";
+            txtPassengerBookingBookedSeats.Text = "";
 
             try
             {
                 // getting flightId from flight table based on selected flightNo
-                string getFlightIdQuery = "SELECT * FROM Flight WHERE flightNo = '" + cmbAdminBookingFlightName.SelectedItem.ToString() + "';";
+                string getFlightIdQuery = "SELECT * FROM Flight WHERE flightNo = '" + cmbPassengerBookingFlightName.SelectedItem.ToString() + "';";
 
                 var getFlightIdQueryResult = DbHelper.GetQueryData(getFlightIdQuery);
 
@@ -624,8 +627,8 @@ namespace Air_Ticket_Management_System
                 int flightId = Convert.ToInt32(getFlightIdQueryResult.Data.Rows[0]["flightId"]);
 
 
-                // getting flightSeats id from txtAdminBookingBookedSeats
-                string bookedSeats = txtAdminBookingBookedSeats.Text.Trim();
+                // getting flightSeats id from txtPassengerBookingBookedSeats
+                string bookedSeats = txtPassengerBookingBookedSeats.Text.Trim();
 
                 string getFlightSeatIdQuery = "SELECT * FROM FlightSeats WHERE flightId = '" + flightId + "' AND seatNo IN ('" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "');";
 
@@ -655,18 +658,18 @@ namespace Air_Ticket_Management_System
 
 
         // Delete Button Click Event
-        private void btnAdminFlightDelete_Click(object sender, EventArgs e)
+        private void btnPassengerBookingDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                string bookedSeats = txtAdminBookingBookedSeats.Text.Trim();
+                string bookedSeats = txtPassengerBookingBookedSeats.Text.Trim();
                 if (string.IsNullOrWhiteSpace(bookedSeats))
                 {
                     MessageBox.Show("Error: No seats selected.");
                     return;
                 }
 
-                if (!int.TryParse(txtAdminBookingPassengerId.Text, out int userId))
+                if (!int.TryParse(txtPassengerBookingPassengerId.Text, out int userId))
                 {
                     MessageBox.Show("Error: Invalid passenger id.");
                     return;
@@ -674,7 +677,7 @@ namespace Air_Ticket_Management_System
 
                 // Get the flightSeatIds for the selected seatNos
                 string seatList = "'" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "'";
-                string flightNo = cmbAdminBookingFlightName.SelectedItem?.ToString();
+                string flightNo = cmbPassengerBookingFlightName.SelectedItem?.ToString();
                 if (string.IsNullOrWhiteSpace(flightNo))
                 {
                     MessageBox.Show("Error: Flight not selected.");

@@ -8,23 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Air_Ticket_Management_System
+namespace Air_Ticket_Management_System.Employee
 {
     public partial class EmployeeForm : Form
     {
         public EmployeeForm()
         {
             InitializeComponent();
-        }
-
-        private void EmployeeForm_Load(object sender, EventArgs e)
-        {
-            this.Owner.Hide();
-        }
-
-        private void EmployeeForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Owner.Show();
         }
     }
 }

@@ -37,7 +37,7 @@
             this.lblAdminFlightManage = new System.Windows.Forms.Label();
             this.lblAdminFlightInfo = new System.Windows.Forms.Label();
             this.pnlAdminFlightManage = new System.Windows.Forms.Panel();
-            this.rdbCanceled = new System.Windows.Forms.RadioButton();
+            this.rdbCancelled = new System.Windows.Forms.RadioButton();
             this.rdbDelayed = new System.Windows.Forms.RadioButton();
             this.rdbOnTime = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -71,7 +71,7 @@
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 410F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 411F));
             this.tableLayoutPanel1.Controls.Add(this.pnlFlightSearch, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminFlightManage, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminFlightInfo, 0, 1);
@@ -97,7 +97,7 @@
             this.pnlFlightSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.pnlFlightSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlFlightSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.pnlFlightSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.pnlFlightSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.pnlFlightSearch.Controls.Add(this.txtFlightSearch, 1, 1);
             this.pnlFlightSearch.Controls.Add(this.btnFlightSearch, 3, 1);
             this.pnlFlightSearch.Controls.Add(this.btnFlightRefresh, 5, 1);
@@ -118,7 +118,7 @@
             this.txtFlightSearch.Location = new System.Drawing.Point(8, 11);
             this.txtFlightSearch.Multiline = true;
             this.txtFlightSearch.Name = "txtFlightSearch";
-            this.txtFlightSearch.Size = new System.Drawing.Size(803, 42);
+            this.txtFlightSearch.Size = new System.Drawing.Size(802, 42);
             this.txtFlightSearch.TabIndex = 0;
             // 
             // btnFlightSearch
@@ -126,7 +126,7 @@
             this.btnFlightSearch.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnFlightSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnFlightSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFlightSearch.Location = new System.Drawing.Point(824, 11);
+            this.btnFlightSearch.Location = new System.Drawing.Point(823, 11);
             this.btnFlightSearch.Name = "btnFlightSearch";
             this.btnFlightSearch.Size = new System.Drawing.Size(154, 42);
             this.btnFlightSearch.TabIndex = 1;
@@ -139,7 +139,7 @@
             this.btnFlightRefresh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnFlightRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnFlightRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFlightRefresh.Location = new System.Drawing.Point(989, 11);
+            this.btnFlightRefresh.Location = new System.Drawing.Point(988, 11);
             this.btnFlightRefresh.Name = "btnFlightRefresh";
             this.btnFlightRefresh.Size = new System.Drawing.Size(154, 42);
             this.btnFlightRefresh.TabIndex = 2;
@@ -152,9 +152,9 @@
             this.lblAdminFlightManage.AutoSize = true;
             this.lblAdminFlightManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAdminFlightManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdminFlightManage.Location = new System.Drawing.Point(757, 72);
+            this.lblAdminFlightManage.Location = new System.Drawing.Point(756, 72);
             this.lblAdminFlightManage.Name = "lblAdminFlightManage";
-            this.lblAdminFlightManage.Size = new System.Drawing.Size(404, 50);
+            this.lblAdminFlightManage.Size = new System.Drawing.Size(405, 50);
             this.lblAdminFlightManage.TabIndex = 1;
             this.lblAdminFlightManage.Text = "Manage Flights";
             this.lblAdminFlightManage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -166,14 +166,14 @@
             this.lblAdminFlightInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdminFlightInfo.Location = new System.Drawing.Point(4, 72);
             this.lblAdminFlightInfo.Name = "lblAdminFlightInfo";
-            this.lblAdminFlightInfo.Size = new System.Drawing.Size(746, 50);
+            this.lblAdminFlightInfo.Size = new System.Drawing.Size(745, 50);
             this.lblAdminFlightInfo.TabIndex = 0;
             this.lblAdminFlightInfo.Text = "Flight Info";
             this.lblAdminFlightInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlAdminFlightManage
             // 
-            this.pnlAdminFlightManage.Controls.Add(this.rdbCanceled);
+            this.pnlAdminFlightManage.Controls.Add(this.rdbCancelled);
             this.pnlAdminFlightManage.Controls.Add(this.rdbDelayed);
             this.pnlAdminFlightManage.Controls.Add(this.rdbOnTime);
             this.pnlAdminFlightManage.Controls.Add(this.tableLayoutPanel2);
@@ -192,22 +192,22 @@
             this.pnlAdminFlightManage.Controls.Add(this.lblAdminFlightId);
             this.pnlAdminFlightManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAdminFlightManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlAdminFlightManage.Location = new System.Drawing.Point(757, 126);
+            this.pnlAdminFlightManage.Location = new System.Drawing.Point(756, 126);
             this.pnlAdminFlightManage.Name = "pnlAdminFlightManage";
-            this.pnlAdminFlightManage.Size = new System.Drawing.Size(404, 521);
+            this.pnlAdminFlightManage.Size = new System.Drawing.Size(405, 521);
             this.pnlAdminFlightManage.TabIndex = 3;
             // 
-            // rdbCanceled
+            // rdbCancelled
             // 
-            this.rdbCanceled.AutoSize = true;
-            this.rdbCanceled.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbCanceled.Location = new System.Drawing.Point(304, 193);
-            this.rdbCanceled.Name = "rdbCanceled";
-            this.rdbCanceled.Size = new System.Drawing.Size(88, 21);
-            this.rdbCanceled.TabIndex = 19;
-            this.rdbCanceled.TabStop = true;
-            this.rdbCanceled.Text = "Cancelled";
-            this.rdbCanceled.UseVisualStyleBackColor = true;
+            this.rdbCancelled.AutoSize = true;
+            this.rdbCancelled.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbCancelled.Location = new System.Drawing.Point(304, 193);
+            this.rdbCancelled.Name = "rdbCancelled";
+            this.rdbCancelled.Size = new System.Drawing.Size(88, 21);
+            this.rdbCancelled.TabIndex = 19;
+            this.rdbCancelled.TabStop = true;
+            this.rdbCancelled.Text = "Cancelled";
+            this.rdbCancelled.UseVisualStyleBackColor = true;
             // 
             // rdbDelayed
             // 
@@ -427,7 +427,7 @@
             this.dgvAdminFlight.Name = "dgvAdminFlight";
             this.dgvAdminFlight.ReadOnly = true;
             this.dgvAdminFlight.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAdminFlight.Size = new System.Drawing.Size(746, 521);
+            this.dgvAdminFlight.Size = new System.Drawing.Size(745, 521);
             this.dgvAdminFlight.TabIndex = 4;
             this.dgvAdminFlight.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAdminFlight_CellDoubleClick);
             this.dgvAdminFlight.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvAdminFlight_DataBindingComplete);
@@ -476,7 +476,7 @@
         private System.Windows.Forms.TextBox txtFlightSearch;
         private System.Windows.Forms.Button btnFlightSearch;
         private System.Windows.Forms.Button btnFlightRefresh;
-        private System.Windows.Forms.RadioButton rdbCanceled;
+        private System.Windows.Forms.RadioButton rdbCancelled;
         private System.Windows.Forms.RadioButton rdbDelayed;
         private System.Windows.Forms.RadioButton rdbOnTime;
         private System.Windows.Forms.DateTimePicker dtpAdminFlightArrivalTime;
