@@ -345,7 +345,7 @@ namespace Air_Ticket_Management_System
         }
 
 
-        // Add Button Click Event
+        // Add Button Click Event g
         private void btnAdminFlightAdd_Click_1(object sender, EventArgs e)
         {
             // Checking if any field is empty
@@ -475,6 +475,7 @@ namespace Air_Ticket_Management_System
                 int flightId = Convert.ToInt32(getFlightIdQueryResult.Data.Rows[0]["flightId"]);
 
 
+                // getting flightSeatIds from flightSeats table based on flightId and SeatNos 
                 string getFlightSeatIdQuery = "SELECT * FROM FlightSeats WHERE flightId = '" + flightId + "' AND seatNo IN ('" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "');";
 
                 var getFlightSeatIdQueryResult = DbHelper.GetQueryData(getFlightSeatIdQuery);
@@ -596,37 +597,56 @@ namespace Air_Ticket_Management_System
         // Update Button Click Event
         private void btnAdminFlightUpdate_Click(object sender, EventArgs e)
         {
-            DateTime BookingDate = dtpAdminBookingDate.Value = DateTime.Now;
-            txtAdminBookingBookedSeats.Text = "";
-
             try
             {
-                // getting flightId from flight table based on selected flightNo
-                string getFlightIdQuery = "SELECT * FROM Flight WHERE flightNo = '" + cmbAdminBookingFlightName.SelectedItem.ToString() + "';";
+                // Checking if any field is empty
+                if (string.IsNullOrWhiteSpace(txtAdminBookingPassengerId.Text))
+                {
+                    MessageBox.Show("Error: Enter Passenger ID");
+                    return;
+                }
 
+                if (cmbAdminBookingFlightName.SelectedItem == null || cmbAdminBookingFlightName.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Error: Select Flight No");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtAdminBookingBookedSeats.Text))
+                {
+                    MessageBox.Show("Error: Select Seats");
+                    return;
+                }
+
+
+                int bookingId = Convert.ToInt32(txtAdminBookingId.Text);
+                int userId = Convert.ToInt32(txtAdminBookingPassengerId.Text);
+                DateTime bookingDate = DateTime.Now;
+                string bookedSeats = txtAdminBookingBookedSeats.Text.Trim();
+
+
+                // Getting flightId from flight table based on selected flightNo
+                string getFlightIdQuery = "SELECT flightId FROM Flight WHERE flightNo = '" + cmbAdminBookingFlightName.SelectedItem.ToString() + "';";
+                
                 var getFlightIdQueryResult = DbHelper.GetQueryData(getFlightIdQuery);
-
+                
                 if (getFlightIdQueryResult.HasError)
                 {
                     MessageBox.Show("Error : " + getFlightIdQueryResult.Message);
                     return;
                 }
-
                 if (getFlightIdQueryResult.Data.Rows.Count < 1)
                 {
                     MessageBox.Show("Error: Flight not found. Please select a valid Flight No.");
-                    ClearBookingSelection();
                     return;
                 }
 
 
-                // stroing flightId
+                // Storing flightId
                 int flightId = Convert.ToInt32(getFlightIdQueryResult.Data.Rows[0]["flightId"]);
 
 
-                // getting flightSeats id from txtAdminBookingBookedSeats
-                string bookedSeats = txtAdminBookingBookedSeats.Text.Trim();
-
+                // getting flightSeatIds from flightSeats table based on flightId and SeatNos 
                 string getFlightSeatIdQuery = "SELECT * FROM FlightSeats WHERE flightId = '" + flightId + "' AND seatNo IN ('" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "');";
 
                 var getFlightSeatIdQueryResult = DbHelper.GetQueryData(getFlightSeatIdQuery);
@@ -638,13 +658,47 @@ namespace Air_Ticket_Management_System
                 }
 
 
-                // storing flightSeatIds in a list
+                // List to store flightSeatIds
                 List<int> flightSeatIds = new List<int>();
 
+                // storing flightSeatIds in a list
                 foreach (DataRow row in getFlightSeatIdQueryResult.Data.Rows)
                 {
                     flightSeatIds.Add(Convert.ToInt32(row["flightSeatId"]));
                 }
+
+
+                // Calculating new amount for payment
+                int seatCount = bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
+                int amount = (100 * seatCount);
+
+
+                // Updating payment record with new amount and booking date
+                string updatePaymentQuery = "UPDATE Payment SET amount = '" + amount + "', paymentDate = '" + bookingDate.ToString("yyyy-MM-dd") + "' WHERE bookingId = '" + bookingId + "';";
+
+                var updatePaymentQueryResult = DbHelper.ExecuteNonResultQuery(updatePaymentQuery);
+
+                if (updatePaymentQueryResult.HasError)
+                {
+                    MessageBox.Show("Error: " + updatePaymentQueryResult.Message);
+                    return;
+                }
+
+
+                // Get the paymentId of the newly created payment record
+                string getPaymentIdQuery = "SELECT TOP 1 paymentId FROM Payment WHERE userId = '" + userId + "' ORDER BY paymentId DESC;";
+
+                var getPaymentIdQueryResult = DbHelper.GetQueryData(getPaymentIdQuery);
+
+                if (getPaymentIdQueryResult.HasError)
+                {
+                    MessageBox.Show("Error: " + getPaymentIdQueryResult.Message);
+                    return;
+                }
+
+                int paymentId = Convert.ToInt32(getPaymentIdQueryResult.Data.Rows[0]["paymentId"]);
+
+
             }
             catch (Exception exception)
             {

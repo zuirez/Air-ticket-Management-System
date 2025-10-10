@@ -76,7 +76,13 @@ namespace Air_Ticket_Management_System.Passenger
         // Payment Button Click Event
         private void btnPassengerPayment_Click(object sender, EventArgs e)
         {
-
+            this.pnlPassengerShowInfo.Controls.Clear();
+            PassengerPaymentForm payment = new PassengerPaymentForm();
+            payment.TopLevel = false;
+            payment.FormBorderStyle = FormBorderStyle.None;
+            payment.Dock = DockStyle.Fill;
+            this.pnlPassengerShowInfo.Controls.Add(payment);
+            payment.Show();
         }
 
 

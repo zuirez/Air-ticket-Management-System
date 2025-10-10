@@ -597,66 +597,6 @@ namespace Air_Ticket_Management_System.Passenger
         }
 
 
-        // Update Button Click Event
-        private void btnPassengerBookingUpdate_Click(object sender, EventArgs e)
-        {
-            txtPassengerBookingBookedSeats.Text = "";
-
-            try
-            {
-                // getting flightId from flight table based on selected flightNo
-                string getFlightIdQuery = "SELECT * FROM Flight WHERE flightNo = '" + cmbPassengerBookingFlightName.SelectedItem.ToString() + "';";
-
-                var getFlightIdQueryResult = DbHelper.GetQueryData(getFlightIdQuery);
-
-                if (getFlightIdQueryResult.HasError)
-                {
-                    MessageBox.Show("Error : " + getFlightIdQueryResult.Message);
-                    return;
-                }
-
-                if (getFlightIdQueryResult.Data.Rows.Count < 1)
-                {
-                    MessageBox.Show("Error: Flight not found. Please select a valid Flight No.");
-                    ClearBookingSelection();
-                    return;
-                }
-
-
-                // stroing flightId
-                int flightId = Convert.ToInt32(getFlightIdQueryResult.Data.Rows[0]["flightId"]);
-
-
-                // getting flightSeats id from txtPassengerBookingBookedSeats
-                string bookedSeats = txtPassengerBookingBookedSeats.Text.Trim();
-
-                string getFlightSeatIdQuery = "SELECT * FROM FlightSeats WHERE flightId = '" + flightId + "' AND seatNo IN ('" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "');";
-
-                var getFlightSeatIdQueryResult = DbHelper.GetQueryData(getFlightSeatIdQuery);
-
-                if (getFlightSeatIdQueryResult.HasError)
-                {
-                    MessageBox.Show("Error : " + getFlightSeatIdQueryResult.Message);
-                    return;
-                }
-
-
-                // storing flightSeatIds in a list
-                List<int> flightSeatIds = new List<int>();
-
-                foreach (DataRow row in getFlightSeatIdQueryResult.Data.Rows)
-                {
-                    flightSeatIds.Add(Convert.ToInt32(row["flightSeatId"]));
-                }
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Error: " + exception.Message);
-                return;
-            }
-        }
-
-
         // Delete Button Click Event
         private void btnPassengerBookingDelete_Click(object sender, EventArgs e)
         {
