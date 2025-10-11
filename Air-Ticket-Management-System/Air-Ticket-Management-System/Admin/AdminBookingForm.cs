@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -352,31 +353,25 @@ namespace Air_Ticket_Management_System
             if (string.IsNullOrWhiteSpace(txtAdminBookingPassengerId.Text))
             {
                 MessageBox.Show("Error: Enter Passenger ID");
+                ClearBookingSelection();
+                ShowBookingInfo();
                 return;
             }
 
             if (cmbAdminBookingFlightName.SelectedItem == null || cmbAdminBookingFlightName.SelectedIndex == -1)
             {
                 MessageBox.Show("Error: Select Flight No");
+                ClearBookingSelection();
+                ShowBookingInfo();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtAdminBookingBookedSeats.Text))
             {
                 MessageBox.Show("Error: Select Seats");
+                ClearBookingSelection();
+                ShowBookingInfo();
                 return;
-            }
-
-            if (!rdbConfirmed.Checked)
-            {
-                if (!rdbPending.Checked)
-                {
-                    if (!rdbCancelled.Checked)
-                    {
-                        MessageBox.Show("Error: Select Booking Status");
-                        return;
-                    }
-                }
             }
 
 
@@ -416,6 +411,7 @@ namespace Air_Ticket_Management_System
             {
                 MessageBox.Show("Error: Passenger not found. Please enter a valid Passenger Name or Add a Passenger first.");
                 ClearBookingSelection();
+                ShowBookingInfo();
                 return;
             }
 
@@ -597,6 +593,15 @@ namespace Air_Ticket_Management_System
         // Update Button Click Event
         private void btnAdminFlightUpdate_Click(object sender, EventArgs e)
         {
+            // if payment status is confirmed then return 
+            if (txtAdminBookingPaymentStatus.Text == "Paid")
+            {
+                MessageBox.Show("Error: Cannot update a confirmed booking.");
+                ClearBookingSelection();
+                ShowBookingInfo();
+                return;
+            }
+
             try
             {
                 // Checking if any field is empty
@@ -621,15 +626,38 @@ namespace Air_Ticket_Management_System
 
                 int bookingId = Convert.ToInt32(txtAdminBookingId.Text);
                 int userId = Convert.ToInt32(txtAdminBookingPassengerId.Text);
+                dtpAdminBookingDate.Enabled = false;
                 DateTime bookingDate = DateTime.Now;
                 string bookedSeats = txtAdminBookingBookedSeats.Text.Trim();
 
 
+                // Getting paymentId from book table uisng bookingId
+                string getPaymentIdQuery = "SELECT paymentId FROM Book WHERE bookingId = '" + bookingId + "';";
+                
+                var getPaymentIdQueryResult = DbHelper.GetQueryData(getPaymentIdQuery);
+                
+                if (getPaymentIdQueryResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getPaymentIdQueryResult.Message);
+                    return;
+                }
+                if (getPaymentIdQueryResult.Data.Rows.Count < 1)
+                {
+                    MessageBox.Show("Error: Payment record not found for the selected booking.");
+                    ClearBookingSelection();
+                    return;
+                }
+
+
+                // Storing paymentId
+                int paymentId = Convert.ToInt32(getPaymentIdQueryResult.Data.Rows[0]["paymentId"]);
+
+
                 // Getting flightId from flight table based on selected flightNo
                 string getFlightIdQuery = "SELECT flightId FROM Flight WHERE flightNo = '" + cmbAdminBookingFlightName.SelectedItem.ToString() + "';";
-                
+
                 var getFlightIdQueryResult = DbHelper.GetQueryData(getFlightIdQuery);
-                
+
                 if (getFlightIdQueryResult.HasError)
                 {
                     MessageBox.Show("Error : " + getFlightIdQueryResult.Message);
@@ -659,12 +687,27 @@ namespace Air_Ticket_Management_System
 
 
                 // List to store flightSeatIds
-                List<int> flightSeatIds = new List<int>();
+                List<int> updatedFlightSeatIds = new List<int>();
 
                 // storing flightSeatIds in a list
                 foreach (DataRow row in getFlightSeatIdQueryResult.Data.Rows)
                 {
-                    flightSeatIds.Add(Convert.ToInt32(row["flightSeatId"]));
+                    updatedFlightSeatIds.Add(Convert.ToInt32(row["flightSeatId"]));
+                }
+
+
+                // Getting already booked seatIds for this bookingId
+                string getExistingSeatsQuery = "SELECT flightSeatId FROM Book WHERE paymentId = '" + paymentId + "';";
+
+                var getExistingSeatsResult = DbHelper.GetQueryData(getExistingSeatsQuery);
+
+                // List to store existing booked seatIds
+                List<int> existingSeatIds = new List<int>();
+
+                // storing existing booked seatIds in a list
+                foreach (DataRow row in getExistingSeatsResult.Data.Rows)
+                {
+                    existingSeatIds.Add(Convert.ToInt32(row["flightSeatId"]));
                 }
 
 
@@ -685,20 +728,59 @@ namespace Air_Ticket_Management_System
                 }
 
 
-                // Get the paymentId of the newly created payment record
-                string getPaymentIdQuery = "SELECT TOP 1 paymentId FROM Payment WHERE userId = '" + userId + "' ORDER BY paymentId DESC;";
-
-                var getPaymentIdQueryResult = DbHelper.GetQueryData(getPaymentIdQuery);
-
-                if (getPaymentIdQueryResult.HasError)
+                // Updating booking records and updating flightSeats status
+                foreach (int seatId in updatedFlightSeatIds)
                 {
-                    MessageBox.Show("Error: " + getPaymentIdQueryResult.Message);
-                    return;
+                    if (existingSeatIds.Contains(seatId))
+                    {
+                        // Updating booking record
+                        string updateBookingQuery = "UPDATE Book SET bookingDate = '" + bookingDate.ToString("yyyy-MM-dd") + "', userId = '" + userId + "', flightSeatId = '" + seatId + "', flightId = '" + flightId + "', paymentId = '" + paymentId + "' WHERE bookingId = '" + bookingId + "';";
+
+                        var updateBookingQueryResult = DbHelper.ExecuteNonResultQuery(updateBookingQuery);
+
+                        if (updateBookingQueryResult.HasError)
+                        {
+                            MessageBox.Show("Error: " + updateBookingQueryResult.Message);
+                            return;
+                        }
+
+
+                        // Updating flightSeat status to 'Booked' and assigning userId
+                        string updateFlightSeatStatusQuery = "UPDATE FlightSeats SET flightSeatStatus = 'Booked', userId = '" + userId + "', paymentId = '" + paymentId + "' WHERE flightSeatId = '" + seatId + "';";
+
+                        var updateFlightSeatStatusQueryResult = DbHelper.ExecuteNonResultQuery(updateFlightSeatStatusQuery);
+
+                        if (updateFlightSeatStatusQueryResult.HasError)
+                        {
+                            MessageBox.Show("Error: " + updateFlightSeatStatusQueryResult.Message);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        // Inserting new booking record
+                        string insertBookingQuery = "INSERT INTO Book (bookingDate, userId, bookingStatus, flightSeatId, flightId, paymentId) VALUES ('" + bookingDate.ToString("yyyy-MM-dd") + "', '" + userId + "', 'Pending', '" + seatId + "', '" + flightId + "', '" + paymentId + "');";
+                        var insertBookingQueryResult = DbHelper.ExecuteNonResultQuery(insertBookingQuery);
+                        if (insertBookingQueryResult.HasError)
+                        {
+                            MessageBox.Show("Error: " + insertBookingQueryResult.Message);
+                            return;
+                        }
+
+                        // Updating flightSeat status to 'Booked' and assigning userId
+                        string updateFlightSeatStatusQuery = "UPDATE FlightSeats SET flightSeatStatus = 'Booked', userId = '" + userId + "', paymentId = '" + paymentId + "' WHERE flightSeatId = '" + seatId + "';";
+                        var updateFlightSeatStatusQueryResult = DbHelper.ExecuteNonResultQuery(updateFlightSeatStatusQuery);
+                        if (updateFlightSeatStatusQueryResult.HasError)
+                        {
+                            MessageBox.Show("Error: " + updateFlightSeatStatusQueryResult.Message);
+                            return;
+                        }
+                    }
                 }
 
-                int paymentId = Convert.ToInt32(getPaymentIdQueryResult.Data.Rows[0]["paymentId"]);
-
-
+                MessageBox.Show("Message: Booking Updated Successfully.");
+                ClearBookingSelection();
+                ShowBookingInfo();
             }
             catch (Exception exception)
             {
@@ -714,144 +796,123 @@ namespace Air_Ticket_Management_System
             try
             {
                 string bookedSeats = txtAdminBookingBookedSeats.Text.Trim();
+                int userId = Convert.ToInt32(txtAdminBookingPassengerId.Text);
+                string flightNo = cmbAdminBookingFlightName.SelectedItem.ToString();
+
+                // validating inputs
                 if (string.IsNullOrWhiteSpace(bookedSeats))
                 {
                     MessageBox.Show("Error: No seats selected.");
                     return;
                 }
-
-                if (!int.TryParse(txtAdminBookingPassengerId.Text, out int userId))
+                if (string.IsNullOrWhiteSpace(txtAdminBookingPassengerId.Text))
                 {
-                    MessageBox.Show("Error: Invalid passenger id.");
+                    MessageBox.Show("Error: Invalid passenger ID.");
                     return;
                 }
-
-                // Get the flightSeatIds for the selected seatNos
-                string seatList = "'" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "'";
-                string flightNo = cmbAdminBookingFlightName.SelectedItem?.ToString();
                 if (string.IsNullOrWhiteSpace(flightNo))
                 {
                     MessageBox.Show("Error: Flight not selected.");
                     return;
                 }
 
-                string getBookingDataQuery = "SELECT flightSeatId, seatNo FROM FlightSeats " +
-                                             "WHERE seatNo IN (" + seatList + ") " +
-                                             "AND flightId = (SELECT flightId FROM Flight WHERE flightNo = '" + flightNo + "') " +
-                                             "AND flightSeatStatus = 'Booked';";
+
+                // Getting the booked seats
+                string getBookingDataQuery = "SELECT flightSeatId, seatNo FROM FlightSeats WHERE seatNo IN ('" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "') AND flightId = (SELECT flightId FROM Flight WHERE flightNo = '" + flightNo + "') AND flightSeatStatus = 'Booked';";
 
                 var getBookingDataQueryResult = DbHelper.GetQueryData(getBookingDataQuery);
+                
                 if (getBookingDataQueryResult.HasError)
                 {
                     MessageBox.Show("Error : " + getBookingDataQueryResult.Message);
                     return;
                 }
-
                 if (getBookingDataQueryResult.Data.Rows.Count == 0)
                 {
                     MessageBox.Show("No booked seats found for the selected seats/flight.");
                     return;
                 }
 
+
+                // Storing booked flightSeatIds
                 var bookedSeatIds = new List<int>();
-                foreach (DataRow r in getBookingDataQueryResult.Data.Rows)
-                    bookedSeatIds.Add(Convert.ToInt32(r["flightSeatId"]));
 
-                // Collect paymentIds encountered so we can evaluate deletion later
-                var paymentIdsEncountered = new HashSet<int>();
+                foreach (DataRow row in getBookingDataQueryResult.Data.Rows)
+                {
+                    bookedSeatIds.Add(Convert.ToInt32(row["flightSeatId"]));
+                }
 
+
+                // Storing paymentId
+                int paymentId = 0;
+
+
+                // Getting paymentId and bookingIds for the booked seats
                 foreach (int seatId in bookedSeatIds)
                 {
                     // Find booking(s) for this flightSeatId and user
                     string getBookingInfo = "SELECT bookingId, paymentId FROM Book WHERE flightSeatId = " + seatId + " AND userId = " + userId + ";";
                     var getBookingInfoResult = DbHelper.GetQueryData(getBookingInfo);
 
-                    if (getBookingInfoResult.HasError)
-                    {
-                        MessageBox.Show("Error : " + getBookingInfoResult.Message);
-                        continue; // move to next seat
-                    }
 
-                    if (getBookingInfoResult.Data.Rows.Count == 0)
-                    {
-                        // no Book rows for this seat+user — skip it
-                        continue;
-                    }
+                    // Storing paymentId
+                    paymentId = Convert.ToInt32(getBookingInfoResult.Data.Rows[0]["paymentId"]);
 
-                    // gather bookingIds & paymentIds for the seat (usually one)
+
+                    // Gather bookingIds for the seat
                     var bookingIds = new List<int>();
-                    foreach (DataRow br in getBookingInfoResult.Data.Rows)
+
+                    foreach (DataRow row in getBookingInfoResult.Data.Rows)
                     {
-                        if (br["bookingId"] != DBNull.Value) bookingIds.Add(Convert.ToInt32(br["bookingId"]));
-                        if (br["paymentId"] != DBNull.Value) paymentIdsEncountered.Add(Convert.ToInt32(br["paymentId"]));
+                        if (row["bookingId"] != DBNull.Value)
+                        {
+                            bookingIds.Add(Convert.ToInt32(row["bookingId"]));
+                        }
                     }
 
-                    // 1) Update FlightSeats by flightSeatId (do NOT require paymentId)
+
+                    // Updating FlightSeats to avaiable
                     string updateFlightSeatStatusQuery = "UPDATE FlightSeats SET flightSeatStatus = 'Available', userId = NULL, paymentId = NULL WHERE flightSeatId = " + seatId + ";";
+                    
                     var updateFlightSeatStatusQueryResult = DbHelper.ExecuteNonResultQuery(updateFlightSeatStatusQuery);
+                    
                     if (updateFlightSeatStatusQueryResult.HasError)
                     {
-                        MessageBox.Show("Error updating FlightSeats for seatId " + seatId + " : " + updateFlightSeatStatusQueryResult.Message);
-                        // continue trying other seats
+                        MessageBox.Show("Error : " + updateFlightSeatStatusQueryResult.Message);
                     }
 
-                    // 2) Delete Book rows for this seat (all bookingIds found)
+                    // Deleting Book rows for this seat 
                     foreach (int bookingId in bookingIds)
                     {
                         string deleteBookingRecordQuery = "DELETE FROM Book WHERE bookingId = " + bookingId + ";";
+
                         var deleteBookingRecordQueryResult = DbHelper.ExecuteNonResultQuery(deleteBookingRecordQuery);
+
                         if (deleteBookingRecordQueryResult.HasError)
                         {
-                            MessageBox.Show("Error deleting Book record " + bookingId + " : " + deleteBookingRecordQueryResult.Message);
-                            // continue with other bookingIds
+                            MessageBox.Show("Error : " + deleteBookingRecordQueryResult.Message);
+                            return;
                         }
                     }
-                } // end foreach seatId
+                }
 
-                // After processing seats, safely delete payment records only if no Book references them
-                foreach (int pid in paymentIdsEncountered)
-                {
-                    try
-                    {
-                        if (pid <= 0) continue;
 
-                        string checkPaymentRefQuery = "SELECT COUNT(*) AS cnt FROM Book WHERE paymentId = " + pid + ";";
-                        var checkPaymentRefResult = DbHelper.GetQueryData(checkPaymentRefQuery);
-                        if (checkPaymentRefResult.HasError)
-                        {
-                            MessageBox.Show("Error checking payment references for paymentId " + pid + " : " + checkPaymentRefResult.Message);
-                            continue;
-                        }
-
-                        int cnt = 0;
-                        if (checkPaymentRefResult.Data.Rows.Count > 0 && checkPaymentRefResult.Data.Rows[0]["cnt"] != DBNull.Value)
-                            cnt = Convert.ToInt32(checkPaymentRefResult.Data.Rows[0]["cnt"]);
-
-                        if (cnt == 0)
-                        {
-                            string deletePaymentQuery = "DELETE FROM Payment WHERE paymentId = " + pid + ";";
-                            var deletePaymentQueryResult = DbHelper.ExecuteNonResultQuery(deletePaymentQuery);
-                            if (deletePaymentQueryResult.HasError)
-                            {
-                                MessageBox.Show("Error deleting payment " + pid + " : " + deletePaymentQueryResult.Message);
-                            }
-                        }
-                        // else: payment still referenced by other Book rows - do not delete
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error handling payment " + pid + " : " + ex.Message);
-                        continue;
-                    }
+                // Deleting Payment record
+                string deletePaymentQuery = "DELETE FROM Payment WHERE paymentId = " + paymentId + ";";
+                var deletePaymentQueryResult = DbHelper.ExecuteNonResultQuery(deletePaymentQuery);
+                if (deletePaymentQueryResult.HasError)
+                { 
+                    MessageBox.Show("Error : " + paymentId + " : " + deletePaymentQueryResult.Message);
                 }
 
                 ClearBookingSelection();
                 ShowBookingInfo();
+
                 MessageBox.Show("Message: Booking Deleted Successfully.");
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error: " + exception.Message);
                 return;
             }
         }
