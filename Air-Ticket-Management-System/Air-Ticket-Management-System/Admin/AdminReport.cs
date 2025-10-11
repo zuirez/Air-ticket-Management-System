@@ -99,11 +99,13 @@ namespace Air_Ticket_Management_System
                 if (getBookingDataResult.Data.Rows.Count == 0)
                 {
                     txtAdminReportTotalBookings.Text = "0";
+                    txtAdminReportBookingStatsTotalBooking.Text = "0";
                 }
 
                 if (getBookingDataResult.Data.Rows.Count > 0)
                 {
                     txtAdminReportTotalBookings.Text = Convert.ToString(getBookingDataResult.Data.Rows[0]["TotalBookings"]);
+                    txtAdminReportBookingStatsTotalBooking.Text = Convert.ToString(getBookingDataResult.Data.Rows[0]["TotalBookings"]);
                 }
             }
             catch (Exception exception)
@@ -279,6 +281,355 @@ namespace Air_Ticket_Management_System
                 {
                     txtAdminReportUserStatsTotalAdmin.Text = Convert.ToString(getAdmineDataResult.Data.Rows[0]["TotalAdmin"]);
                 }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Total Confirmed Bookings
+            try
+            {
+                string getConfirmedBookingData = "SELECT COUNT(*) AS ConfirmedBookings FROM Book WHERE bookingStatus = 'Paid'";
+                var getConfirmedBookingDataResult = DbHelper.GetQueryData(getConfirmedBookingData);
+                if (getConfirmedBookingDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getConfirmedBookingDataResult.Message);
+                    return;
+                }
+                if (getConfirmedBookingDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportBookingStatsConfirmedBooking.Text = "0";
+                }
+                if (getConfirmedBookingDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportBookingStatsConfirmedBooking.Text = Convert.ToString(getConfirmedBookingDataResult.Data.Rows[0]["ConfirmedBookings"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Total Cancelled Bookings
+            try
+            {
+                string getCancelledBookingData = "SELECT COUNT(*) AS CancelledBookings FROM Book WHERE bookingStatus = 'Cancelled'";
+                var getCancelledBookingDataResult = DbHelper.GetQueryData(getCancelledBookingData);
+                if (getCancelledBookingDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getCancelledBookingDataResult.Message);
+                    return;
+                }
+                if (getCancelledBookingDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportBookingStatsCancelledBooking.Text = "0";
+                }
+                if (getCancelledBookingDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportBookingStatsCancelledBooking.Text = Convert.ToString(getCancelledBookingDataResult.Data.Rows[0]["CancelledBookings"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Total Pending Bookings
+            try
+            {
+                string getPendingBookingData = "SELECT COUNT(*) AS PendingBookings FROM Book WHERE bookingStatus = 'Pending'";
+                var getPendingBookingDataResult = DbHelper.GetQueryData(getPendingBookingData);
+                if (getPendingBookingDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getPendingBookingDataResult.Message);
+                    return;
+                }
+                if (getPendingBookingDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportBookingStatsPendingBooking.Text = "0";
+                }
+                if (getPendingBookingDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportBookingStatsPendingBooking.Text = Convert.ToString(getPendingBookingDataResult.Data.Rows[0]["PendingBookings"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Total number of payments
+            try
+            {
+                string getPaymentData = "SELECT COUNT(*) AS TotalPayments FROM Payment";
+                var getPaymentDataResult = DbHelper.GetQueryData(getPaymentData);
+                if (getPaymentDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getPaymentDataResult.Message);
+                    return;
+                }
+                if (getPaymentDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportPaymentStatsNoofPayments.Text = "0";
+                }
+                if (getPaymentDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportPaymentStatsNoofPayments.Text = Convert.ToString(getPaymentDataResult.Data.Rows[0]["TotalPayments"]);
+                }
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Total amount of payments
+            try
+            {
+                string getTotalPaymentAmountData = "SELECT SUM(amount) AS TotalPaymentAmount FROM Payment";
+                var getTotalPaymentAmountDataResult = DbHelper.GetQueryData(getTotalPaymentAmountData);
+                if (getTotalPaymentAmountDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getTotalPaymentAmountDataResult.Message);
+                    return;
+                }
+                if (getTotalPaymentAmountDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportPaymentStatsPaymentAmount.Text = "0";
+                }
+                if (getTotalPaymentAmountDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportPaymentStatsPaymentAmount.Text = Convert.ToString(getTotalPaymentAmountDataResult.Data.Rows[0]["TotalPaymentAmount"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Confirmed payments
+            try
+            {
+                string getConfirmedPaymentData = "SELECT COUNT(*) AS ConfirmedPayments FROM Payment WHERE paymentStatus = 'Paid'";
+                var getConfirmedPaymentDataResult = DbHelper.GetQueryData(getConfirmedPaymentData);
+                if (getConfirmedPaymentDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getConfirmedPaymentDataResult.Message);
+                    return;
+                }
+                if (getConfirmedPaymentDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportPaymentStatsConfirmedPayment.Text = "0";
+                }
+                if (getConfirmedPaymentDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportPaymentStatsConfirmedPayment.Text = Convert.ToString(getConfirmedPaymentDataResult.Data.Rows[0]["ConfirmedPayments"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Pending payments
+            try
+            {
+                string getPendingPaymentData = "SELECT COUNT(*) AS PendingPayments FROM Payment WHERE paymentStatus = 'Pending'";
+                var getPendingPaymentDataResult = DbHelper.GetQueryData(getPendingPaymentData);
+                if (getPendingPaymentDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getPendingPaymentDataResult.Message);
+                    return;
+                }
+                if (getPendingPaymentDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportPaymentStatsPendingPayment.Text = "0";
+                }
+                if (getPendingPaymentDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportPaymentStatsPendingPayment.Text = Convert.ToString(getPendingPaymentDataResult.Data.Rows[0]["PendingPayments"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Cancelled payments
+            try
+            {
+                string getCancelledPaymentData = "SELECT COUNT(*) AS CancelledPayments FROM Payment WHERE paymentStatus = 'Cancelled'";
+                var getCancelledPaymentDataResult = DbHelper.GetQueryData(getCancelledPaymentData);
+                if (getCancelledPaymentDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getCancelledPaymentDataResult.Message);
+                    return;
+                }
+                if (getCancelledPaymentDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportPaymentStatsCancelledPayment.Text = "0";
+                }
+                if (getCancelledPaymentDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportPaymentStatsCancelledPayment.Text = Convert.ToString(getCancelledPaymentDataResult.Data.Rows[0]["CancelledPayments"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Total number of refunds
+            try
+            {
+                string getRefundData = "SELECT COUNT(*) AS TotalRefunds FROM Refund";
+                var getRefundDataResult = DbHelper.GetQueryData(getRefundData);
+                if (getRefundDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getRefundDataResult.Message);
+                    return;
+                }
+                if (getRefundDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportRefundStatsNoofRefunds.Text = "0";
+                }
+                if (getRefundDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportRefundStatsNoofRefunds.Text = Convert.ToString(getRefundDataResult.Data.Rows[0]["TotalRefunds"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Total amount of refunds
+            try
+            {
+                string getTotalRefundAmountData = "SELECT SUM(amount) AS TotalRefundAmount FROM Refund WHERE refundStatus = 'Pending'";
+                var getTotalRefundAmountDataResult = DbHelper.GetQueryData(getTotalRefundAmountData);
+                if (getTotalRefundAmountDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getTotalRefundAmountDataResult.Message);
+                    return;
+                }
+                if (getTotalRefundAmountDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportRefundStatsRefundAmount.Text = "0";
+                    txtAdminReportPendingRefunds.Text = "0";
+                }
+                if (getTotalRefundAmountDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportRefundStatsRefundAmount.Text = Convert.ToString(getTotalRefundAmountDataResult.Data.Rows[0]["TotalRefundAmount"]);
+                    txtAdminReportPendingRefunds.Text = Convert.ToString(getTotalRefundAmountDataResult.Data.Rows[0]["TotalRefundAmount"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Confirmed refunds
+            try
+            {
+                string getConfirmedRefundData = "SELECT COUNT(*) AS ConfirmedRefunds FROM Refund WHERE refundStatus = 'Paid'";
+                var getConfirmedRefundDataResult = DbHelper.GetQueryData(getConfirmedRefundData);
+                if (getConfirmedRefundDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getConfirmedRefundDataResult.Message);
+                    return;
+                }
+                if (getConfirmedRefundDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportRefundStatsConfirmedRefund.Text = "0";
+                }
+                if (getConfirmedRefundDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportRefundStatsConfirmedRefund.Text = Convert.ToString(getConfirmedRefundDataResult.Data.Rows[0]["ConfirmedRefunds"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Pending refunds
+            try
+            {
+                string getPendingRefundData = "SELECT COUNT(*) AS PendingRefunds FROM Refund WHERE refundStatus = 'Pending'";
+                var getPendingRefundDataResult = DbHelper.GetQueryData(getPendingRefundData);
+                if (getPendingRefundDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getPendingRefundDataResult.Message);
+                    return;
+                }
+                if (getPendingRefundDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportRefundStatsPendingRefund.Text = "0";
+                }
+                if (getPendingRefundDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportRefundStatsPendingRefund.Text = Convert.ToString(getPendingRefundDataResult.Data.Rows[0]["PendingRefunds"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Cancelled refunds
+            try
+            {
+                string getCancelledRefundData = "SELECT COUNT(*) AS CancelledRefunds FROM Refund WHERE refundStatus = 'Cancelled'";
+                var getCancelledRefundDataResult = DbHelper.GetQueryData(getCancelledRefundData);
+                if (getCancelledRefundDataResult.HasError)
+                {
+                    MessageBox.Show("Error : " + getCancelledRefundDataResult.Message);
+                    return;
+                }
+                if (getCancelledRefundDataResult.Data.Rows.Count == 0)
+                {
+                    txtAdminReportRefundStatsCancelledRefund.Text = "0";
+                }
+                if (getCancelledRefundDataResult.Data.Rows.Count > 0)
+                {
+                    txtAdminReportRefundStatsCancelledRefund.Text = Convert.ToString(getCancelledRefundDataResult.Data.Rows[0]["CancelledRefunds"]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error : " + exception);
+            }
+
+
+            // Total revenue
+            try
+            {
+                decimal totalPaymentAmount = 0;
+                decimal totalRefundAmount = 0;
+                if (txtAdminReportPaymentStatsPaymentAmount.Text != "")
+                {
+                    totalPaymentAmount = Convert.ToDecimal(txtAdminReportPaymentStatsPaymentAmount.Text);
+                }
+                if (txtAdminReportRefundStatsRefundAmount.Text != "")
+                {
+                    totalRefundAmount = Convert.ToDecimal(txtAdminReportRefundStatsRefundAmount.Text);
+                }
+                decimal totalRevenue = totalPaymentAmount - totalRefundAmount;
+                txtAdminReportTotalRevenue.Text = Convert.ToString(totalRevenue);
             }
             catch (Exception exception)
             {

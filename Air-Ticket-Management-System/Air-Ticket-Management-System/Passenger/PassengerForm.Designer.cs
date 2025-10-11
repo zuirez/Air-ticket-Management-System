@@ -178,6 +178,7 @@
             this.ClientSize = new System.Drawing.Size(1356, 698);
             this.Controls.Add(this.pnlPassenger);
             this.Name = "PassengerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PassengerForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PassengerForm_FormClosed);
             this.Load += new System.EventHandler(this.PassengerForm_Load);

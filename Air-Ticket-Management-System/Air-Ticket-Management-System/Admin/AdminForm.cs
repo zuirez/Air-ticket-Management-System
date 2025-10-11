@@ -146,7 +146,6 @@ namespace Air_Ticket_Management_System
         }
 
 
-
         // Sign Out Button Click Event
         private void btnAdminSignOut_Click(object sender, EventArgs e)
         {

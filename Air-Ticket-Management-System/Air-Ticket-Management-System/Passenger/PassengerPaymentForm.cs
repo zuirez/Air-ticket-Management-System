@@ -32,12 +32,12 @@ namespace Air_Ticket_Management_System.Passenger
             cmbPassengerPaymentType.SelectedIndex = -1;
             dtpPassengerPaymentDate.Value = DateTime.Now;
             dtpPassengerPaymentDate.Enabled = false;
-            rdbPaid.Checked = false;
+            rdbPending.Checked = true;
             rdbPending.Enabled = true;
             rdbCancelled.Checked = false;
-            rdbCancelled.Enabled = true;
-            rdbPending.Checked = false;
-            rdbPaid.Enabled = true;
+            rdbCancelled.Enabled = false;
+            rdbPaid.Checked = false;
+            rdbPaid.Enabled = false;
         }
 
 
@@ -77,6 +77,7 @@ namespace Air_Ticket_Management_System.Passenger
         // Form Load Event
         private void PassengerPaymentForm_Load(object sender, EventArgs e)
         {
+            ClearPaymentSelection();
             ShowPaymentTypeData();
             ShowPaymentInfo();
         }
@@ -91,6 +92,9 @@ namespace Air_Ticket_Management_System.Passenger
             {
                 MessageBox.Show("Error: Enter Payment Id/ Payment status/ Payment Type/ Booking ID.");
                 txtPaymentSearch.Text = "";
+                ClearPaymentSelection();
+                ShowPaymentTypeData();
+                ShowPaymentInfo();
                 return;
             }
 
@@ -152,6 +156,7 @@ namespace Air_Ticket_Management_System.Passenger
                 cmbPassengerPaymentType.Text = Convert.ToString(result.Data.Rows[0]["paymentType"]);
                 string status = Convert.ToString(result.Data.Rows[0]["paymentStatus"]);
                 dtpPassengerPaymentDate.Value = Convert.ToDateTime(result.Data.Rows[0]["paymentDate"]);
+                dtpPassengerPaymentDate.Enabled = false;
 
                 if (status == "Paid")
                 {
@@ -185,6 +190,16 @@ namespace Air_Ticket_Management_System.Passenger
         // Pay Button Click Event
         private void btnPassengerPaymentPay_Click(object sender, EventArgs e)
         {
+            // Validations
+            if (string.IsNullOrWhiteSpace(txtPassengerPaymentId.Text))
+            {
+                MessageBox.Show("Error: Select a payment to pay.");
+                ClearPaymentSelection();
+                ShowPaymentInfo();
+                return;
+            }
+
+
             string PaymentStatus = "";
             string paymentType = cmbPassengerPaymentType.Text;
             int paymentId = Convert.ToInt32(txtPassengerPaymentId.Text);

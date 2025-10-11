@@ -18,7 +18,7 @@ namespace Air_Ticket_Management_System
         }
 
 
-        // Method to clear all fields after adding or updating a flight
+        // Method to clear all fields
         public void clearFlightSelection()
         {
             txtAdminFlightNo.Text = "";
@@ -33,7 +33,7 @@ namespace Air_Ticket_Management_System
 
 
         // Method to display flight information in the DataGridView
-        public void ShowFlightInfo()
+        public void showFlightInfo()
         {
             txtAdminFlightId.Text = "Auto Generated";
 
@@ -53,17 +53,10 @@ namespace Air_Ticket_Management_System
         }
 
 
-        // DataGridView DataBindingComplete Event to clear selection
-        private void dgvAdminFlight_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            dgvAdminFlight.ClearSelection();
-        }
-
-
         // Form Load Event
         private void AdminFlightForm_Load(object sender, EventArgs e)
         {
-            ShowFlightInfo();
+            showFlightInfo();
         }
 
 
@@ -72,13 +65,18 @@ namespace Air_Ticket_Management_System
         {
             string searchText = txtFlightSearch.Text;
 
+            // Checking if search text is empty
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 MessageBox.Show("Error: Enter Flight Number/ Flight Id/ Flight origin/ Flight destination/ Flight status.");
                 txtFlightSearch.Text = "";
+                clearFlightSelection();
+                showFlightInfo();
                 return;
             }
 
+
+            // Searching flight data in the database
             string query = "SELECT * FROM Flight WHERE flightNo = '" + searchText + "' OR CAST(flightId AS VARCHAR) = '" + searchText + "' OR origin = '" + searchText + "' OR destination = '" + searchText + "' OR flightStatus = '" + searchText + "';";
 
             var result = DbHelper.GetQueryData(query);
@@ -102,7 +100,7 @@ namespace Air_Ticket_Management_System
         {
             txtFlightSearch.Text = "";
             clearFlightSelection();
-            ShowFlightInfo();
+            showFlightInfo();
         }
 
 
@@ -119,6 +117,8 @@ namespace Air_Ticket_Management_System
 
                 int FlightId = Convert.ToInt32(dgvAdminFlight.Rows[e.RowIndex].Cells["flightId"].Value);
 
+
+                // Selecting all information of the selected flight
                 string query = "SELECT * FROM Flight WHERE flightId = '" + FlightId + "'";
 
                 var result = DbHelper.GetQueryData(query);
@@ -230,7 +230,6 @@ namespace Air_Ticket_Management_System
                 MessageBox.Show("Error : " + checkFlightNoResult.Message);
                 return;
             }
-
             if (checkFlightNoResult.Data.Rows.Count > 0)
             {
                 MessageBox.Show("Error: Flight Number already exists. Please use a different Flight Number.");
@@ -247,8 +246,10 @@ namespace Air_Ticket_Management_System
 
 
             // Validating that departure time is unique
-            string checkDepartureTime = "SELECT * FROM Flight WHERE departureTime = '" + FlightDepartureTime.ToString("yyyy-MM-dd HH:mm:ss") + "';";
+            string checkDepartureTime = "SELECT * FROM Flight WHERE departureTime = '" + FlightDepartureTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND origin = 'Dhaka';";
+            
             var checkDepartureTimeResult = DbHelper.GetQueryData(checkDepartureTime);
+            
             if (checkDepartureTimeResult.HasError)
             {
                 MessageBox.Show("Error : " + checkDepartureTimeResult.Message);
@@ -262,14 +263,15 @@ namespace Air_Ticket_Management_System
 
 
             // Validating that arrival time is unique
-            string checkArrivalTime = "SELECT * FROM Flight WHERE arrivalTime = '" + FlightArrivalTime.ToString("yyyy-MM-dd HH:mm:ss") + "';";
+            string checkArrivalTime = "SELECT * FROM Flight WHERE arrivalTime = '" + FlightArrivalTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND destination = 'Dhaka';";
+            
             var checkArrivalTimeResult = DbHelper.GetQueryData(checkArrivalTime);
+            
             if (checkArrivalTimeResult.HasError)
             {
                 MessageBox.Show("Error : " + checkArrivalTimeResult.Message);
                 return;
             }
-
             if (checkArrivalTimeResult.Data.Rows.Count > 0)
             {
                 MessageBox.Show("Error: Arrival Time already exists. Please choose a different Arrival Time.");
@@ -301,8 +303,7 @@ namespace Air_Ticket_Management_System
                 MessageBox.Show("Message: Flight Added Successfully.");
 
 
-
-                // adding flight seats for this flight
+                // Adding flight seats for this flight
                 string getFlightIdQuery = "SELECT flightId FROM Flight WHERE flightNo = '" + FlightNo + "';";
 
                 var getFlightIdResult = DbHelper.GetQueryData(getFlightIdQuery);
@@ -338,7 +339,7 @@ namespace Air_Ticket_Management_System
                 }
 
                 clearFlightSelection();
-                ShowFlightInfo();
+                showFlightInfo();
             }
             catch (Exception exception)
             {
@@ -479,7 +480,7 @@ namespace Air_Ticket_Management_System
                 MessageBox.Show("Message: Flight Updated Successfully.");
 
                 clearFlightSelection();
-                ShowFlightInfo();
+                showFlightInfo();
             }
             catch (Exception exception)
             {
@@ -494,8 +495,10 @@ namespace Air_Ticket_Management_System
         {
             try
             {
+                int FlightId = Convert.ToInt32(txtAdminFlightId.Text);
+
                 // Deleting flight seats associated with this flight
-                string deleteFlightSeatsQuery = "DELETE FROM FlightSeats WHERE flightId = '" + txtAdminFlightId.Text + "';";
+                string deleteFlightSeatsQuery = "DELETE FROM FlightSeats WHERE flightId = '" + FlightId + "';";
 
                 var deleteFlightSeatsQueryResult = DbHelper.ExecuteNonResultQuery(deleteFlightSeatsQuery);
 
@@ -507,8 +510,6 @@ namespace Air_Ticket_Management_System
 
 
                 // Deleting the flight
-                string FlightId = Convert.ToString(txtAdminFlightId.Text);
-
                 string deleteFlightQuery = "DELETE FROM Flight WHERE flightId = '" + FlightId + "';";
 
                 var deleteFlightQueryResult = DbHelper.ExecuteNonResultQuery(deleteFlightQuery);
@@ -520,7 +521,7 @@ namespace Air_Ticket_Management_System
                 }
 
                 clearFlightSelection();
-                ShowFlightInfo();
+                showFlightInfo();
 
                 MessageBox.Show("Message: Flight Deleted Successfully.");
             }

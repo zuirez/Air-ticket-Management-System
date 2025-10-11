@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtAdminRefundPaymentId = new System.Windows.Forms.TextBox();
             this.txtAdminRefundPassengerId = new System.Windows.Forms.TextBox();
             this.lblAdminRefundPassengerId = new System.Windows.Forms.Label();
@@ -41,11 +41,11 @@
             this.rdbPending = new System.Windows.Forms.RadioButton();
             this.rdbPaid = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAdminRefundUpdate = new System.Windows.Forms.Button();
-            this.btnAdminRefundDelete = new System.Windows.Forms.Button();
+            this.btnAdminRefundAdd = new System.Windows.Forms.Button();
+            this.btnAdminRefundPay = new System.Windows.Forms.Button();
             this.lblAdminRefundDate = new System.Windows.Forms.Label();
             this.dtpAdminRefundDate = new System.Windows.Forms.DateTimePicker();
-            this.lblAdminPaymentStatus = new System.Windows.Forms.Label();
+            this.lblAdminRefundStatus = new System.Windows.Forms.Label();
             this.txtAdminRefundAmount = new System.Windows.Forms.TextBox();
             this.lblAdminRefundAmount = new System.Windows.Forms.Label();
             this.txtAdminRefundId = new System.Windows.Forms.TextBox();
@@ -68,7 +68,6 @@
             // 
             this.txtAdminRefundPaymentId.Location = new System.Drawing.Point(164, 56);
             this.txtAdminRefundPaymentId.Name = "txtAdminRefundPaymentId";
-            this.txtAdminRefundPaymentId.ReadOnly = true;
             this.txtAdminRefundPaymentId.Size = new System.Drawing.Size(222, 26);
             this.txtAdminRefundPaymentId.TabIndex = 37;
             // 
@@ -76,14 +75,13 @@
             // 
             this.txtAdminRefundPassengerId.Location = new System.Drawing.Point(164, 88);
             this.txtAdminRefundPassengerId.Name = "txtAdminRefundPassengerId";
-            this.txtAdminRefundPassengerId.ReadOnly = true;
             this.txtAdminRefundPassengerId.Size = new System.Drawing.Size(222, 26);
             this.txtAdminRefundPassengerId.TabIndex = 35;
             // 
             // lblAdminRefundPassengerId
             // 
             this.lblAdminRefundPassengerId.AutoSize = true;
-            this.lblAdminRefundPassengerId.Location = new System.Drawing.Point(43, 91);
+            this.lblAdminRefundPassengerId.Location = new System.Drawing.Point(42, 91);
             this.lblAdminRefundPassengerId.Name = "lblAdminRefundPassengerId";
             this.lblAdminRefundPassengerId.Size = new System.Drawing.Size(118, 20);
             this.lblAdminRefundPassengerId.TabIndex = 34;
@@ -105,11 +103,11 @@
             // lblAdminRefundType
             // 
             this.lblAdminRefundType.AutoSize = true;
-            this.lblAdminRefundType.Location = new System.Drawing.Point(40, 204);
+            this.lblAdminRefundType.Location = new System.Drawing.Point(48, 204);
             this.lblAdminRefundType.Name = "lblAdminRefundType";
-            this.lblAdminRefundType.Size = new System.Drawing.Size(121, 20);
+            this.lblAdminRefundType.Size = new System.Drawing.Size(112, 20);
             this.lblAdminRefundType.TabIndex = 32;
-            this.lblAdminRefundType.Text = "Payment Type : ";
+            this.lblAdminRefundType.Text = "Refund Type : ";
             // 
             // txtRefundSearch
             // 
@@ -118,7 +116,7 @@
             this.txtRefundSearch.Location = new System.Drawing.Point(8, 11);
             this.txtRefundSearch.Multiline = true;
             this.txtRefundSearch.Name = "txtRefundSearch";
-            this.txtRefundSearch.Size = new System.Drawing.Size(800, 42);
+            this.txtRefundSearch.Size = new System.Drawing.Size(799, 42);
             this.txtRefundSearch.TabIndex = 0;
             // 
             // btnRefundSearch
@@ -126,7 +124,7 @@
             this.btnRefundSearch.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnRefundSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRefundSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefundSearch.Location = new System.Drawing.Point(821, 11);
+            this.btnRefundSearch.Location = new System.Drawing.Point(820, 11);
             this.btnRefundSearch.Name = "btnRefundSearch";
             this.btnRefundSearch.Size = new System.Drawing.Size(154, 42);
             this.btnRefundSearch.TabIndex = 1;
@@ -137,7 +135,7 @@
             // lblAdminRefundPaymentId
             // 
             this.lblAdminRefundPaymentId.AutoSize = true;
-            this.lblAdminRefundPaymentId.Location = new System.Drawing.Point(60, 59);
+            this.lblAdminRefundPaymentId.Location = new System.Drawing.Point(56, 59);
             this.lblAdminRefundPaymentId.Name = "lblAdminRefundPaymentId";
             this.lblAdminRefundPaymentId.Size = new System.Drawing.Size(104, 20);
             this.lblAdminRefundPaymentId.TabIndex = 36;
@@ -187,8 +185,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.btnAdminRefundUpdate, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnAdminRefundDelete, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnAdminRefundAdd, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnAdminRefundPay, 2, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(19, 300);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -196,40 +194,40 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(371, 40);
             this.tableLayoutPanel2.TabIndex = 16;
             // 
-            // btnAdminRefundUpdate
+            // btnAdminRefundAdd
             // 
-            this.btnAdminRefundUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnAdminRefundUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdminRefundUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminRefundUpdate.Location = new System.Drawing.Point(3, 3);
-            this.btnAdminRefundUpdate.Name = "btnAdminRefundUpdate";
-            this.btnAdminRefundUpdate.Size = new System.Drawing.Size(174, 34);
-            this.btnAdminRefundUpdate.TabIndex = 3;
-            this.btnAdminRefundUpdate.Text = "Update";
-            this.btnAdminRefundUpdate.UseVisualStyleBackColor = false;
-            this.btnAdminRefundUpdate.Click += new System.EventHandler(this.btnAdminRefundUpdate_Click);
+            this.btnAdminRefundAdd.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnAdminRefundAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdminRefundAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminRefundAdd.Location = new System.Drawing.Point(3, 3);
+            this.btnAdminRefundAdd.Name = "btnAdminRefundAdd";
+            this.btnAdminRefundAdd.Size = new System.Drawing.Size(174, 34);
+            this.btnAdminRefundAdd.TabIndex = 3;
+            this.btnAdminRefundAdd.Text = "Add";
+            this.btnAdminRefundAdd.UseVisualStyleBackColor = false;
+            this.btnAdminRefundAdd.Click += new System.EventHandler(this.btnAdminRefundUpdate_Click);
             // 
-            // btnAdminRefundDelete
+            // btnAdminRefundPay
             // 
-            this.btnAdminRefundDelete.BackColor = System.Drawing.Color.Salmon;
-            this.btnAdminRefundDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdminRefundDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminRefundDelete.Location = new System.Drawing.Point(193, 3);
-            this.btnAdminRefundDelete.Name = "btnAdminRefundDelete";
-            this.btnAdminRefundDelete.Size = new System.Drawing.Size(175, 34);
-            this.btnAdminRefundDelete.TabIndex = 4;
-            this.btnAdminRefundDelete.Text = "Delete";
-            this.btnAdminRefundDelete.UseVisualStyleBackColor = false;
-            this.btnAdminRefundDelete.Click += new System.EventHandler(this.btnAdminRefundDelete_Click);
+            this.btnAdminRefundPay.BackColor = System.Drawing.Color.Khaki;
+            this.btnAdminRefundPay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAdminRefundPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminRefundPay.Location = new System.Drawing.Point(193, 3);
+            this.btnAdminRefundPay.Name = "btnAdminRefundPay";
+            this.btnAdminRefundPay.Size = new System.Drawing.Size(175, 34);
+            this.btnAdminRefundPay.TabIndex = 4;
+            this.btnAdminRefundPay.Text = "Pay";
+            this.btnAdminRefundPay.UseVisualStyleBackColor = false;
+            this.btnAdminRefundPay.Click += new System.EventHandler(this.btnAdminRefundDelete_Click);
             // 
             // lblAdminRefundDate
             // 
             this.lblAdminRefundDate.AutoSize = true;
-            this.lblAdminRefundDate.Location = new System.Drawing.Point(39, 165);
+            this.lblAdminRefundDate.Location = new System.Drawing.Point(47, 165);
             this.lblAdminRefundDate.Name = "lblAdminRefundDate";
-            this.lblAdminRefundDate.Size = new System.Drawing.Size(122, 20);
+            this.lblAdminRefundDate.Size = new System.Drawing.Size(113, 20);
             this.lblAdminRefundDate.TabIndex = 14;
-            this.lblAdminRefundDate.Text = "Payment Date : ";
+            this.lblAdminRefundDate.Text = "Refund Date : ";
             // 
             // dtpAdminRefundDate
             // 
@@ -240,14 +238,14 @@
             this.dtpAdminRefundDate.Size = new System.Drawing.Size(222, 26);
             this.dtpAdminRefundDate.TabIndex = 12;
             // 
-            // lblAdminPaymentStatus
+            // lblAdminRefundStatus
             // 
-            this.lblAdminPaymentStatus.AutoSize = true;
-            this.lblAdminPaymentStatus.Location = new System.Drawing.Point(27, 243);
-            this.lblAdminPaymentStatus.Name = "lblAdminPaymentStatus";
-            this.lblAdminPaymentStatus.Size = new System.Drawing.Size(125, 20);
-            this.lblAdminPaymentStatus.TabIndex = 10;
-            this.lblAdminPaymentStatus.Text = "Refund Status : ";
+            this.lblAdminRefundStatus.AutoSize = true;
+            this.lblAdminRefundStatus.Location = new System.Drawing.Point(35, 243);
+            this.lblAdminRefundStatus.Name = "lblAdminRefundStatus";
+            this.lblAdminRefundStatus.Size = new System.Drawing.Size(125, 20);
+            this.lblAdminRefundStatus.TabIndex = 10;
+            this.lblAdminRefundStatus.Text = "Refund Status : ";
             // 
             // txtAdminRefundAmount
             // 
@@ -260,11 +258,11 @@
             // lblAdminRefundAmount
             // 
             this.lblAdminRefundAmount.AutoSize = true;
-            this.lblAdminRefundAmount.Location = new System.Drawing.Point(14, 126);
+            this.lblAdminRefundAmount.Location = new System.Drawing.Point(25, 126);
             this.lblAdminRefundAmount.Name = "lblAdminRefundAmount";
-            this.lblAdminRefundAmount.Size = new System.Drawing.Size(147, 20);
+            this.lblAdminRefundAmount.Size = new System.Drawing.Size(138, 20);
             this.lblAdminRefundAmount.TabIndex = 2;
-            this.lblAdminRefundAmount.Text = "Payment Amount :  ";
+            this.lblAdminRefundAmount.Text = "Refund Amount :  ";
             // 
             // txtAdminRefundId
             // 
@@ -279,7 +277,7 @@
             this.btnRefundRefresh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnRefundRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRefundRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefundRefresh.Location = new System.Drawing.Point(986, 11);
+            this.btnRefundRefresh.Location = new System.Drawing.Point(985, 11);
             this.btnRefundRefresh.Name = "btnRefundRefresh";
             this.btnRefundRefresh.Size = new System.Drawing.Size(154, 42);
             this.btnRefundRefresh.TabIndex = 2;
@@ -292,7 +290,7 @@
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 413F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 414F));
             this.tableLayoutPanel1.Controls.Add(this.pnlRefundSearch, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminRefundManage, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblAdminRefundInfo, 0, 1);
@@ -318,7 +316,7 @@
             this.pnlRefundSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.pnlRefundSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlRefundSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.pnlRefundSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13F));
+            this.pnlRefundSearch.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 14F));
             this.pnlRefundSearch.Controls.Add(this.txtRefundSearch, 1, 1);
             this.pnlRefundSearch.Controls.Add(this.btnRefundSearch, 3, 1);
             this.pnlRefundSearch.Controls.Add(this.btnRefundRefresh, 5, 1);
@@ -337,9 +335,9 @@
             this.lblAdminRefundManage.AutoSize = true;
             this.lblAdminRefundManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAdminRefundManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdminRefundManage.Location = new System.Drawing.Point(754, 72);
+            this.lblAdminRefundManage.Location = new System.Drawing.Point(753, 72);
             this.lblAdminRefundManage.Name = "lblAdminRefundManage";
-            this.lblAdminRefundManage.Size = new System.Drawing.Size(407, 50);
+            this.lblAdminRefundManage.Size = new System.Drawing.Size(408, 50);
             this.lblAdminRefundManage.TabIndex = 1;
             this.lblAdminRefundManage.Text = "Manage Refund";
             this.lblAdminRefundManage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -351,7 +349,7 @@
             this.lblAdminRefundInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdminRefundInfo.Location = new System.Drawing.Point(4, 72);
             this.lblAdminRefundInfo.Name = "lblAdminRefundInfo";
-            this.lblAdminRefundInfo.Size = new System.Drawing.Size(743, 50);
+            this.lblAdminRefundInfo.Size = new System.Drawing.Size(742, 50);
             this.lblAdminRefundInfo.TabIndex = 0;
             this.lblAdminRefundInfo.Text = "Refund Info";
             this.lblAdminRefundInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -370,22 +368,22 @@
             this.pnlAdminRefundManage.Controls.Add(this.tableLayoutPanel2);
             this.pnlAdminRefundManage.Controls.Add(this.lblAdminRefundDate);
             this.pnlAdminRefundManage.Controls.Add(this.dtpAdminRefundDate);
-            this.pnlAdminRefundManage.Controls.Add(this.lblAdminPaymentStatus);
+            this.pnlAdminRefundManage.Controls.Add(this.lblAdminRefundStatus);
             this.pnlAdminRefundManage.Controls.Add(this.txtAdminRefundAmount);
             this.pnlAdminRefundManage.Controls.Add(this.lblAdminRefundAmount);
             this.pnlAdminRefundManage.Controls.Add(this.txtAdminRefundId);
             this.pnlAdminRefundManage.Controls.Add(this.lblAdminRefundId);
             this.pnlAdminRefundManage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAdminRefundManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlAdminRefundManage.Location = new System.Drawing.Point(754, 126);
+            this.pnlAdminRefundManage.Location = new System.Drawing.Point(753, 126);
             this.pnlAdminRefundManage.Name = "pnlAdminRefundManage";
-            this.pnlAdminRefundManage.Size = new System.Drawing.Size(407, 521);
+            this.pnlAdminRefundManage.Size = new System.Drawing.Size(408, 521);
             this.pnlAdminRefundManage.TabIndex = 3;
             // 
             // lblAdminRefundId
             // 
             this.lblAdminRefundId.AutoSize = true;
-            this.lblAdminRefundId.Location = new System.Drawing.Point(57, 24);
+            this.lblAdminRefundId.Location = new System.Drawing.Point(65, 24);
             this.lblAdminRefundId.Name = "lblAdminRefundId";
             this.lblAdminRefundId.Size = new System.Drawing.Size(95, 20);
             this.lblAdminRefundId.TabIndex = 0;
@@ -396,21 +394,22 @@
             this.dgvAdminRefund.AllowUserToAddRows = false;
             this.dgvAdminRefund.AllowUserToDeleteRows = false;
             this.dgvAdminRefund.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAdminRefund.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAdminRefund.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAdminRefund.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAdminRefund.Location = new System.Drawing.Point(4, 126);
             this.dgvAdminRefund.Name = "dgvAdminRefund";
             this.dgvAdminRefund.ReadOnly = true;
             this.dgvAdminRefund.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAdminRefund.Size = new System.Drawing.Size(743, 521);
+            this.dgvAdminRefund.Size = new System.Drawing.Size(742, 521);
             this.dgvAdminRefund.TabIndex = 4;
+            this.dgvAdminRefund.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAdminRefund_CellDoubleClick);
             // 
             // AdminRefund
             // 
@@ -447,11 +446,11 @@
         private System.Windows.Forms.RadioButton rdbPending;
         private System.Windows.Forms.RadioButton rdbPaid;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button btnAdminRefundUpdate;
-        private System.Windows.Forms.Button btnAdminRefundDelete;
+        private System.Windows.Forms.Button btnAdminRefundAdd;
+        private System.Windows.Forms.Button btnAdminRefundPay;
         private System.Windows.Forms.Label lblAdminRefundDate;
         private System.Windows.Forms.DateTimePicker dtpAdminRefundDate;
-        private System.Windows.Forms.Label lblAdminPaymentStatus;
+        private System.Windows.Forms.Label lblAdminRefundStatus;
         private System.Windows.Forms.TextBox txtAdminRefundAmount;
         private System.Windows.Forms.Label lblAdminRefundAmount;
         private System.Windows.Forms.TextBox txtAdminRefundId;

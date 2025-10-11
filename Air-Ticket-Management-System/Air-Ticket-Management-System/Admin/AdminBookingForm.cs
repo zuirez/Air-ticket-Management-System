@@ -21,7 +21,7 @@ namespace Air_Ticket_Management_System
 
 
         // Method to clear input fields
-        private void ClearBookingSelection()
+        private void clearBookingSelection()
         {
             txtAdminBookingPassengerId.ReadOnly = false;
             cmbAdminBookingFlightName.Enabled = true;
@@ -34,12 +34,13 @@ namespace Air_Ticket_Management_System
             txtAdminBookingBookedSeats.Text = "";
             rdbCancelled.Checked = false;
             rdbConfirmed.Checked = false;
-            rdbPending.Checked = false;
+            rdbPending.Checked = true;
+            rdbPending.Enabled = true;
         }
 
 
         // Method to display booking information
-        private void ShowBookingInfo()
+        private void showBookingInfo()
         {
             txtAdminBookingId.Text = "Auto Generated";
             txtAdminBookingPaymentStatus.Text = "Pending";
@@ -64,7 +65,7 @@ namespace Air_Ticket_Management_System
 
 
         // Mehtod to populate flight names in combobox
-        private void ShowFlightNames()
+        private void showFlightNames()
         {
             string query = "SELECT flightNo FROM Flight";
 
@@ -124,7 +125,7 @@ namespace Air_Ticket_Management_System
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Unexpected error: " + exception.Message);
+                MessageBox.Show("Error : " + exception.Message);
                 return;
             }
         }
@@ -133,8 +134,8 @@ namespace Air_Ticket_Management_System
         // Form Load Event
         private void AdminBookingForm_Load(object sender, EventArgs e)
         {
-            ShowBookingInfo();
-            ShowFlightNames();
+            showBookingInfo();
+            showFlightNames();
         }
 
 
@@ -173,8 +174,8 @@ namespace Air_Ticket_Management_System
         private void btnBookingRefresh_Click(object sender, EventArgs e)
         {
             txtBookingSearch.Text = "";
-            ClearBookingSelection();
-            ShowBookingInfo();
+            clearBookingSelection();
+            showBookingInfo();
         }
 
 
@@ -204,7 +205,7 @@ namespace Air_Ticket_Management_System
                 if (GetPaymentIdQueryResult.Data.Rows.Count < 1)
                 {
                     MessageBox.Show("Error: Payment record not found for the selected booking.");
-                    ClearBookingSelection();
+                    clearBookingSelection();
                     return;
                 }
 
@@ -346,31 +347,25 @@ namespace Air_Ticket_Management_System
         }
 
 
-        // Add Button Click Event g
+        // Add Button Click Event
         private void btnAdminFlightAdd_Click_1(object sender, EventArgs e)
         {
             // Checking if any field is empty
             if (string.IsNullOrWhiteSpace(txtAdminBookingPassengerId.Text))
             {
                 MessageBox.Show("Error: Enter Passenger ID");
-                ClearBookingSelection();
-                ShowBookingInfo();
                 return;
             }
 
             if (cmbAdminBookingFlightName.SelectedItem == null || cmbAdminBookingFlightName.SelectedIndex == -1)
             {
                 MessageBox.Show("Error: Select Flight No");
-                ClearBookingSelection();
-                ShowBookingInfo();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtAdminBookingBookedSeats.Text))
             {
                 MessageBox.Show("Error: Select Seats");
-                ClearBookingSelection();
-                ShowBookingInfo();
                 return;
             }
 
@@ -406,17 +401,16 @@ namespace Air_Ticket_Management_System
                 MessageBox.Show("Error : " + getUserIdQueryResult.Message);
                 return;
             }
-
             if (getUserIdQueryResult.Data.Rows.Count < 1)
             {
                 MessageBox.Show("Error: Passenger not found. Please enter a valid Passenger Name or Add a Passenger first.");
-                ClearBookingSelection();
-                ShowBookingInfo();
+                clearBookingSelection();
+                showBookingInfo();
                 return;
             }
 
 
-            // getting flightSeats id from txtAdminBookingBookedSeats
+            // Getting flightSeats id from txtAdminBookingBookedSeats
             string bookedSeats = txtAdminBookingBookedSeats.Text.Trim();
 
 
@@ -448,7 +442,7 @@ namespace Air_Ticket_Management_System
             // Inserting Booking data into the database
             try
             {
-                // getting flightId from flight table based on selected flightNo
+                // Getting flightId from flight table based on selected flightNo
                 string getFlightIdQuery = "SELECT * FROM Flight WHERE flightNo = '" + cmbAdminBookingFlightName.SelectedItem.ToString() + "';";
 
                 var getFlightIdQueryResult = DbHelper.GetQueryData(getFlightIdQuery);
@@ -462,16 +456,16 @@ namespace Air_Ticket_Management_System
                 if (getFlightIdQueryResult.Data.Rows.Count < 1)
                 {
                     MessageBox.Show("Error: Flight not found. Please select a valid Flight No.");
-                    ClearBookingSelection();
+                    clearBookingSelection();
                     return;
                 }
 
 
-                // stroing flightId
+                // Stroing flightId
                 int flightId = Convert.ToInt32(getFlightIdQueryResult.Data.Rows[0]["flightId"]);
 
 
-                // getting flightSeatIds from flightSeats table based on flightId and SeatNos 
+                // Getting flightSeatIds from flightSeats table based on flightId and SeatNos 
                 string getFlightSeatIdQuery = "SELECT * FROM FlightSeats WHERE flightId = '" + flightId + "' AND seatNo IN ('" + string.Join("','", bookedSeats.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) + "');";
 
                 var getFlightSeatIdQueryResult = DbHelper.GetQueryData(getFlightSeatIdQuery);
@@ -483,7 +477,7 @@ namespace Air_Ticket_Management_System
                 }
 
 
-                // storing flightSeatIds in a list
+                // Storing flightSeatIds in a list
                 List<int> flightSeatIds = new List<int>();
 
                 foreach (DataRow row in getFlightSeatIdQueryResult.Data.Rows)
@@ -579,8 +573,8 @@ namespace Air_Ticket_Management_System
 
                 MessageBox.Show("Message: Booking Added Successfully.");
 
-                ClearBookingSelection();
-                ShowBookingInfo();
+                clearBookingSelection();
+                showBookingInfo();
             }
             catch (Exception exception)
             {
@@ -593,12 +587,12 @@ namespace Air_Ticket_Management_System
         // Update Button Click Event
         private void btnAdminFlightUpdate_Click(object sender, EventArgs e)
         {
-            // if payment status is confirmed then return 
+            // If payment status is confirmed then return 
             if (txtAdminBookingPaymentStatus.Text == "Paid")
             {
                 MessageBox.Show("Error: Cannot update a confirmed booking.");
-                ClearBookingSelection();
-                ShowBookingInfo();
+                clearBookingSelection();
+                showBookingInfo();
                 return;
             }
 
@@ -644,7 +638,7 @@ namespace Air_Ticket_Management_System
                 if (getPaymentIdQueryResult.Data.Rows.Count < 1)
                 {
                     MessageBox.Show("Error: Payment record not found for the selected booking.");
-                    ClearBookingSelection();
+                    clearBookingSelection();
                     return;
                 }
 
@@ -779,8 +773,8 @@ namespace Air_Ticket_Management_System
                 }
 
                 MessageBox.Show("Message: Booking Updated Successfully.");
-                ClearBookingSelection();
-                ShowBookingInfo();
+                clearBookingSelection();
+                showBookingInfo();
             }
             catch (Exception exception)
             {
@@ -905,8 +899,8 @@ namespace Air_Ticket_Management_System
                     MessageBox.Show("Error : " + paymentId + " : " + deletePaymentQueryResult.Message);
                 }
 
-                ClearBookingSelection();
-                ShowBookingInfo();
+                clearBookingSelection();
+                showBookingInfo();
 
                 MessageBox.Show("Message: Booking Deleted Successfully.");
             }

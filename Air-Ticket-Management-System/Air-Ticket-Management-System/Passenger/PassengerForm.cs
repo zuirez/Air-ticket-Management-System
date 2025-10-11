@@ -89,7 +89,13 @@ namespace Air_Ticket_Management_System.Passenger
         // Refund Button Click Event
         private void btnPassengerRefund_Click(object sender, EventArgs e)
         {
-
+            this.pnlPassengerShowInfo.Controls.Clear();
+            PassengerRefund refund = new PassengerRefund();
+            refund.TopLevel = false;
+            refund.FormBorderStyle = FormBorderStyle.None;
+            refund.Dock = DockStyle.Fill;
+            this.pnlPassengerShowInfo.Controls.Add(refund);
+            refund.Show();
         }
 
 

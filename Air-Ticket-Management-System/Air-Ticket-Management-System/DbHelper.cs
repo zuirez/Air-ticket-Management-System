@@ -40,10 +40,10 @@ namespace Air_Ticket_Management_System
 
                 result.Data = dt;
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
                 result.HasError = true;
-                result.Message = e.Message;
+                result.Message = exception.Message;
             }
             finally
             {

@@ -22,36 +22,8 @@ namespace Air_Ticket_Management_System
             InitializeComponent();
         }
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void lblPassword_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtUserName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblUserName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLogIn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //Connection String to connect to database
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-MH8FO6G;Initial Catalog=Air.Ticket.Management;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
-
-
-        //Method to clear all fields after SignUp
+        // Method to clear all fields after SignUp
         public void clearSignUpSelection()
         {
             txtUserNameSignUp.Text = "";
@@ -63,7 +35,7 @@ namespace Air_Ticket_Management_System
         }
 
 
-        //Method to clear all fields after LogIn
+        // Method to clear all fields after LogIn
         public void clearLogInSelection()
         {
             txtUserNameLogIn.Text = "";
@@ -71,7 +43,7 @@ namespace Air_Ticket_Management_System
         }
 
 
-        //SignUp Button Click Event
+        // SignUp Button Click Event
         private void btnSignUp_Click(object sender, EventArgs e)
         {
             String userName = txtUserNameSignUp.Text;
@@ -81,7 +53,7 @@ namespace Air_Ticket_Management_System
             String gender = "";
 
 
-            //Storing gender according to selected radio button
+            // Storing gender according to selected radio button
             if (rdbMaleSignUp.Checked)
             {
                 gender += rdbMaleSignUp.Text;
@@ -92,7 +64,7 @@ namespace Air_Ticket_Management_System
             }
 
 
-            //Checking if any field is empty
+            // Checking if any field is empty
             if (string.IsNullOrWhiteSpace(userName))
             {
                 MessageBox.Show("Error : Enter username");
@@ -120,9 +92,10 @@ namespace Air_Ticket_Management_System
             }
 
 
-            //Database Connection and Insertion for SignUp
+            // Inserting new user into database
             try
             {
+                // Chacking if user already exists
                 string queryCheckIfUserExists = "SELECT * FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "'";
 
                 var result = DbHelper.GetQueryData(queryCheckIfUserExists);
@@ -132,29 +105,29 @@ namespace Air_Ticket_Management_System
                     MessageBox.Show("Error : " + result.Message);
                     return;
                 }
-
                 if (result.Data.Rows.Count > 0)
                 {
                     MessageBox.Show("Error : User already exists. Please Log In.");
                     clearSignUpSelection();
                     return;
                 }
-                else
+                
+
+                // Inserting new user
+                string queryNewUser = "INSERT INTO UserInfo VALUES ('" + userName + "', '" + password + "', '" + email + "', '" + address + "', '" + gender + "', 3);";
+
+                var insertResult = DbHelper.ExecuteNonResultQuery(queryNewUser);
+
+                if (insertResult.HasError)
                 {
-                    string queryNewUser = "INSERT INTO UserInfo VALUES ('" + userName + "', '" + password + "', '" + email + "', '" + address + "', '" + gender + "', 3);\r\n";
-
-                    var insertResult = DbHelper.ExecuteNonResultQuery(queryNewUser);
-
-                    if (insertResult.HasError)
-                    {
-                        MessageBox.Show("Error : " + insertResult.Message);
-                        return;
-                    }
-
-                    //SignUp Success Message
-                    MessageBox.Show("Message : \n\nSign Up Successful.\nNow you can Log In.");
-                    clearSignUpSelection();
+                    MessageBox.Show("Error : " + insertResult.Message);
+                    return;
                 }
+
+                // SignUp Success Message
+                MessageBox.Show("Message : \n\nSign Up Successful.\nNow you can Log In.");
+                clearSignUpSelection();
+                
             }
             catch (Exception exception)
             {
@@ -163,14 +136,14 @@ namespace Air_Ticket_Management_System
         }
 
 
-        //Log In Button Click Event
+        // Log In Button Click Event
         private void btnLogIn_Click_1(object sender, EventArgs e)
         {
             string userName = txtUserNameLogIn.Text;
             string password = txtPasswordLogIn.Text;
 
 
-            //Checking if any field is empty
+            // Checking if any field is empty
             if (string.IsNullOrWhiteSpace(userName))
             {
                 MessageBox.Show("Error : Enter username");
@@ -183,9 +156,10 @@ namespace Air_Ticket_Management_System
             }
 
 
-            //Database Connection and Verification for LogIn
+            // Logging in the user
             try
             {
+                // Checking if user exists
                 String queryCheck = "SELECT * FROM UserInfo WHERE userName = '" + userName + "' AND userPassword = '" + password + "';";
                 
                 var result = DbHelper.GetQueryData(queryCheck);
@@ -195,15 +169,15 @@ namespace Air_Ticket_Management_System
                     MessageBox.Show("Error : " + result.Message);
                     return;
                 }
-
                 if (result.Data.Rows.Count > 0)
                 {
-                    //Log in success message
+                    // Log in success message
                     MessageBox.Show($"Log in successful. \n\nWelcome, {userName}.");
                     clearLogInSelection();
 
-                    //Demining user type and opening respective form
+                    // Determining user type and opening respective form
                     int userTypeInt = Convert.ToInt32(result.Data.Rows[0]["userIdType"]);
+
                     SessionInfo.LoggedInUserId = Convert.ToInt32(result.Data.Rows[0]["userId"]);
 
                     if (userTypeInt == 1)

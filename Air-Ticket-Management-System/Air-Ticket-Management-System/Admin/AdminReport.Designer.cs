@@ -57,7 +57,7 @@
             this.txtAdminReportTotalRevenue = new System.Windows.Forms.TextBox();
             this.txtAdminReportTotalBookings = new System.Windows.Forms.TextBox();
             this.txtAdminReportTotalFlights = new System.Windows.Forms.TextBox();
-            this.lblAdminReportPendingRefunds = new System.Windows.Forms.Label();
+            this.lblAdminReportRefundsToPay = new System.Windows.Forms.Label();
             this.lblAdminReportTotalRevenue = new System.Windows.Forms.Label();
             this.lblAdminReportTotalBookings = new System.Windows.Forms.Label();
             this.lblAdminReportTotalFlights = new System.Windows.Forms.Label();
@@ -73,12 +73,38 @@
             this.txtAdminReportFlightStatsTotalFlights = new System.Windows.Forms.TextBox();
             this.lblAdminReportFlightStatsTotalFlights = new System.Windows.Forms.Label();
             this.lblAdminReportFlightStats = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblAdminReportPaymentStats = new System.Windows.Forms.Label();
+            this.txtAdminReportPaymentStatsPendingPayment = new System.Windows.Forms.TextBox();
+            this.txtAdminReportPaymentStatsConfirmedPayment = new System.Windows.Forms.TextBox();
+            this.txtAdminReportPaymentStatsPaymentAmount = new System.Windows.Forms.TextBox();
+            this.lblAdminReportPaymentStatsPendingPayment = new System.Windows.Forms.Label();
+            this.lblAdminReportPaymentStatsConfirmedPayment = new System.Windows.Forms.Label();
+            this.lblAdminReportPaymentStatsPaymentAmount = new System.Windows.Forms.Label();
+            this.txtAdminReportPaymentStatsNoofPayments = new System.Windows.Forms.TextBox();
+            this.lblAdminReportPaymentStatsNoofPayments = new System.Windows.Forms.Label();
+            this.txtAdminReportPaymentStatsCancelledPayment = new System.Windows.Forms.TextBox();
+            this.lblAdminReportPaymentStatsCancelledPayment = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.txtAdminReportRefundStatsCancelledRefund = new System.Windows.Forms.TextBox();
+            this.lblAdminReportRefundStatsCancelledRefund = new System.Windows.Forms.Label();
+            this.lblAdminReportRefundStats = new System.Windows.Forms.Label();
+            this.txtAdminReportRefundStatsPendingRefund = new System.Windows.Forms.TextBox();
+            this.txtAdminReportRefundStatsConfirmedRefund = new System.Windows.Forms.TextBox();
+            this.txtAdminReportRefundStatsRefundAmount = new System.Windows.Forms.TextBox();
+            this.lblAdminReportRefundStatsPendingRefund = new System.Windows.Forms.Label();
+            this.lblAdminReportRefundStatsConfirmedRefund = new System.Windows.Forms.Label();
+            this.lblAdminReportRefundStatsRefundAmount = new System.Windows.Forms.Label();
+            this.txtAdminReportRefundStatsNoofRefunds = new System.Windows.Forms.TextBox();
+            this.lblAdminReportRefundStatsNoofRefunds = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pnlAdminReportUserStats.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlAdminReportQuickStats.SuspendLayout();
             this.pnlAdminReportFlightStats.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -87,6 +113,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.Controls.Add(this.panel4, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.pnlAdminReportUserStats, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
@@ -124,7 +152,7 @@
             // 
             this.lblAdminReportBookingStats.AutoSize = true;
             this.lblAdminReportBookingStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdminReportBookingStats.Location = new System.Drawing.Point(132, 13);
+            this.lblAdminReportBookingStats.Location = new System.Drawing.Point(130, 13);
             this.lblAdminReportBookingStats.Name = "lblAdminReportBookingStats";
             this.lblAdminReportBookingStats.Size = new System.Drawing.Size(147, 26);
             this.lblAdminReportBookingStats.TabIndex = 17;
@@ -233,7 +261,7 @@
             // 
             this.lblAdminReportUserStats.AutoSize = true;
             this.lblAdminReportUserStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdminReportUserStats.Location = new System.Drawing.Point(132, 13);
+            this.lblAdminReportUserStats.Location = new System.Drawing.Point(135, 13);
             this.lblAdminReportUserStats.Name = "lblAdminReportUserStats";
             this.lblAdminReportUserStats.Size = new System.Drawing.Size(114, 26);
             this.lblAdminReportUserStats.TabIndex = 17;
@@ -347,7 +375,7 @@
             this.pnlAdminReportQuickStats.Controls.Add(this.txtAdminReportTotalRevenue);
             this.pnlAdminReportQuickStats.Controls.Add(this.txtAdminReportTotalBookings);
             this.pnlAdminReportQuickStats.Controls.Add(this.txtAdminReportTotalFlights);
-            this.pnlAdminReportQuickStats.Controls.Add(this.lblAdminReportPendingRefunds);
+            this.pnlAdminReportQuickStats.Controls.Add(this.lblAdminReportRefundsToPay);
             this.pnlAdminReportQuickStats.Controls.Add(this.lblAdminReportTotalRevenue);
             this.pnlAdminReportQuickStats.Controls.Add(this.lblAdminReportTotalBookings);
             this.pnlAdminReportQuickStats.Controls.Add(this.lblAdminReportTotalFlights);
@@ -409,15 +437,15 @@
             this.txtAdminReportTotalFlights.Size = new System.Drawing.Size(211, 27);
             this.txtAdminReportTotalFlights.TabIndex = 13;
             // 
-            // lblAdminReportPendingRefunds
+            // lblAdminReportRefundsToPay
             // 
-            this.lblAdminReportPendingRefunds.AutoSize = true;
-            this.lblAdminReportPendingRefunds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdminReportPendingRefunds.Location = new System.Drawing.Point(9, 219);
-            this.lblAdminReportPendingRefunds.Name = "lblAdminReportPendingRefunds";
-            this.lblAdminReportPendingRefunds.Size = new System.Drawing.Size(144, 20);
-            this.lblAdminReportPendingRefunds.TabIndex = 12;
-            this.lblAdminReportPendingRefunds.Text = "Pending Refunds : ";
+            this.lblAdminReportRefundsToPay.AutoSize = true;
+            this.lblAdminReportRefundsToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportRefundsToPay.Location = new System.Drawing.Point(9, 219);
+            this.lblAdminReportRefundsToPay.Name = "lblAdminReportRefundsToPay";
+            this.lblAdminReportRefundsToPay.Size = new System.Drawing.Size(134, 20);
+            this.lblAdminReportRefundsToPay.TabIndex = 12;
+            this.lblAdminReportRefundsToPay.Text = "Refunds To Pay : ";
             // 
             // lblAdminReportTotalRevenue
             // 
@@ -577,6 +605,268 @@
             this.lblAdminReportFlightStats.TabIndex = 18;
             this.lblAdminReportFlightStats.Text = "Flight Stats";
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtAdminReportPaymentStatsCancelledPayment);
+            this.panel2.Controls.Add(this.lblAdminReportPaymentStatsCancelledPayment);
+            this.panel2.Controls.Add(this.lblAdminReportPaymentStats);
+            this.panel2.Controls.Add(this.txtAdminReportPaymentStatsPendingPayment);
+            this.panel2.Controls.Add(this.txtAdminReportPaymentStatsConfirmedPayment);
+            this.panel2.Controls.Add(this.txtAdminReportPaymentStatsPaymentAmount);
+            this.panel2.Controls.Add(this.lblAdminReportPaymentStatsPendingPayment);
+            this.panel2.Controls.Add(this.lblAdminReportPaymentStatsConfirmedPayment);
+            this.panel2.Controls.Add(this.lblAdminReportPaymentStatsPaymentAmount);
+            this.panel2.Controls.Add(this.txtAdminReportPaymentStatsNoofPayments);
+            this.panel2.Controls.Add(this.lblAdminReportPaymentStatsNoofPayments);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(779, 53);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(383, 294);
+            this.panel2.TabIndex = 6;
+            // 
+            // lblAdminReportPaymentStats
+            // 
+            this.lblAdminReportPaymentStats.AutoSize = true;
+            this.lblAdminReportPaymentStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportPaymentStats.Location = new System.Drawing.Point(117, 13);
+            this.lblAdminReportPaymentStats.Name = "lblAdminReportPaymentStats";
+            this.lblAdminReportPaymentStats.Size = new System.Drawing.Size(155, 26);
+            this.lblAdminReportPaymentStats.TabIndex = 17;
+            this.lblAdminReportPaymentStats.Text = "Payment Stats";
+            // 
+            // txtAdminReportPaymentStatsPendingPayment
+            // 
+            this.txtAdminReportPaymentStatsPendingPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportPaymentStatsPendingPayment.Location = new System.Drawing.Point(173, 178);
+            this.txtAdminReportPaymentStatsPendingPayment.Multiline = true;
+            this.txtAdminReportPaymentStatsPendingPayment.Name = "txtAdminReportPaymentStatsPendingPayment";
+            this.txtAdminReportPaymentStatsPendingPayment.ReadOnly = true;
+            this.txtAdminReportPaymentStatsPendingPayment.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportPaymentStatsPendingPayment.TabIndex = 15;
+            // 
+            // txtAdminReportPaymentStatsConfirmedPayment
+            // 
+            this.txtAdminReportPaymentStatsConfirmedPayment.AcceptsReturn = true;
+            this.txtAdminReportPaymentStatsConfirmedPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportPaymentStatsConfirmedPayment.Location = new System.Drawing.Point(173, 140);
+            this.txtAdminReportPaymentStatsConfirmedPayment.Multiline = true;
+            this.txtAdminReportPaymentStatsConfirmedPayment.Name = "txtAdminReportPaymentStatsConfirmedPayment";
+            this.txtAdminReportPaymentStatsConfirmedPayment.ReadOnly = true;
+            this.txtAdminReportPaymentStatsConfirmedPayment.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportPaymentStatsConfirmedPayment.TabIndex = 14;
+            // 
+            // txtAdminReportPaymentStatsPaymentAmount
+            // 
+            this.txtAdminReportPaymentStatsPaymentAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportPaymentStatsPaymentAmount.Location = new System.Drawing.Point(173, 102);
+            this.txtAdminReportPaymentStatsPaymentAmount.Multiline = true;
+            this.txtAdminReportPaymentStatsPaymentAmount.Name = "txtAdminReportPaymentStatsPaymentAmount";
+            this.txtAdminReportPaymentStatsPaymentAmount.ReadOnly = true;
+            this.txtAdminReportPaymentStatsPaymentAmount.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportPaymentStatsPaymentAmount.TabIndex = 13;
+            // 
+            // lblAdminReportPaymentStatsPendingPayment
+            // 
+            this.lblAdminReportPaymentStatsPendingPayment.AutoSize = true;
+            this.lblAdminReportPaymentStatsPendingPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportPaymentStatsPendingPayment.Location = new System.Drawing.Point(26, 181);
+            this.lblAdminReportPaymentStatsPendingPayment.Name = "lblAdminReportPaymentStatsPendingPayment";
+            this.lblAdminReportPaymentStatsPendingPayment.Size = new System.Drawing.Size(145, 20);
+            this.lblAdminReportPaymentStatsPendingPayment.TabIndex = 10;
+            this.lblAdminReportPaymentStatsPendingPayment.Text = "Pending Payment : ";
+            // 
+            // lblAdminReportPaymentStatsConfirmedPayment
+            // 
+            this.lblAdminReportPaymentStatsConfirmedPayment.AutoSize = true;
+            this.lblAdminReportPaymentStatsConfirmedPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportPaymentStatsConfirmedPayment.Location = new System.Drawing.Point(11, 143);
+            this.lblAdminReportPaymentStatsConfirmedPayment.Name = "lblAdminReportPaymentStatsConfirmedPayment";
+            this.lblAdminReportPaymentStatsConfirmedPayment.Size = new System.Drawing.Size(160, 20);
+            this.lblAdminReportPaymentStatsConfirmedPayment.TabIndex = 8;
+            this.lblAdminReportPaymentStatsConfirmedPayment.Text = "Confirmed Payment : ";
+            // 
+            // lblAdminReportPaymentStatsPaymentAmount
+            // 
+            this.lblAdminReportPaymentStatsPaymentAmount.AutoSize = true;
+            this.lblAdminReportPaymentStatsPaymentAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportPaymentStatsPaymentAmount.Location = new System.Drawing.Point(28, 105);
+            this.lblAdminReportPaymentStatsPaymentAmount.Name = "lblAdminReportPaymentStatsPaymentAmount";
+            this.lblAdminReportPaymentStatsPaymentAmount.Size = new System.Drawing.Size(143, 20);
+            this.lblAdminReportPaymentStatsPaymentAmount.TabIndex = 6;
+            this.lblAdminReportPaymentStatsPaymentAmount.Text = "Payment Amount : ";
+            // 
+            // txtAdminReportPaymentStatsNoofPayments
+            // 
+            this.txtAdminReportPaymentStatsNoofPayments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportPaymentStatsNoofPayments.Location = new System.Drawing.Point(173, 64);
+            this.txtAdminReportPaymentStatsNoofPayments.Multiline = true;
+            this.txtAdminReportPaymentStatsNoofPayments.Name = "txtAdminReportPaymentStatsNoofPayments";
+            this.txtAdminReportPaymentStatsNoofPayments.ReadOnly = true;
+            this.txtAdminReportPaymentStatsNoofPayments.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportPaymentStatsNoofPayments.TabIndex = 5;
+            // 
+            // lblAdminReportPaymentStatsNoofPayments
+            // 
+            this.lblAdminReportPaymentStatsNoofPayments.AutoSize = true;
+            this.lblAdminReportPaymentStatsNoofPayments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportPaymentStatsNoofPayments.Location = new System.Drawing.Point(33, 67);
+            this.lblAdminReportPaymentStatsNoofPayments.Name = "lblAdminReportPaymentStatsNoofPayments";
+            this.lblAdminReportPaymentStatsNoofPayments.Size = new System.Drawing.Size(138, 20);
+            this.lblAdminReportPaymentStatsNoofPayments.TabIndex = 4;
+            this.lblAdminReportPaymentStatsNoofPayments.Text = "Num of Payment : ";
+            // 
+            // txtAdminReportPaymentStatsCancelledPayment
+            // 
+            this.txtAdminReportPaymentStatsCancelledPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportPaymentStatsCancelledPayment.Location = new System.Drawing.Point(173, 216);
+            this.txtAdminReportPaymentStatsCancelledPayment.Multiline = true;
+            this.txtAdminReportPaymentStatsCancelledPayment.Name = "txtAdminReportPaymentStatsCancelledPayment";
+            this.txtAdminReportPaymentStatsCancelledPayment.ReadOnly = true;
+            this.txtAdminReportPaymentStatsCancelledPayment.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportPaymentStatsCancelledPayment.TabIndex = 19;
+            // 
+            // lblAdminReportPaymentStatsCancelledPayment
+            // 
+            this.lblAdminReportPaymentStatsCancelledPayment.AutoSize = true;
+            this.lblAdminReportPaymentStatsCancelledPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportPaymentStatsCancelledPayment.Location = new System.Drawing.Point(14, 219);
+            this.lblAdminReportPaymentStatsCancelledPayment.Name = "lblAdminReportPaymentStatsCancelledPayment";
+            this.lblAdminReportPaymentStatsCancelledPayment.Size = new System.Drawing.Size(157, 20);
+            this.lblAdminReportPaymentStatsCancelledPayment.TabIndex = 18;
+            this.lblAdminReportPaymentStatsCancelledPayment.Text = "Cancelled Payment : ";
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.txtAdminReportRefundStatsCancelledRefund);
+            this.panel4.Controls.Add(this.lblAdminReportRefundStatsCancelledRefund);
+            this.panel4.Controls.Add(this.lblAdminReportRefundStats);
+            this.panel4.Controls.Add(this.txtAdminReportRefundStatsPendingRefund);
+            this.panel4.Controls.Add(this.txtAdminReportRefundStatsConfirmedRefund);
+            this.panel4.Controls.Add(this.txtAdminReportRefundStatsRefundAmount);
+            this.panel4.Controls.Add(this.lblAdminReportRefundStatsPendingRefund);
+            this.panel4.Controls.Add(this.lblAdminReportRefundStatsConfirmedRefund);
+            this.panel4.Controls.Add(this.lblAdminReportRefundStatsRefundAmount);
+            this.panel4.Controls.Add(this.txtAdminReportRefundStatsNoofRefunds);
+            this.panel4.Controls.Add(this.lblAdminReportRefundStatsNoofRefunds);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(779, 353);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(383, 295);
+            this.panel4.TabIndex = 7;
+            // 
+            // txtAdminReportRefundStatsCancelledRefund
+            // 
+            this.txtAdminReportRefundStatsCancelledRefund.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportRefundStatsCancelledRefund.Location = new System.Drawing.Point(173, 216);
+            this.txtAdminReportRefundStatsCancelledRefund.Multiline = true;
+            this.txtAdminReportRefundStatsCancelledRefund.Name = "txtAdminReportRefundStatsCancelledRefund";
+            this.txtAdminReportRefundStatsCancelledRefund.ReadOnly = true;
+            this.txtAdminReportRefundStatsCancelledRefund.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportRefundStatsCancelledRefund.TabIndex = 19;
+            // 
+            // lblAdminReportRefundStatsCancelledRefund
+            // 
+            this.lblAdminReportRefundStatsCancelledRefund.AutoSize = true;
+            this.lblAdminReportRefundStatsCancelledRefund.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportRefundStatsCancelledRefund.Location = new System.Drawing.Point(14, 219);
+            this.lblAdminReportRefundStatsCancelledRefund.Name = "lblAdminReportRefundStatsCancelledRefund";
+            this.lblAdminReportRefundStatsCancelledRefund.Size = new System.Drawing.Size(148, 20);
+            this.lblAdminReportRefundStatsCancelledRefund.TabIndex = 18;
+            this.lblAdminReportRefundStatsCancelledRefund.Text = "Cancelled Refund : ";
+            // 
+            // lblAdminReportRefundStats
+            // 
+            this.lblAdminReportRefundStats.AutoSize = true;
+            this.lblAdminReportRefundStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportRefundStats.Location = new System.Drawing.Point(117, 13);
+            this.lblAdminReportRefundStats.Name = "lblAdminReportRefundStats";
+            this.lblAdminReportRefundStats.Size = new System.Drawing.Size(138, 26);
+            this.lblAdminReportRefundStats.TabIndex = 17;
+            this.lblAdminReportRefundStats.Text = "Refund Stats";
+            // 
+            // txtAdminReportRefundStatsPendingRefund
+            // 
+            this.txtAdminReportRefundStatsPendingRefund.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportRefundStatsPendingRefund.Location = new System.Drawing.Point(173, 178);
+            this.txtAdminReportRefundStatsPendingRefund.Multiline = true;
+            this.txtAdminReportRefundStatsPendingRefund.Name = "txtAdminReportRefundStatsPendingRefund";
+            this.txtAdminReportRefundStatsPendingRefund.ReadOnly = true;
+            this.txtAdminReportRefundStatsPendingRefund.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportRefundStatsPendingRefund.TabIndex = 15;
+            // 
+            // txtAdminReportRefundStatsConfirmedRefund
+            // 
+            this.txtAdminReportRefundStatsConfirmedRefund.AcceptsReturn = true;
+            this.txtAdminReportRefundStatsConfirmedRefund.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportRefundStatsConfirmedRefund.Location = new System.Drawing.Point(173, 140);
+            this.txtAdminReportRefundStatsConfirmedRefund.Multiline = true;
+            this.txtAdminReportRefundStatsConfirmedRefund.Name = "txtAdminReportRefundStatsConfirmedRefund";
+            this.txtAdminReportRefundStatsConfirmedRefund.ReadOnly = true;
+            this.txtAdminReportRefundStatsConfirmedRefund.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportRefundStatsConfirmedRefund.TabIndex = 14;
+            // 
+            // txtAdminReportRefundStatsRefundAmount
+            // 
+            this.txtAdminReportRefundStatsRefundAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportRefundStatsRefundAmount.Location = new System.Drawing.Point(173, 102);
+            this.txtAdminReportRefundStatsRefundAmount.Multiline = true;
+            this.txtAdminReportRefundStatsRefundAmount.Name = "txtAdminReportRefundStatsRefundAmount";
+            this.txtAdminReportRefundStatsRefundAmount.ReadOnly = true;
+            this.txtAdminReportRefundStatsRefundAmount.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportRefundStatsRefundAmount.TabIndex = 13;
+            // 
+            // lblAdminReportRefundStatsPendingRefund
+            // 
+            this.lblAdminReportRefundStatsPendingRefund.AutoSize = true;
+            this.lblAdminReportRefundStatsPendingRefund.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportRefundStatsPendingRefund.Location = new System.Drawing.Point(26, 181);
+            this.lblAdminReportRefundStatsPendingRefund.Name = "lblAdminReportRefundStatsPendingRefund";
+            this.lblAdminReportRefundStatsPendingRefund.Size = new System.Drawing.Size(136, 20);
+            this.lblAdminReportRefundStatsPendingRefund.TabIndex = 10;
+            this.lblAdminReportRefundStatsPendingRefund.Text = "Pending Refund : ";
+            // 
+            // lblAdminReportRefundStatsConfirmedRefund
+            // 
+            this.lblAdminReportRefundStatsConfirmedRefund.AutoSize = true;
+            this.lblAdminReportRefundStatsConfirmedRefund.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportRefundStatsConfirmedRefund.Location = new System.Drawing.Point(11, 143);
+            this.lblAdminReportRefundStatsConfirmedRefund.Name = "lblAdminReportRefundStatsConfirmedRefund";
+            this.lblAdminReportRefundStatsConfirmedRefund.Size = new System.Drawing.Size(151, 20);
+            this.lblAdminReportRefundStatsConfirmedRefund.TabIndex = 8;
+            this.lblAdminReportRefundStatsConfirmedRefund.Text = "Confirmed Refund : ";
+            // 
+            // lblAdminReportRefundStatsRefundAmount
+            // 
+            this.lblAdminReportRefundStatsRefundAmount.AutoSize = true;
+            this.lblAdminReportRefundStatsRefundAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportRefundStatsRefundAmount.Location = new System.Drawing.Point(28, 105);
+            this.lblAdminReportRefundStatsRefundAmount.Name = "lblAdminReportRefundStatsRefundAmount";
+            this.lblAdminReportRefundStatsRefundAmount.Size = new System.Drawing.Size(134, 20);
+            this.lblAdminReportRefundStatsRefundAmount.TabIndex = 6;
+            this.lblAdminReportRefundStatsRefundAmount.Text = "Refund Amount : ";
+            // 
+            // txtAdminReportRefundStatsNoofRefunds
+            // 
+            this.txtAdminReportRefundStatsNoofRefunds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAdminReportRefundStatsNoofRefunds.Location = new System.Drawing.Point(173, 64);
+            this.txtAdminReportRefundStatsNoofRefunds.Multiline = true;
+            this.txtAdminReportRefundStatsNoofRefunds.Name = "txtAdminReportRefundStatsNoofRefunds";
+            this.txtAdminReportRefundStatsNoofRefunds.ReadOnly = true;
+            this.txtAdminReportRefundStatsNoofRefunds.Size = new System.Drawing.Size(194, 27);
+            this.txtAdminReportRefundStatsNoofRefunds.TabIndex = 5;
+            // 
+            // lblAdminReportRefundStatsNoofRefunds
+            // 
+            this.lblAdminReportRefundStatsNoofRefunds.AutoSize = true;
+            this.lblAdminReportRefundStatsNoofRefunds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdminReportRefundStatsNoofRefunds.Location = new System.Drawing.Point(33, 67);
+            this.lblAdminReportRefundStatsNoofRefunds.Name = "lblAdminReportRefundStatsNoofRefunds";
+            this.lblAdminReportRefundStatsNoofRefunds.Size = new System.Drawing.Size(129, 20);
+            this.lblAdminReportRefundStatsNoofRefunds.TabIndex = 4;
+            this.lblAdminReportRefundStatsNoofRefunds.Text = "Num of Refund : ";
+            // 
             // AdminReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -597,6 +887,10 @@
             this.pnlAdminReportQuickStats.PerformLayout();
             this.pnlAdminReportFlightStats.ResumeLayout(false);
             this.pnlAdminReportFlightStats.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -610,7 +904,7 @@
         private System.Windows.Forms.TextBox txtAdminReportTotalUsers;
         private System.Windows.Forms.Label lblAdminReportTotalUsers;
         private System.Windows.Forms.TextBox txtAdminReportTotalFlights;
-        private System.Windows.Forms.Label lblAdminReportPendingRefunds;
+        private System.Windows.Forms.Label lblAdminReportRefundsToPay;
         private System.Windows.Forms.Label lblAdminReportTotalRevenue;
         private System.Windows.Forms.Label lblAdminReportTotalBookings;
         private System.Windows.Forms.Label lblAdminReportTotalFlights;
@@ -648,5 +942,29 @@
         private System.Windows.Forms.Label lblAdminReportBookingStatsConfirmedBooking;
         private System.Windows.Forms.TextBox txtAdminReportBookingStatsTotalBooking;
         private System.Windows.Forms.Label lblAdminReportBookingStatsTotalBooking;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblAdminReportPaymentStats;
+        private System.Windows.Forms.TextBox txtAdminReportPaymentStatsPendingPayment;
+        private System.Windows.Forms.TextBox txtAdminReportPaymentStatsConfirmedPayment;
+        private System.Windows.Forms.TextBox txtAdminReportPaymentStatsPaymentAmount;
+        private System.Windows.Forms.Label lblAdminReportPaymentStatsPendingPayment;
+        private System.Windows.Forms.Label lblAdminReportPaymentStatsConfirmedPayment;
+        private System.Windows.Forms.Label lblAdminReportPaymentStatsPaymentAmount;
+        private System.Windows.Forms.TextBox txtAdminReportPaymentStatsNoofPayments;
+        private System.Windows.Forms.Label lblAdminReportPaymentStatsNoofPayments;
+        private System.Windows.Forms.TextBox txtAdminReportPaymentStatsCancelledPayment;
+        private System.Windows.Forms.Label lblAdminReportPaymentStatsCancelledPayment;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TextBox txtAdminReportRefundStatsCancelledRefund;
+        private System.Windows.Forms.Label lblAdminReportRefundStatsCancelledRefund;
+        private System.Windows.Forms.Label lblAdminReportRefundStats;
+        private System.Windows.Forms.TextBox txtAdminReportRefundStatsPendingRefund;
+        private System.Windows.Forms.TextBox txtAdminReportRefundStatsConfirmedRefund;
+        private System.Windows.Forms.TextBox txtAdminReportRefundStatsRefundAmount;
+        private System.Windows.Forms.Label lblAdminReportRefundStatsPendingRefund;
+        private System.Windows.Forms.Label lblAdminReportRefundStatsConfirmedRefund;
+        private System.Windows.Forms.Label lblAdminReportRefundStatsRefundAmount;
+        private System.Windows.Forms.TextBox txtAdminReportRefundStatsNoofRefunds;
+        private System.Windows.Forms.Label lblAdminReportRefundStatsNoofRefunds;
     }
 }

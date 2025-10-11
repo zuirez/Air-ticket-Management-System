@@ -25,9 +25,11 @@ namespace Air_Ticket_Management_System.Passenger
         private void ClearBookingSelection()
         {
             txtPassengerBookingPassengerId.ReadOnly = true;
+            btnPassengerBookingFlightSeat.Enabled = true;
             txtPassengerBookingPassengerId.Text = Convert.ToString(userId);
             cmbPassengerBookingFlightName.Enabled = true;
             dtpPassengerBookingDate.Value = DateTime.Now;
+            dtpPassengerBookingDate.Enabled = false;
             cmbPassengerBookingFlightName.SelectedIndex = -1;
             txtPassengerBookingFlightOrigin.Text = "";
             txtPassengerBookingFlightDestination.Text = "";
@@ -35,7 +37,8 @@ namespace Air_Ticket_Management_System.Passenger
             txtPassengerBookingBookedSeats.Text = "";
             rdbCancelled.Checked = false;
             rdbConfirmed.Checked = false;
-            rdbPending.Checked = false;
+            rdbPending.Checked = true;
+            rdbPending.Enabled = true;
         }
 
 
@@ -136,6 +139,7 @@ namespace Air_Ticket_Management_System.Passenger
         private void PassengerBookingForm_Load(object sender, EventArgs e)
         {
             txtPassengerBookingPassengerId.Text = Convert.ToString(userId);
+            ClearBookingSelection();
             ShowBookingInfo();
             ShowFlightNames();
         }
@@ -150,6 +154,8 @@ namespace Air_Ticket_Management_System.Passenger
             {
                 MessageBox.Show("Error: Enter Booking Id/ Booking status");
                 txtBookingSearch.Text = "";
+                ClearBookingSelection();
+                ShowBookingInfo();
                 return;
             }
 
@@ -169,6 +175,8 @@ namespace Air_Ticket_Management_System.Passenger
             dgvPassengerBooking.ClearSelection();
 
             txtBookingSearch.Text = "";
+            ClearBookingSelection();
+            ShowBookingInfo();
         }
 
 
@@ -264,8 +272,10 @@ namespace Air_Ticket_Management_System.Passenger
                 txtPassengerBookingFlightDestination.Text = Convert.ToString(GetFLightQueryResult.Data.Rows[0]["destination"]);
 
 
-                // making combobox readonly
+                // making combobox, flightSeat and bookingDate readonly
                 cmbPassengerBookingFlightName.Enabled = false;
+                btnPassengerBookingFlightSeat.Enabled = false;
+                dtpPassengerBookingDate.Enabled = false;
 
 
                 string GetFlightSeatsQuery = "SELECT seatNo FROM FlightSeats WHERE userId = '" + PassengerId + "' AND paymentId = '" + PaymentId + "';";
@@ -380,7 +390,7 @@ namespace Air_Ticket_Management_System.Passenger
 
             // Getting data from input fields
             int userId = Convert.ToInt32(txtPassengerBookingPassengerId.Text);
-            DateTime BookingDate = dtpPassengerBookingDate.Value;
+            DateTime BookingDate = DateTime.Now;
             string BookingStatus = "";
 
 
@@ -414,6 +424,7 @@ namespace Air_Ticket_Management_System.Passenger
             {
                 MessageBox.Show("Error: Passenger not found. Please enter a valid Passenger Name or Add a Passenger first.");
                 ClearBookingSelection();
+                ShowBookingInfo();
                 return;
             }
 
@@ -443,6 +454,8 @@ namespace Air_Ticket_Management_System.Passenger
 
                 MessageBox.Show("Error: The following seats are already booked: " + string.Join(", ", alreadyBookedSeats) + ". Please select different seats.");
                 txtPassengerBookingBookedSeats.Text = "";
+                ClearBookingSelection();
+                ShowBookingInfo();
                 return;
             }
 

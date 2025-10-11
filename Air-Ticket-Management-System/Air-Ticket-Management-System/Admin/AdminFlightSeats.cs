@@ -32,7 +32,7 @@ namespace Air_Ticket_Management_System
 
 
             // Initialize seats list from the provided TextBox
-            if (!string.IsNullOrWhiteSpace(bookedSeats.Text))
+            if(!string.IsNullOrWhiteSpace(bookedSeats.Text))
             {
                 var alreadyBooked = bookedSeats.Text.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim());
                 seats.AddRange(alreadyBooked);
@@ -45,74 +45,88 @@ namespace Air_Ticket_Management_System
         {
             try
             {
+                // Getting the flightId using flightNo
                 string getFlightIdQuery = "SELECT flightId FROM Flight WHERE flightNo = '" + this.FlightNo + "'";
 
                 var getFlightIdResult = DbHelper.GetQueryData(getFlightIdQuery);
 
-                if (getFlightIdResult.HasError)
+                if(getFlightIdResult.HasError)
                 {
                     MessageBox.Show("Error : " + getFlightIdResult.Message);
                     return;
                 }
-
-                if (getFlightIdResult.Data.Rows.Count == 0)
+                if(getFlightIdResult.Data.Rows.Count == 0)
                 {
                     MessageBox.Show("Error : Flight not found");
                     return;
                 }
 
-                // get flightId from result
+
+                // Storing flightId
                 int flightId = Convert.ToInt32(getFlightIdResult.Data.Rows[0]["flightId"]);
 
+
+                // Getting flight seats info using flightId
                 string flightSeatsInfoQuery = "SELECT * FROM FlightSeats WHERE flightId = '" + flightId + "'";
 
                 var flightSeatsInfoResult = DbHelper.GetQueryData(flightSeatsInfoQuery);
 
-                if (flightSeatsInfoResult.HasError)
+                if(flightSeatsInfoResult.HasError)
                 {
                     MessageBox.Show("Error : " + flightSeatsInfoResult.Message);
                     return;
                 }
 
+
+                // Storing flight seats info in a DataTable
                 DataTable flightSeatsInfo = flightSeatsInfoResult.Data;
 
-                // loop through all buttons in pnlSeats
+
+                // Looping through all buttons in pnlSeats
                 foreach (Button seatButton in this.pnlFlightSeats.Controls.OfType<Button>())
                 {
-                    // inside the foreach loop, replace existing logic with:
+                    // Storing seat number from button text
                     string seatNo = seatButton.Text;
 
-                    // find DB row as before...
+
+                    // Selecting the row from DataTable where seatNo matches
                     DataRow[] rows = flightSeatsInfo.Select("seatNo = '" + seatNo + "'");
-                    if (rows.Length > 0)
+
+                    if(rows.Length > 0)
                     {
                         string status = rows[0]["flightSeatStatus"].ToString();
 
-                        // If the seat is selected locally, show selected color regardless of DB status
-                        if (seats.Contains(seatNo))
+                        // Changing button color based on seat status
+                        if(seats.Contains(seatNo))
                         {
-                            // Always show seats the user has already selected
+                            // Selected seat by Passenger
                             seatButton.BackColor = Color.LimeGreen;
                         }
-                        else if (status == "Available")
+                        else if(status == "Available")
                         {
                             seatButton.BackColor = Color.DimGray;
                         }
-                        else if (status == "Booked")
+                        else if(status == "Booked")
                         {
                             seatButton.BackColor = Color.IndianRed;
 
                             // Only remove if booked by someone else
-                            if (seats.Contains(seatNo)) seats.Remove(seatNo);
+                            if (seats.Contains(seatNo))
+                            {
+                                seats.Remove(seatNo);
+                            }
                         }
                     }
                     else
                     {
-                        // No DB row found
-                        if (seats.Contains(seatNo))
+                        if(seats.Contains(seatNo))
+                        {
                             seatButton.BackColor = Color.LimeGreen;
+                        }
                         else
+                        {
                             seatButton.BackColor = SystemColors.Control;
+                        }
                     }
                 }
             }
@@ -129,11 +143,17 @@ namespace Air_Ticket_Management_System
             string seatNo = seatBtn.Text;
 
             var result = MessageBox.Show("Do you want to select/deselect this seat?", "Select Seat", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result != DialogResult.Yes) return;
+            
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
 
             try
             {
+                // Check if the seat is already booked in the database
                 string checkSeatStatusQuery = "SELECT flightSeatStatus FROM FlightSeats WHERE seatNo = '" + seatNo + "' AND flightId = (SELECT flightId FROM Flight WHERE flightNo = '" + this.FlightNo + "')";
+                
                 var checkSeatStatusResult = DbHelper.GetQueryData(checkSeatStatusQuery);
 
                 if (checkSeatStatusResult.HasError)
@@ -141,13 +161,14 @@ namespace Air_Ticket_Management_System
                     MessageBox.Show("Error : " + checkSeatStatusResult.Message);
                     return;
                 }
-
                 if (checkSeatStatusResult.Data.Rows.Count == 0)
                 {
                     MessageBox.Show("Error : Seat not found");
                     return;
                 }
 
+
+                // Storing seat status
                 string seatStatus = checkSeatStatusResult.Data.Rows[0]["flightSeatStatus"].ToString();
 
                 if (seatStatus == "Booked")
